@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/input_color"></solid>
+
+    <padding
+        android:bottom="2dp"
+        android:left="20dp"
+        android:right="2dp"
+        android:top="2dp"></padding>
+
+    <corners android:radius="16dp"></corners>
+</shape>
