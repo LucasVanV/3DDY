@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/choix_authe"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToOutline="true"
+    android:background="#2D2828">
+
+    <!-- Auto layout, variables, and unit scale are not yet supported -->
+    <ImageView
+        android:id="@+id/ddy_black_1"
+        android:layout_width="417dp"
+        android:layout_height="285dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/logo_3ddy"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="-4dp"
+        tools:layout_editor_absoluteY="2dp" />
+
+    <Button
+        android:id="@+id/connexion"
+        android:layout_width="334dp"
+        android:layout_height="72dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        tools:layout_editor_absoluteX="38dp"
+        tools:layout_editor_absoluteY="287dp"
+        tools:ignore="MissingConstraints"
+        android:text="Connexion"/>
+
+    <Button
+        android:id="@+id/inscription"
+        android:layout_width="334dp"
+        android:layout_height="72dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="Inscription"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="38dp"
+        tools:layout_editor_absoluteY="452dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
