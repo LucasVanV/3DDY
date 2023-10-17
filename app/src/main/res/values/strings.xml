@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">3DDY</string>
+    <string name="connexion">Connexion</string>
+    <string name="inscription">Inscription</string>
+    <string name="reco">Mes recommandations</string>
 </resources>
