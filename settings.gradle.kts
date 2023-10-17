@@ -14,4 +14,5 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "3DDY"
-include ':app'
+include(":app")
+ 
