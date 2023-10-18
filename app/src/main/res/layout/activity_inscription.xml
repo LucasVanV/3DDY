@@ -22,12 +22,15 @@
         android:id="@+id/imageButton"
         android:layout_width="68dp"
         android:layout_height="39dp"
+        android:backgroundTint="@color/background_color"
+        android:contentDescription="Icône pour la flèche de retour en arrière"
+        android:src="@drawable/arrow"
         app:layout_constraintBottom_toTopOf="@+id/edittext_nom_utilisateur"
         app:layout_constraintEnd_toStartOf="@+id/titre_inscription"
+        app:layout_constraintHorizontal_bias="0.014"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
-        android:backgroundTint="@color/background_color"
-        android:src="@drawable/arrow"/>
+        app:layout_constraintVertical_bias="0.536" />
 
     <TextView
         android:id="@+id/titre_inscription"
@@ -35,12 +38,12 @@
         android:layout_height="wrap_content"
         android:text="Inscription"
         android:textColor="@color/text_color_blanc"
-        android:textSize="28dp"
+        android:textSize="@dimen/taille_police_titre"
         app:layout_constraintBottom_toTopOf="@+id/edittext_nom_utilisateur"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.607"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.523" />
 
     <EditText
         android:id="@+id/edittext_nom_utilisateur"
