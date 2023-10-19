@@ -32,9 +32,9 @@
     <TableLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         tools:ignore="MissingConstraints" >
         <TableRow>
@@ -61,7 +61,7 @@
             <Button
                 android:layout_height="match_parent"
                 android:text="Photo de profil"
-                android:background=""/>
+/>
         </TableRow>
 
         <TableRow>
@@ -84,19 +84,63 @@
                 android:layout_width="65dp"
                 android:layout_height="65dp"
                 android:background="@drawable/baseline_grid_3x3_24" />
-            <TableRow>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Tags"
-                    android:textAlignment="center" />
-            </TableRow>
+                <TableLayout>
+                    <TableRow>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Veuillez sélectionner 2 tags minimum"
+                            android:textAlignment="center" />
+                    </TableRow>
+                    <TableRow>
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Automobile" />
+                    </TableRow>
+                    <TableRow>
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Automobile" />
+                    </TableRow>
+                    <TableRow>
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Automobile" />
+                    </TableRow>
+                    <TableRow>
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Automobile" />
+                    </TableRow>
+                    <TableRow>
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Automobile" />
+                    </TableRow>
+                    <TableRow>
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Automobile" />
+                    </TableRow>
+                </TableLayout>
+
         </TableRow>
     </TableLayout>
 
-
-
-
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Valider"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
