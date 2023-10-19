@@ -44,7 +44,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:text="Paramètres"
-                    android:textColor="@color/text_color_blanc"
                     android:textSize="28dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
