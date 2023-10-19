@@ -13,13 +13,16 @@
         android:theme="@style/Base.Theme._3DDY"
         tools:targetApi="31">
         <activity
+            android:name=".PosterActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".InscriptionActivity"
             android:exported="false" />
         <activity
-            android:name=".PosterActivity"
+            android:name=".ParamatresActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,4 +31,5 @@
             </intent-filter>
         </activity>
     </application>
+
 </manifest>
