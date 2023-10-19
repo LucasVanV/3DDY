@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/creation_profil"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToOutline="true"
+    android:background="#2D2828">
+
+    <ImageButton
+        android:id="@+id/arrow"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/baseline_arrow_back_24"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:text="Création du profil"
+        android:textSize="30sp"
+        app:layout_constraintLeft_toRightOf="@+id/arrow"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="25dp" />
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:ignore="MissingConstraints" >
+        <TableRow>
+            <ImageView
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:background="@drawable/baseline_person_outline_24" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Nom d'utilisateur"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="109dp"
+                tools:layout_editor_absoluteY="118dp" />
+        </TableRow>
+
+        <TableRow>
+            <ImageView
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:background="@drawable/baseline_image_search_24" />
+
+            <Button
+                android:layout_height="match_parent"
+                android:text="Photo de profil"
+                android:background=""/>
+        </TableRow>
+
+        <TableRow>
+            <ImageView
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:background="@drawable/baseline_sort_24" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Bio"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="109dp"
+                tools:layout_editor_absoluteY="118dp" />
+        </TableRow>
+
+        <TableRow>
+            <ImageView
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:background="@drawable/baseline_grid_3x3_24" />
+            <TableRow>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Tags"
+                    android:textAlignment="center" />
+            </TableRow>
+        </TableRow>
+    </TableLayout>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
