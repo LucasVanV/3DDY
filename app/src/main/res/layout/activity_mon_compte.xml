@@ -9,6 +9,7 @@
     tools:context=".MonCompteActivity">
 
     <ScrollView
+        android:id="@+id/scrollView4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,8 +32,8 @@
                     android:layout_height="39dp"
                     android:layout_marginTop="4dp"
                     android:backgroundTint="@color/background_color"
-                    android:src="@drawable/arrow"
                     android:contentDescription="Bouton de retour"
+                    android:src="@drawable/arrow"
                     app:layout_constraintEnd_toStartOf="@+id/titre_parametres"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
@@ -54,7 +55,7 @@
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintlayout_photoprofil"
+                android:id="@+id/constraintlayout_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
@@ -63,29 +64,29 @@
                 app:layout_constraintTop_toBottomOf="@+id/constraintlayout_titre">
 
                 <ImageView
-                    android:id="@+id/icone_photoprofil"
+                    android:id="@+id/icone_email"
                     android:layout_width="45dp"
                     android:layout_height="45dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/icone_photo_profil" />
+                    app:srcCompat="@drawable/icone_email" />
 
                 <Button
-                    android:id="@+id/button_notification"
+                    android:id="@+id/button_email"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bouton"
-                    android:text="Changer ma photo de profil"
+                    android:text="Email"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/icone_photoprofil"
+                    app:layout_constraintStart_toEndOf="@+id/icone_email"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintlayout_nomutilisateur"
+                android:id="@+id/constraintlayout_mdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
@@ -94,54 +95,23 @@
                 app:layout_constraintTop_toBottomOf="@+id/constraintlayout_titre">
 
                 <ImageView
-                    android:id="@+id/icone_nomutilisateur"
+                    android:id="@+id/icone_mdp"
                     android:layout_width="45dp"
                     android:layout_height="45dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/icone_nom_utilisateur" />
+                    app:srcCompat="@drawable/icone_mdp" />
 
                 <Button
-                    android:id="@+id/button_nomutilisateur"
+                    android:id="@+id/button_mdp"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bouton"
-                    android:text="Changer mon nom d'utilisateur"
+                    android:text="Mot de passe"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/icone_nomutilisateur"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintlayout_bio"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintlayout_titre">
-
-                <ImageView
-                    android:id="@+id/icone_bio"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/icone_description_text" />
-
-                <Button
-                    android:id="@+id/button_bio"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bouton"
-                    android:text="Changer la description de mon compte"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/icone_bio"
+                    app:layout_constraintStart_toEndOf="@+id/icone_mdp"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
@@ -155,8 +125,10 @@
         android:text="Valider"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.389" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

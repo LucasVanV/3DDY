@@ -161,7 +161,7 @@
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintlayout_confidentialite"
+                android:id="@+id/constraintlayout_tags"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
@@ -170,23 +170,23 @@
                 app:layout_constraintTop_toBottomOf="@+id/constraintlayout_compte">
 
                 <ImageView
-                    android:id="@+id/icone_confidentialite"
+                    android:id="@+id/icone_tags"
                     android:layout_width="45dp"
                     android:layout_height="45dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/icone_confidentialite" />
+                    app:srcCompat="@drawable/icone_tags" />
 
                 <Button
-                    android:id="@+id/button_confidentialite"
+                    android:id="@+id/button_tags"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bouton"
-                    android:text="Confidentialité du compte"
+                    android:text="Gérer mes tags"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/icone_confidentialite"
+                    app:layout_constraintStart_toEndOf="@+id/icone_tags"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
