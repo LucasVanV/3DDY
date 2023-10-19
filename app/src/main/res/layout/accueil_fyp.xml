@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/choix_authe"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,72 +9,70 @@
     android:background="#2D2828">
 
     <TableLayout
-        android:layout_width="match_parent"
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#242020"
         tools:ignore="MissingConstraints">
-
-        <TableRow
-            android:id="@+id/title"
-            tools:ignore="MissingConstraints" >
-        <ImageView
-            android:id="@+id/logo_appli"
-            android:layout_width="154dp"
-            android:layout_height="102dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:background="@drawable/logo_3ddy"
-            tools:ignore="MissingConstraints" />
-
-        <TextView
-            android:id="@+id/reco"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:gravity="center_vertical"
-            android:lineSpacingExtra="2sp"
-            android:text="@string/reco"
-            tools:layout_editor_absoluteX="154dp"
-            tools:layout_editor_absoluteY="0dp"
-            tools:ignore="MissingConstraints" />
-        </TableRow>
-
-
-        <TableRow
-            android:id="@+id/user"
-            tools:ignore="MissingConstraints" >
-
+        <TableRow>
             <ImageView
-                android:id="@+id/user_image"
-                android:layout_width="143dp"
-                android:layout_height="99dp"
-                android:background="@drawable/default_user"
-                tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteX="16dp"
-                tools:layout_editor_absoluteY="118dp" />
+                android:id="@+id/logo_appli"
+                android:layout_width="154dp"
+                android:layout_height="102dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/logo_3ddy"
+                tools:ignore="MissingConstraints" />
 
             <TextView
-                android:id="@+id/monsieur_to"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/reco"
+                android:layout_width="258dp"
+                android:layout_height="102dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
                 android:gravity="center_vertical"
                 android:lineSpacingExtra="2sp"
-                android:text="John Doe"
-                tools:layout_editor_absoluteX="66dp"
-                tools:layout_editor_absoluteY="133dp"
-                tools:ignore="MissingConstraints" />
-
+                android:text="@string/reco"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="152dp"
+                tools:layout_editor_absoluteY="0dp" />
         </TableRow>
-
     </TableLayout>
 
 
+    <ImageView
+        android:id="@+id/user_image"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/default_user"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="124dp" />
+
+    <TextView
+        android:id="@+id/user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:text="John Doe"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="73dp"
+        tools:layout_editor_absoluteY="141dp" />
+
+    <ImageView
+        android:id="@+id/post_image"
+        android:layout_width="410dp"
+        android:layout_height="310dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/default_post"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="188dp"
+        tools:ignore="MissingConstraints" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
