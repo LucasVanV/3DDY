@@ -72,12 +72,12 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/icone_email" />
 
-                <Button
+                <EditText
                     android:id="@+id/button_email"
                     android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bouton"
-                    android:text="Email"
+                    android:layout_height="50dp"
+                    android:background="@drawable/edittext"
+                    android:hint="Email"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/icone_email"
@@ -103,12 +103,12 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/icone_mdp" />
 
-                <Button
+                <EditText
                     android:id="@+id/button_mdp"
                     android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bouton"
-                    android:text="Mot de passe"
+                    android:layout_height="50dp"
+                    android:background="@drawable/edittext"
+                    android:hint="Mot de passe"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/icone_mdp"
