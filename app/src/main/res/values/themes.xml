@@ -10,7 +10,7 @@
         <item name="colorSecondaryVariant">@color/input_color</item>
         <item name="colorOnSecondary">@color/input_color</item>
         <!--below is the text color-->
-        <item name="android:textColor">@color/input_color</item>
+        <item name="android:textColor">@color/text_color_blanc</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->

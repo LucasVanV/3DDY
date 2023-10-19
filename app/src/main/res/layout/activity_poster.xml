@@ -14,7 +14,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nouvelle publication"
-        android:textColor="@color/text_color_blanc"
         android:textSize="@dimen/taille_police_titre"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
