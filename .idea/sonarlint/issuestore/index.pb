@@ -9,3 +9,5 @@ c
 3app/src/main/java/com/example/a3ddy/RoundImage.java,d\0\d0f639951ef7b435f9be857569c31af20827cf7c
 e
 5app/src/main/java/com/example/a3ddy/MainActivity.java,a\4\a4844d7a05a9a1350eeec2de739c277517f011bb
+P
+ app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
