@@ -1,4 +1,4 @@
-package com.example.a3ddy;
+package fr.uphf.a3ddy;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
