@@ -30,23 +30,10 @@ public class ProfilActivity extends AppCompatActivity {
         });
 
 
+        //Permet de mettre en surbrillance la page Mon compte dans le menu
         BottomNavigationView bottomNavigation = findViewById(R.id.bottom_navigation);
+        bottomNavigation.setSelectedItemId(R.id.compte);
 
-        bottomNavigation.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(MenuItem item) {
-                switch (item.getItemId()) {
-                    case ACCUEIL:
-                        // Réagir au clic sur l'élément 1
-                        return true;
-                    case RECHERCHE:
-                        // Réagir au clic sur l'élément 2
-                        return true;
-                    default:
-                        return false;
-                }
-            }
-        });
 
     }
 }

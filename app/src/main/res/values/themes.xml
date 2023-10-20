@@ -27,9 +27,6 @@
         <item name="textAppearanceCaption">@style/TextAppearance.MaterialComponents.Caption</item>
         <item name="textAppearanceButton">@style/TextAppearance.MaterialComponents.Button</item>
         <item name="textAppearanceOverline">@style/TextAppearance.MaterialComponents.Overline</item>
-
-        <!-- Thème pour le menu -->
-        <item name="colorSurface">@color/couleur_menu</item>
     </style>
 
     <style name="Theme.TodoListandroid" parent="Base.Theme._3DDY" />

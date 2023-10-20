@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.os.Bundle;
 import android.widget.ImageButton;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 public class ParamatresActivity extends AppCompatActivity {
 
     @Override
@@ -33,6 +35,10 @@ public class ParamatresActivity extends AppCompatActivity {
                 startActivity(intent_profil);
             }
         });
+
+        //Permet de mettre en surbrillance la page Mon compte dans le menu
+        BottomNavigationView bottomNavigation = findViewById(R.id.bottom_navigation);
+        bottomNavigation.setSelectedItemId(R.id.compte);
     }
 
 

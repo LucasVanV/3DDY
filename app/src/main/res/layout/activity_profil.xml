@@ -190,5 +190,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_navigation_menu" />
+        app:menu="@menu/bottom_navigation_menu"
+        android:background="@color/couleur_menu"
+        app:itemRippleColor="#ffffff"
+        app:itemIconTint="@color/icons_color"
+        app:itemTextColor="@color/icons_color"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
