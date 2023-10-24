@@ -1,4 +1,4 @@
-package com.example.a3ddy;
+package fr.uphf.a3ddy.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+
+import fr.uphf.a3ddy.R;
 
 public class MonCompteActivity extends AppCompatActivity {
 

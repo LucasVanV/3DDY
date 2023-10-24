@@ -1,4 +1,4 @@
-package com.example.a3ddy;
+package fr.uphf.a3ddy.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.widget.ImageButton;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import fr.uphf.a3ddy.R;
 
 public class ParamatresActivity extends AppCompatActivity {
 

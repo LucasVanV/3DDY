@@ -1,9 +1,11 @@
-package com.example.a3ddy;
+package fr.uphf.a3ddy.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.ImageView;
+
+import fr.uphf.a3ddy.R;
 
 public class InscriptionActivity extends AppCompatActivity {
 

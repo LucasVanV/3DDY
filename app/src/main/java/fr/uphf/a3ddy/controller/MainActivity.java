@@ -1,4 +1,4 @@
-package fr.uphf.a3ddy;
+package fr.uphf.a3ddy.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,10 +7,10 @@ import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import fr.uphf.a3ddy.R;
 import fr.uphf.a3ddy.model.Utilisateur;
-import fr.uphf.a3ddy.reotrfit.RetrofitService;
-import fr.uphf.a3ddy.reotrfit.UserApi;
-import com.google.gson.JsonArray;
+import fr.uphf.a3ddy.retrofit.RetrofitService;
+import fr.uphf.a3ddy.retrofit.api.UserApi;
 
 import retrofit2.Call;
 import retrofit2.Callback;
