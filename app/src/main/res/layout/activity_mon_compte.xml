@@ -40,7 +40,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/TextInputLayout_email"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-        android:layout_marginTop="32dpaaaa"
+        android:layout_marginTop="32dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/mdp_confirm_hint"

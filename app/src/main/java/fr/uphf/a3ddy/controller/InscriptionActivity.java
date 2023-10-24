@@ -16,6 +16,8 @@ public class InscriptionActivity extends AppCompatActivity {
 
         ImageView imageView = findViewById(R.id.imageView);
 
+
+
         /*
         Exemple de récupération des données pour les edittext de material component :
 

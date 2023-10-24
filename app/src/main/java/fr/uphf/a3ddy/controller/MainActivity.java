@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import fr.uphf.a3ddy.R;
 import fr.uphf.a3ddy.model.Utilisateur;
-import fr.uphf.a3ddy.retrofit.RetrofitService;
+import fr.uphf.a3ddy.retrofit.api.RetrofitService;
 import fr.uphf.a3ddy.retrofit.api.UserApi;
 
 import retrofit2.Call;

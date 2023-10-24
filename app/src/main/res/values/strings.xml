@@ -7,5 +7,8 @@
     <string name="email_hint">Email</string>
     <string name="mdp_hint">Mot de passe</string>
     <string name="mdp_confirm_hint">Confirmer le mot de passe</string>
+    <string name="reco">Recommendation</string>
+    <string name="inscription">Inscription</string>
+    <string name="connexion">Connexion</string>
 </resources>
 
