@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".InscriptionActivity"
+    android:background="@color/background_color" android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="387dp"
+        android:layout_height="189dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/logo_3ddy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="68dp"
+        android:layout_height="39dp"
+        app:layout_constraintBottom_toTopOf="@+id/TextInputLayout_nom_utilisateur"
+        app:layout_constraintEnd_toStartOf="@+id/titre_inscription"
+        app:layout_constraintHorizontal_bias="0.014"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.536" />
+
+    <TextView
+        android:id="@+id/titre_inscription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Inscription"
+        android:textColor="@color/text_color_blanc"
+        android:textSize="28dp"
+        app:layout_constraintBottom_toTopOf="@+id/TextInputLayout_nom_utilisateur"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.523" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/TextInputLayout_nom_utilisateur"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/nom_utilisateur_hint"
+        android:textColor="@color/blanc"
+        android:textColorHint="@color/text_color_blanc"
+        app:boxStrokeColor="@color/background_color"
+        app:counterEnabled="true"
+        app:counterMaxLength="20"
+        app:counterTextColor="@color/alerte_vert"
+        app:cursorColor="@color/blanc"
+        app:endIconMode="clear_text"
+        app:endIconTint="@color/blanc"
+        app:errorEnabled="true"
+        app:hintTextColor="@color/text_color_blanc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titre_inscription"
+        app:startIconDrawable="@drawable/icone_nom_utilisateur"
+        app:startIconTint="@color/blanc">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/TextInputEditText_nom_utilisateur"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="21"
+            android:textColor="@color/blanc"
+            android:background="@drawable/edittext"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/TextInputLayout_email"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="@string/email_hint"
+        android:textColor="@color/blanc"
+        android:textColorHint="@color/text_color_blanc"
+        app:boxStrokeColor="@color/background_color"
+        app:counterEnabled="true"
+        app:counterMaxLength="20"
+        app:counterTextColor="@color/alerte_vert"
+        app:cursorColor="@color/blanc"
+        app:endIconMode="clear_text"
+        app:endIconTint="@color/blanc"
+        app:errorEnabled="true"
+        app:hintTextColor="@color/text_color_blanc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/TextInputLayout_nom_utilisateur"
+        app:startIconDrawable="@drawable/icone_email"
+        app:startIconTint="@color/blanc">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/TextInputEditText_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="21"
+            android:textColor="@color/blanc"
+            android:inputType="textEmailAddress"
+            android:background="@drawable/edittext"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/TextInputLayout_mdp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="@string/mdp_hint"
+        android:textColor="@color/blanc"
+        android:textColorHint="@color/text_color_blanc"
+        app:boxStrokeColor="@color/background_color"
+        app:counterEnabled="true"
+        app:counterMaxLength="20"
+        app:counterTextColor="@color/alerte_vert"
+        app:cursorColor="@color/blanc"
+        app:endIconMode="password_toggle"
+        app:endIconTint="@color/blanc"
+        app:errorEnabled="true"
+        app:hintTextColor="@color/text_color_blanc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/TextInputLayout_email"
+        app:startIconDrawable="@drawable/icone_mdp"
+        app:startIconTint="@color/blanc">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/TextInputEditText_mdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="21"
+            android:textColor="@color/blanc"
+            android:inputType="textPassword"
+            android:background="@drawable/edittext"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/TextInputLayout_mdp_confirm"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="4dp"
+        android:hint="@string/mdp_confirm_hint"
+        android:textColor="@color/blanc"
+        android:textColorHint="@color/text_color_blanc"
+        app:boxStrokeColor="@color/background_color"
+        app:counterEnabled="true"
+        app:counterMaxLength="20"
+        app:counterTextColor="@color/alerte_vert"
+        app:cursorColor="@color/blanc"
+        app:endIconMode="password_toggle"
+        app:endIconTint="@color/blanc"
+        app:errorEnabled="true"
+        app:hintTextColor="@color/text_color_blanc"
+        app:layout_constraintBottom_toTopOf="@+id/bouton_inscription"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/TextInputLayout_mdp"
+        app:startIconDrawable="@drawable/icone_mdp"
+        app:startIconTint="@color/blanc">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/TextInputEditText_mdp_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="21"
+            android:textColor="@color/blanc"
+            android:inputType="textPassword"
+            android:background="@drawable/edittext"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <Button
+        android:id="@+id/bouton_inscription"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="256dp"
+        android:background="@drawable/bouton"
+        android:text="Inscription"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TextInputLayout_nom_utilisateur" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
