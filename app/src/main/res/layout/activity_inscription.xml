@@ -45,16 +45,16 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/TextInputLayout_nom_utilisateur"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/nom_utilisateur_hint"
         android:textColor="@color/blanc"
         android:textColorHint="@color/text_color_blanc"
-        app:boxStrokeColor="@color/input_color"
+        app:boxStrokeColor="@color/background_color"
         app:counterEnabled="true"
         app:counterMaxLength="20"
-        app:counterTextColor="@color/blanc"
+        app:counterTextColor="@color/alerte_vert"
         app:cursorColor="@color/blanc"
         app:endIconMode="clear_text"
         app:endIconTint="@color/blanc"
@@ -71,22 +71,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLength="21"
-            android:textColor="@color/blanc" />
+            android:textColor="@color/blanc"
+            android:background="@drawable/edittext"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/TextInputLayout_email"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:hint="@string/email_hint"
         android:textColor="@color/blanc"
         android:textColorHint="@color/text_color_blanc"
-        app:boxStrokeColor="@color/input_color"
+        app:boxStrokeColor="@color/background_color"
         app:counterEnabled="true"
         app:counterMaxLength="20"
-        app:counterTextColor="@color/blanc"
+        app:counterTextColor="@color/alerte_vert"
         app:cursorColor="@color/blanc"
         app:endIconMode="clear_text"
         app:endIconTint="@color/blanc"
@@ -104,23 +105,24 @@
             android:layout_height="wrap_content"
             android:maxLength="21"
             android:textColor="@color/blanc"
-            android:inputType="textEmailAddress"/>
+            android:inputType="textEmailAddress"
+            android:background="@drawable/edittext"/>
     </com.google.android.material.textfield.TextInputLayout>
 
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/TextInputLayout_mdp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:hint="@string/mdp_hint"
         android:textColor="@color/blanc"
         android:textColorHint="@color/text_color_blanc"
-        app:boxStrokeColor="@color/input_color"
+        app:boxStrokeColor="@color/background_color"
         app:counterEnabled="true"
         app:counterMaxLength="20"
-        app:counterTextColor="@color/blanc"
+        app:counterTextColor="@color/alerte_vert"
         app:cursorColor="@color/blanc"
         app:endIconMode="password_toggle"
         app:endIconTint="@color/blanc"
@@ -138,13 +140,14 @@
             android:layout_height="wrap_content"
             android:maxLength="21"
             android:textColor="@color/blanc"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:background="@drawable/edittext"/>
     </com.google.android.material.textfield.TextInputLayout>
 
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/TextInputLayout_mdp_confirm"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -152,10 +155,10 @@
         android:hint="@string/mdp_confirm_hint"
         android:textColor="@color/blanc"
         android:textColorHint="@color/text_color_blanc"
-        app:boxStrokeColor="@color/input_color"
+        app:boxStrokeColor="@color/background_color"
         app:counterEnabled="true"
         app:counterMaxLength="20"
-        app:counterTextColor="@color/blanc"
+        app:counterTextColor="@color/alerte_vert"
         app:cursorColor="@color/blanc"
         app:endIconMode="password_toggle"
         app:endIconTint="@color/blanc"
@@ -174,7 +177,8 @@
             android:layout_height="wrap_content"
             android:maxLength="21"
             android:textColor="@color/blanc"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword"
+            android:background="@drawable/edittext"/>
     </com.google.android.material.textfield.TextInputLayout>
 
 

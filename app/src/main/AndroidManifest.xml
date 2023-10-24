@@ -16,7 +16,7 @@
             android:name=".ParamatresActivity"
             android:exported="false" />
         <activity
-            android:name=".MonCompteActivity"
+            android:name=".InscriptionActivity"
             android:exported="false" />
         <activity
             android:name=".PosterActivity"
@@ -28,7 +28,7 @@
             android:name=".ProfilActivity"
             android:exported="false" />
         <activity
-            android:name=".InscriptionActivity"
+            android:name=".MonCompteActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

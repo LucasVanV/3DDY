@@ -6,5 +6,6 @@
     <color name="text_color_blanc">#FFFFFF</color>
     <color name="couleur_menu">#282323</color>
     <color name="blanc">#FFFFFF</color>
-    <color  name="alerte_rouge">#E23636</color>
+    <color name="alerte_rouge">#E23636</color>
+    <color name="alerte_vert">#7CB862</color>
 </resources>
