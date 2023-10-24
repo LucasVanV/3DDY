@@ -195,4 +195,5 @@
         app:itemRippleColor="#ffffff"
         app:itemIconTint="@color/icons_color"
         app:itemTextColor="@color/icons_color"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>

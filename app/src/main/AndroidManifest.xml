@@ -25,10 +25,10 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".InscriptionActivity"
+            android:name=".ProfilActivity"
             android:exported="false" />
         <activity
-            android:name=".ProfilActivity"
+            android:name=".InscriptionActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

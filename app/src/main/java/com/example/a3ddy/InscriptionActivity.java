@@ -13,5 +13,13 @@ public class InscriptionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_inscription);
 
         ImageView imageView = findViewById(R.id.imageView);
+
+        /*
+        Exemple de récupération des données pour les edittext de material component :
+
+            TextInputEditText textInputEditText = findViewById(R.id.TextInputEditText_nom_utilisateur);
+            String utilisateurNom = textInputEditText.getText().toString();
+        */
+
     }
 }
