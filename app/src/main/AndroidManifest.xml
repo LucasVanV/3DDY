@@ -13,10 +13,22 @@
         android:theme="@style/Base.Theme._3DDY"
         tools:targetApi="31">
         <activity
+            android:name=".ParamatresActivity"
+            android:exported="false" />
+        <activity
             android:name=".InscriptionActivity"
             android:exported="false" />
         <activity
+            android:name=".PosterActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ProfilActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MonCompteActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

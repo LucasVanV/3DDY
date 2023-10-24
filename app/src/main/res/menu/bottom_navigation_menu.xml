@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+        android:id="@+id/accueil"
+        android:enabled="true"
+        android:icon="@drawable/outline_home_24"
+        android:title="Accueil"/>
+    <item
+        android:id="@+id/recherche"
+        android:enabled="true"
+        android:icon="@drawable/outline_search_24"
+        android:title="Recherche"/>
+    <item
+        android:id="@+id/publier"
+        android:enabled="true"
+        android:icon="@drawable/outline_add_circle_outline_24"
+        android:title="Publier"/>
+    <item
+        android:id="@+id/message"
+        android:enabled="true"
+        android:icon="@drawable/outline_textsms_24"
+        android:title="Message"/>
+    <item
+        android:id="@+id/compte"
+        android:enabled="true"
+        android:icon="@drawable/outline_person_24"
+        android:title="Mon compte"/>
+</menu>
