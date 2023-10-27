@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">3DDY</string>
     <string name="connexion">Connexion</string>
+    <string name="CONNEXION">CONNEXION</string>
     <string name="inscription">Inscription</string>
     <string name="reco">Mes recommandations</string>
+    <string name="hintConnexion">Entrer votre email</string>
+    <string name="hintMDP">Entrer votre mot de passe</string>
 </resources>
