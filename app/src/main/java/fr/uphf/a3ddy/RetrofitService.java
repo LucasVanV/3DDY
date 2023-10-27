@@ -1,4 +1,4 @@
-package fr.uphf.a3ddy.retrofit.api;
+package fr.uphf.a3ddy;
 
 import com.google.gson.Gson;
 import retrofit2.Retrofit;

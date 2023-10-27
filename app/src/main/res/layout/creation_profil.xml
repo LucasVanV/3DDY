@@ -5,42 +5,47 @@
     android:id="@+id/creation_profil"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clipToOutline="true"
-    android:background="#2D2828">
+    android:background="#2D2828"
+    android:clipToOutline="true">
 
     <ImageButton
         android:id="@+id/arrow"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/baseline_arrow_back_24"
+        app:layout_constraintEnd_toStartOf="@id/titre"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
     <TextView
+        android:id="@+id/titre"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
         android:text="Création du profil"
         android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/arrow"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="25dp" />
+        tools:ignore="MissingConstraints" />
 
     <TableLayout
+        android:id="@+id/tableLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
 
-        <TableRow
-            android:layout_weight="1">
+        <TableRow android:layout_weight="1">
+
             <ImageView
                 android:layout_width="65dp"
                 android:layout_height="65dp"
@@ -55,8 +60,8 @@
                 tools:layout_editor_absoluteY="118dp" />
         </TableRow>
 
-        <TableRow
-            android:layout_weight="1">
+        <TableRow android:layout_weight="1">
+
             <ImageView
                 android:layout_width="65sp"
                 android:layout_height="65sp"
@@ -67,8 +72,8 @@
                 android:text="Photo de profil" />
         </TableRow>
 
-        <TableRow
-            android:layout_weight="1">
+        <TableRow android:layout_weight="1">
+
             <ImageView
                 android:layout_width="65sp"
                 android:layout_height="65sp"
@@ -82,64 +87,45 @@
                 tools:layout_editor_absoluteX="109sp"
                 tools:layout_editor_absoluteY="118sp" />
         </TableRow>
+    </TableLayout>
 
-        <TableRow
-            android:layout_weight="1">
-            <ImageView
-                android:layout_width="65dp"
-                android:layout_height="65dp"
-                android:background="@drawable/baseline_grid_3x3_24" />
+    <ScrollView
+        android:id="@+id/ScrollView_tags"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/validateButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tableLayout">
 
-            <TableLayout
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/ScrollView_tags"
+            app:singleSelection="false">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/Chips_Automobile"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center">
-                    <TableRow>
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Veuillez sélectionner 2 tags minimum"
-                            android:textAlignment="center" />
-                    </TableRow>
-                    <TableRow>
-                        <CheckBox
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Automobile" />
-                    </TableRow>
-                    <TableRow>
-                        <CheckBox
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Automobile" />
-                    </TableRow>
-                    <TableRow>
-                        <CheckBox
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Automobile" />
-                    </TableRow>
-                    <TableRow>
-                        <CheckBox
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Automobile" />
-                    </TableRow>
-                    <TableRow>
-                        <CheckBox
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Automobile" />
-                    </TableRow>
-                    <TableRow>
-                        <CheckBox
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Automobile" />
-                    </TableRow>
-                </TableLayout>
-        </TableRow>
-    </TableLayout>
+                android:text="Automobile"
+                app:chipBackgroundColor="@color/chip_background_selector" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/Chips_Sport"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sport"
+                app:chipBackgroundColor="@color/chip_background_selector" />
+
+        </com.google.android.material.chip.ChipGroup>
+    </ScrollView>
+
 
     <Button
         android:id="@+id/validateButton"
@@ -147,8 +133,8 @@
         android:layout_height="wrap_content"
         android:text="Valider"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
