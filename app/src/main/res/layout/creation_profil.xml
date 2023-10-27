@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/creation_profil"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToOutline="true"
+    android:background="#2D2828">
+
+    <ImageButton
+        android:id="@+id/arrow"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/baseline_arrow_back_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:text="Création du profil"
+        android:textSize="30sp"
+        app:layout_constraintStart_toEndOf="@+id/arrow"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="25dp" />
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <TableRow
+            android:layout_weight="1">
+            <ImageView
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:background="@drawable/baseline_person_outline_24" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:hint="Nom d'utilisateur"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="109dp"
+                tools:layout_editor_absoluteY="118dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_weight="1">
+            <ImageView
+                android:layout_width="65sp"
+                android:layout_height="65sp"
+                android:background="@drawable/baseline_image_search_24" />
+
+            <Button
+                android:layout_height="match_parent"
+                android:text="Photo de profil" />
+        </TableRow>
+
+        <TableRow
+            android:layout_weight="1">
+            <ImageView
+                android:layout_width="65sp"
+                android:layout_height="65sp"
+                android:background="@drawable/baseline_sort_24" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:hint="Bio"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="109sp"
+                tools:layout_editor_absoluteY="118sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_weight="1">
+            <ImageView
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:background="@drawable/baseline_grid_3x3_24" />
+
+            <TableLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+                    <TableRow>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Veuillez sélectionner 2 tags minimum"
+                            android:textAlignment="center" />
+                    </TableRow>
+                    <TableRow>
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Automobile" />
+                    </TableRow>
+                    <TableRow>
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Automobile" />
+                    </TableRow>
+                    <TableRow>
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Automobile" />
+                    </TableRow>
+                    <TableRow>
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Automobile" />
+                    </TableRow>
+                    <TableRow>
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Automobile" />
+                    </TableRow>
+                    <TableRow>
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Automobile" />
+                    </TableRow>
+                </TableLayout>
+        </TableRow>
+    </TableLayout>
+
+    <Button
+        android:id="@+id/validateButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Valider"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
