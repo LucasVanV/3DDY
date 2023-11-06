@@ -4,22 +4,26 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.gson.Gson;
 
-import fr.uphf.a3ddy.R;
-import fr.uphf.a3ddy.RetrofitService;
-import fr.uphf.a3ddy.model.Utilisateur;
-import fr.uphf.a3ddy.retrofit.api.UserApi;
+import java.io.IOException;
+
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import fr.uphf.a3ddy.R;
+import fr.uphf.a3ddy.RetrofitService;
+import fr.uphf.a3ddy.model.Utilisateur;
+import fr.uphf.a3ddy.model.UtilisateurSecurity;
+import fr.uphf.a3ddy.retrofit.api.UserApi;
 
 public class InscriptionActivity extends AppCompatActivity {
 
@@ -28,60 +32,72 @@ public class InscriptionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inscription);
 
+        Button boutonInscription = findViewById(R.id.bouton_inscription);
 
-        ImageView imageView = findViewById(R.id.imageView);
-
-        //Récupération des données du formulaire
-        TextInputLayout nom_utilisateur = findViewById(R.id.TextInputLayout_nom_utilisateur);
-        TextInputLayout email = findViewById(R.id.TextInputLayout_email);
-        TextInputLayout mdp = findViewById(R.id.TextInputLayout_mdp);
-        TextInputLayout mdpConfirm = findViewById(R.id.TextInputLayout_mdp_confirm);
-        Button bouton_inscription = findViewById(R.id.bouton_inscription);
-
-        bouton_inscription.setOnClickListener(new View.OnClickListener() {
+        boutonInscription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (nom_utilisateur.getEditText().toString().isEmpty() || email.getEditText().toString().isEmpty() || mdp.getEditText().toString().isEmpty() || mdpConfirm.getEditText().toString().isEmpty()) {
-                    Toast.makeText(InscriptionActivity.this, "Tous les champs doivent être remplis", Toast.LENGTH_SHORT).show();
-                } else {
-                    inscription();
-                }
+                inscription();
             }
         });
     }
 
-
     private void inscription() {
-        //Récupération des données du formulaire
-        TextInputEditText nom_utilisateur = findViewById(R.id.TextInputLayout_nom_utilisateur);
-        TextInputEditText email = findViewById(R.id.TextInputLayout_email);
-        TextInputEditText mdp = findViewById(R.id.TextInputLayout_mdp);
-        TextInputEditText mdpConfirm = findViewById(R.id.TextInputLayout_mdp_confirm);
-        Button bouton_inscription = findViewById(R.id.bouton_inscription);
+        TextInputLayout nomUtilisateur = findViewById(R.id.TextInputLayout_nom_utilisateur);
+        TextInputLayout email = findViewById(R.id.TextInputLayout_email);
+        TextInputLayout mdp = findViewById(R.id.TextInputLayout_mdp);
 
+        String nomUtilisateurText = nomUtilisateur.getEditText().getText().toString();
+        String emailText = email.getEditText().getText().toString();
+        String mdpText = mdp.getEditText().getText().toString();
+
+        Utilisateur utilisateur = new Utilisateur(nomUtilisateurText, "app/src/main/res/drawable/default_user.png", "");
+        UtilisateurSecurity utilisateurSecurity = new UtilisateurSecurity(emailText, mdpText, false, null);
+        utilisateurSecurity.setUtilisateur(utilisateur);
+
+        // Appel Retrofit
         RetrofitService retrofitService = new RetrofitService();
-        UserApi utilisateurAPi = retrofitService.getRetrofit().create(UserApi.class);
+        UserApi utilisateurApi = retrofitService.getRetrofit().create(UserApi.class);
 
-        Utilisateur utilisateur = new Utilisateur();
-        utilisateur.setPseudo(nom_utilisateur.getText().toString());
-        utilisateur.setEmail(email.getText().toString());
-        utilisateur.setPassword(mdp.getText().toString());
+        Call<InscriptionRequest> call = utilisateurApi.inscription(
+                emailText, mdpText, false, null
+        );
 
-
-        utilisateurAPi.inscription(utilisateur).enqueue(new Callback<Utilisateur>() {
+        call.enqueue(new Callback<InscriptionRequest>() {
             @Override
-            public void onResponse(Call<Utilisateur> call, Response<Utilisateur> response) {
+            public void onResponse(Call<InscriptionRequest> call, Response<InscriptionRequest> response) {
                 if (response.isSuccessful()) {
-                    Intent intent_creation_profil = new Intent(InscriptionActivity.this, CreationProfilActivity.class);
-                    startActivity(intent_creation_profil);
+                    InscriptionRequest inscriptionRequestResponse = response.body();
+                    // Inscription réussie, redirigez l'utilisateur vers l'activité suivante
+                    Intent intent = new Intent(InscriptionActivity.this, CreationProfilActivity.class);
+                    startActivity(intent);
                 } else {
-                    Toast.makeText(InscriptionActivity.this, "Erreur lors de l'inscription", Toast.LENGTH_SHORT).show();
+                    // Gestion des erreurs en fonction du code de réponse HTTP
+                    if (response.code() == 400) {
+                        // Erreur de validation côté serveur
+                        try {
+                            String errorBody = response.errorBody().string();
+                            Log.d("Erreur d'inscription", errorBody); // Enregistrez le message d'erreur dans les logs
+                            Toast.makeText(InscriptionActivity.this, "Erreur lors de l'inscription : " + errorBody, Toast.LENGTH_LONG).show();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            Log.d("Erreur d'inscription", "Erreur lors de l'inscription"); // Enregistrez le message d'erreur dans les logs
+                            Toast.makeText(InscriptionActivity.this, "Erreur lors de l'inscription", Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        // Gérez d'autres erreurs ici
+                        Log.d("Erreur d'inscription", "Erreur inattendue : " + response.code());
+                        Toast.makeText(InscriptionActivity.this, "Erreur lors de l'inscription : " + response.code(), Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
 
             @Override
-            public void onFailure(Call<Utilisateur> call, Throwable t) {
-                Toast.makeText(InscriptionActivity.this, "Throwable : " + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<InscriptionRequest> call, Throwable t) {
+                // Gérez les erreurs de connexion, etc.
+                Log.d("Erreur : ", t.getLocalizedMessage());
+                Toast.makeText(InscriptionActivity.this, "Erreur : " + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                call.cancel();
             }
         });
     }

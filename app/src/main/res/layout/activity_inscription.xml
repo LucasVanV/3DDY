@@ -27,7 +27,9 @@
         app:layout_constraintHorizontal_bias="0.014"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.536" />
+        app:layout_constraintVertical_bias="0.536"
+        android:src="@drawable/arrow"
+        android:background="@color/background_color"/>
 
     <TextView
         android:id="@+id/titre_inscription"
@@ -48,6 +50,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:hint="@string/nom_utilisateur_hint"
         android:textColor="@color/blanc"
         android:textColorHint="@color/text_color_blanc"
@@ -85,9 +88,6 @@
         android:textColor="@color/blanc"
         android:textColorHint="@color/text_color_blanc"
         app:boxStrokeColor="@color/background_color"
-        app:counterEnabled="true"
-        app:counterMaxLength="20"
-        app:counterTextColor="@color/alerte_vert"
         app:cursorColor="@color/blanc"
         app:endIconMode="clear_text"
         app:endIconTint="@color/blanc"
@@ -103,7 +103,6 @@
             android:id="@+id/TextInputEditText_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLength="21"
             android:textColor="@color/blanc"
             android:inputType="textEmailAddress"
             android:background="@drawable/edittext"/>
@@ -120,9 +119,6 @@
         android:textColor="@color/blanc"
         android:textColorHint="@color/text_color_blanc"
         app:boxStrokeColor="@color/background_color"
-        app:counterEnabled="true"
-        app:counterMaxLength="20"
-        app:counterTextColor="@color/alerte_vert"
         app:cursorColor="@color/blanc"
         app:endIconMode="password_toggle"
         app:endIconTint="@color/blanc"
@@ -138,7 +134,6 @@
             android:id="@+id/TextInputEditText_mdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLength="21"
             android:textColor="@color/blanc"
             android:inputType="textPassword"
             android:background="@drawable/edittext"/>
@@ -156,9 +151,6 @@
         android:textColor="@color/blanc"
         android:textColorHint="@color/text_color_blanc"
         app:boxStrokeColor="@color/background_color"
-        app:counterEnabled="true"
-        app:counterMaxLength="20"
-        app:counterTextColor="@color/alerte_vert"
         app:cursorColor="@color/blanc"
         app:endIconMode="password_toggle"
         app:endIconTint="@color/blanc"
@@ -175,7 +167,6 @@
             android:id="@+id/TextInputEditText_mdp_confirm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLength="21"
             android:textColor="@color/blanc"
             android:inputType="textPassword"
             android:background="@drawable/edittext"/>

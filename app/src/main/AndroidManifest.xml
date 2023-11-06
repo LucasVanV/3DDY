@@ -34,10 +34,10 @@ xmlns:tools="http://schemas.android.com/tools">
         android:name=".controller.ProfilActivity"
         android:exported="false" />
     <activity
-        android:name=".controller.InscriptionActivity"
+        android:name=".controller.CreationProfilActivity"
         android:exported="false" />
     <activity
-        android:name=".controller.CreationProfilActivity"
+        android:name=".controller.InscriptionActivity"
         android:exported="true">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
