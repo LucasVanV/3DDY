@@ -43,17 +43,18 @@ public class InscriptionActivity extends AppCompatActivity {
     }
 
     private void inscription() {
-        TextInputLayout nomUtilisateur = findViewById(R.id.TextInputLayout_nom_utilisateur);
         TextInputLayout email = findViewById(R.id.TextInputLayout_email);
         TextInputLayout mdp = findViewById(R.id.TextInputLayout_mdp);
+        TextInputLayout mdpConfirm = findViewById(R.id.TextInputLayout_mdp_confirm);
 
-        String nomUtilisateurText = nomUtilisateur.getEditText().getText().toString();
         String emailText = email.getEditText().getText().toString();
         String mdpText = mdp.getEditText().getText().toString();
+        String mdpConfirmText = mdp.getEditText().getText().toString();
 
-        Utilisateur utilisateur = new Utilisateur(nomUtilisateurText, "app/src/main/res/drawable/default_user.png", "");
-        UtilisateurSecurity utilisateurSecurity = new UtilisateurSecurity(emailText, mdpText, false, null);
-        utilisateurSecurity.setUtilisateur(utilisateur);
+        if (!mdpText.equals(mdpConfirmText)) {
+            Toast.makeText(InscriptionActivity.this, "Les mots de passe sont différents", Toast.LENGTH_SHORT);
+            return;
+        }
 
         // Appel Retrofit
         RetrofitService retrofitService = new RetrofitService();
