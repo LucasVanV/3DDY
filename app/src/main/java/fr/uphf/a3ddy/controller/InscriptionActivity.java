@@ -37,31 +37,42 @@ public class InscriptionActivity extends AppCompatActivity {
         boutonInscription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                inscription();
+                TextInputLayout email = findViewById(R.id.TextInputLayout_email);
+                TextInputLayout mdp = findViewById(R.id.TextInputLayout_mdp);
+                TextInputLayout mdpConfirm = findViewById(R.id.TextInputLayout_mdp_confirm);
+
+                String emailText = email.getEditText().getText().toString();
+                String mdpText = mdp.getEditText().getText().toString();
+                String mdpConfirmText = mdpConfirm.getEditText().getText().toString();
+
+                if (!mdpText.equals(mdpConfirmText)) {
+                    Toast.makeText(InscriptionActivity.this, "Les mots de passe sont différents", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (motDePasseValidation(mdpText) == false) {
+                    Toast.makeText(InscriptionActivity.this, "Le mot de passe doit contenir au minimum 8 caractères, dont 1 majuscule, 1 minuscule, 1 chiffre et 1 symbole", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                inscriptionUtilisateur(emailText, mdpText, false);
             }
         });
     }
 
-    private void inscription() {
-        TextInputLayout email = findViewById(R.id.TextInputLayout_email);
-        TextInputLayout mdp = findViewById(R.id.TextInputLayout_mdp);
-        TextInputLayout mdpConfirm = findViewById(R.id.TextInputLayout_mdp_confirm);
+    //Fonction permettant de vérifier le regex pour le mot de passe
+    private boolean motDePasseValidation(String password) {
+        String regex = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[.#?!@$%^&*-]).{8,}$";
+        return password.matches(regex);
+    }
 
-        String emailText = email.getEditText().getText().toString();
-        String mdpText = mdp.getEditText().getText().toString();
-        String mdpConfirmText = mdp.getEditText().getText().toString();
-
-        if (!mdpText.equals(mdpConfirmText)) {
-            Toast.makeText(InscriptionActivity.this, "Les mots de passe sont différents", Toast.LENGTH_SHORT);
-            return;
-        }
-
+    //Fonction permettant l'inscription d'un utilisateur
+    private void inscriptionUtilisateur(String emailText, String mdpText, boolean idAdmin) {
         // Appel Retrofit
         RetrofitService retrofitService = new RetrofitService();
         UserApi utilisateurApi = retrofitService.getRetrofit().create(UserApi.class);
 
         Call<UtilisateurSecurity> call = utilisateurApi.inscription(
-                emailText, mdpText, false, null
+                emailText, mdpText, idAdmin
         );
 
         call.enqueue(new Callback<UtilisateurSecurity>() {

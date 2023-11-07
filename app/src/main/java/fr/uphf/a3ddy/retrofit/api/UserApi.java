@@ -19,7 +19,6 @@ public interface UserApi {
     Call<UtilisateurSecurity> inscription(
             @Field("email") String nom,
             @Field("password") String password,
-            @Field("isAdmin") boolean idAdmin,
-            @Field("utilisateur") Utilisateur utilisateur
+            @Field("isAdmin") boolean idAdmin
     );
 }
