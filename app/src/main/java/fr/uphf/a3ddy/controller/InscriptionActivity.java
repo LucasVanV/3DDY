@@ -59,15 +59,15 @@ public class InscriptionActivity extends AppCompatActivity {
         RetrofitService retrofitService = new RetrofitService();
         UserApi utilisateurApi = retrofitService.getRetrofit().create(UserApi.class);
 
-        Call<InscriptionRequest> call = utilisateurApi.inscription(
+        Call<UtilisateurSecurity> call = utilisateurApi.inscription(
                 emailText, mdpText, false, null
         );
 
-        call.enqueue(new Callback<InscriptionRequest>() {
+        call.enqueue(new Callback<UtilisateurSecurity>() {
             @Override
-            public void onResponse(Call<InscriptionRequest> call, Response<InscriptionRequest> response) {
+            public void onResponse(Call<UtilisateurSecurity> call, Response<UtilisateurSecurity> response) {
                 if (response.isSuccessful()) {
-                    InscriptionRequest inscriptionRequestResponse = response.body();
+                    UtilisateurSecurity utilisateurSecurity1 = response.body();
                     // Inscription réussie, redirigez l'utilisateur vers l'activité suivante
                     Intent intent = new Intent(InscriptionActivity.this, CreationProfilActivity.class);
                     startActivity(intent);
@@ -93,7 +93,7 @@ public class InscriptionActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<InscriptionRequest> call, Throwable t) {
+            public void onFailure(Call<UtilisateurSecurity> call, Throwable t) {
                 // Gérez les erreurs de connexion, etc.
                 Log.d("Erreur : ", t.getLocalizedMessage());
                 Toast.makeText(InscriptionActivity.this, "Erreur : " + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
