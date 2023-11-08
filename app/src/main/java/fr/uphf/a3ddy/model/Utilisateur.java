@@ -1,8 +1,11 @@
 package fr.uphf.a3ddy.model;
 
 
+import android.net.Uri;
+
 import com.google.gson.annotations.SerializedName;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -15,7 +18,7 @@ public class Utilisateur {
     @SerializedName("pseudo")
     private String pseudo;
     @SerializedName("photoProfil")
-    private String photoProfil;
+    private File photoProfil;
     @SerializedName("bio")
     private String bio;
     //private Set<Tag> tagsPrefere; // Assurez-vous que la classe 'Tag' soit également adaptée
@@ -25,7 +28,7 @@ public class Utilisateur {
     public Utilisateur() {
     }
 
-    public Utilisateur(String pseudo, String photoProfil, String bio) {
+    public Utilisateur(String pseudo, File photoProfil, String bio) {
         this.pseudo = pseudo;
         this.photoProfil = photoProfil;
         this.bio = bio;
@@ -43,11 +46,11 @@ public class Utilisateur {
         this.pseudo = pseudo;
     }
 
-    public String getPhotoProfil() {
+    public File getPhotoProfil() {
         return photoProfil;
     }
 
-    public void setPhotoProfil(String photoProfil) {
+    public void setPhotoProfil(File photoProfil) {
         this.photoProfil = photoProfil;
     }
 
