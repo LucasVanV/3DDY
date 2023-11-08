@@ -27,7 +27,5 @@ l
 <app/src/main/java/fr/uphf/a3ddy/controller/MainActivity.java,1\4\14ea49e93901cadf3df3abf46d98b8587c4b5d6c
 u
 Eapp/src/main/java/fr/uphf/a3ddy/controller/ChoixAuthentification.java,8\3\83fce8d26c273f014e4e84f7ebe54a03b3620017
-k
-;app/src/main/java/fr/uphf/a3ddy/controller/Inscription.java,6\9\693b5063a283ea4ead686b3bf7c4e3662de212e6
 s
 Capp/src/main/java/fr/uphf/a3ddy/controller/InscriptionActivity.java,6\b\6b080a4a9be097bffec7de5a3a84c2309984af08

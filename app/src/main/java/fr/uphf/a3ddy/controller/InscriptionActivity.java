@@ -7,16 +7,14 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Layout;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.IOException;
 
+import fr.uphf.a3ddy.databinding.ActivityMainBinding;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -30,11 +28,12 @@ public class InscriptionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.choix_authentification);
+        setContentView(R.layout.activity_main);
+        getSupportFragmentManager().beginTransaction()
+                .setReorderingAllowed(true)
+                .add(R.id.main, FragmentChoixAuthentification.class, null)
+                .commit();
 
-        findViewById(R.id.inscription).setOnClickListener(view -> {
-            replaceFragment(new Inscription());
-        });
     }
 
     private void inscription() {

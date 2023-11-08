@@ -12,38 +12,32 @@
         android:id="@+id/logo"
         android:layout_width="417dp"
         android:layout_height="285dp"
+
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:background="@drawable/logo_3ddy"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="-4dp"
-        tools:layout_editor_absoluteY="2dp"
         />
 
     <Button
         android:id="@+id/connexion"
+        android:text="@string/connexion"
         android:layout_width="334dp"
         android:layout_height="72dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:text="@string/connexion"
-        tools:ignore="MissingConstraints"
-        tools:layout_constraintTop_toBottomOf="@+id/logo"
+        app:layout_constraintTop_toBottomOf="@+id/logo"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintBottom_toTopOf="@+id/inscription"/>
 
     <Button
         android:id="@+id/inscription"
+        android:text="@string/inscription"
         android:layout_width="334dp"
         android:layout_height="72dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:text="@string/inscription"
-        tools:ignore="MissingConstraints"
-        tools:layout_constraintTop_toBottomOf="@+id/connexion"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/connexion"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="50dp"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
