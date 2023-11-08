@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
     */
     private void recuperation_JSon() {
 
-
         TextView textView = (TextView) findViewById(R.id.textJsonTest);
 
         // creation d'un object retrofit voir class fr.uphf.a3ddy.retrofit.RetrofitService

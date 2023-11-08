@@ -63,7 +63,6 @@ public class InscriptionActivity extends AppCompatActivity {
 
         bouton_inscription.setOnClickListener(new View.OnClickListener() {
 
-
             @Override
             public void onClick(View view) {
                 utilisateurAPi.inscription(utilisateur).enqueue(new Callback<Utilisateur>() {
