@@ -1,27 +1,27 @@
 package fr.uphf.a3ddy.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.gson.Gson;
 
 import java.io.IOException;
 
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import fr.uphf.a3ddy.R;
 import fr.uphf.a3ddy.RetrofitService;
-import fr.uphf.a3ddy.model.Utilisateur;
 import fr.uphf.a3ddy.model.UtilisateurSecurity;
 import fr.uphf.a3ddy.retrofit.api.UserApi;
 
@@ -30,15 +30,10 @@ public class InscriptionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_inscription);
+        setContentView(R.layout.choix_authentification);
 
-        Button boutonInscription = findViewById(R.id.bouton_inscription);
-
-        boutonInscription.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                inscription();
-            }
+        findViewById(R.id.inscription).setOnClickListener(view -> {
+            replaceFragment(new Inscription());
         });
     }
 
@@ -101,5 +96,12 @@ public class InscriptionActivity extends AppCompatActivity {
                 call.cancel();
             }
         });
+    }
+
+    private void replaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.choix_authe,fragment);
+        fragmentTransaction.commit();
     }
 }
