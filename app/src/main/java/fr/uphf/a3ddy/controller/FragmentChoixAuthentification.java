@@ -32,12 +32,13 @@ public class FragmentChoixAuthentification extends Fragment {
                     .beginTransaction();
 
             transaction.replace(R.id.choix_authe, fragment)
-                    .addToBackStack("name")
+                    .addToBackStack(null)
                     .commit();
 
-            view.setVisibility(View.GONE);
-            buttonConnexion.setVisibility(View.GONE);
+            view.setVisibility(View.INVISIBLE);
+            buttonConnexion.setVisibility(View.INVISIBLE);
         });
+
         return view;
     }
 }

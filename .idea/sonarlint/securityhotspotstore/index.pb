@@ -25,7 +25,9 @@ r
 Bapp/src/main/java/fr/uphf/a3ddy/controller/InscriptionRequest.java,7\9\79f886c0b8503ace48691b7a0da7864a8967d159
 l
 <app/src/main/java/fr/uphf/a3ddy/controller/MainActivity.java,1\4\14ea49e93901cadf3df3abf46d98b8587c4b5d6c
-u
-Eapp/src/main/java/fr/uphf/a3ddy/controller/ChoixAuthentification.java,8\3\83fce8d26c273f014e4e84f7ebe54a03b3620017
 s
 Capp/src/main/java/fr/uphf/a3ddy/controller/InscriptionActivity.java,6\b\6b080a4a9be097bffec7de5a3a84c2309984af08
+s
+Capp/src/main/java/fr/uphf/a3ddy/controller/FragmentInscription.java,d\3\d3c8278f5b3a86483231aa4fdb48e3f95e207c84
+}
+Mapp/src/main/java/fr/uphf/a3ddy/controller/FragmentChoixAuthentification.java,a\0\a01b4dc6350f4324ea658dd04bf3ceb143ff28a9

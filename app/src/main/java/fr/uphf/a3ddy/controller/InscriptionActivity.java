@@ -96,11 +96,4 @@ public class InscriptionActivity extends AppCompatActivity {
             }
         });
     }
-
-    private void replaceFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.choix_authe,fragment);
-        fragmentTransaction.commit();
-    }
 }
