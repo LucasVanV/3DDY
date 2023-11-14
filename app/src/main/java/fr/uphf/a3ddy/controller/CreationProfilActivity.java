@@ -1,31 +1,31 @@
 package fr.uphf.a3ddy.controller;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.textfield.TextInputLayout;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-
+import java.util.Arrays;
+import java.util.List;
 import fr.uphf.a3ddy.R;
 import fr.uphf.a3ddy.RetrofitService;
 import fr.uphf.a3ddy.model.Utilisateur;
-import fr.uphf.a3ddy.model.UtilisateurSecurity;
 import fr.uphf.a3ddy.retrofit.api.UserApi;
 import okhttp3.MediaType;
-import retrofit2.Call;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
@@ -34,6 +34,7 @@ public class CreationProfilActivity extends AppCompatActivity {
     private static final int REQUEST_IMAGE_PICK = 1;
     private TextInputLayout nomUtilisateur;
     private TextInputLayout bio;
+    private ChipGroup chipGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,23 +43,33 @@ public class CreationProfilActivity extends AppCompatActivity {
 
         nomUtilisateur = findViewById(R.id.TextInputLayout_nomUtilisateur);
         bio = findViewById(R.id.TextInputLayout_bio);
+        chipGroup = findViewById(R.id.chipGroup);
 
-        /* Exemple pour la récupération des chips sélectionnés :
+        // Liste de tags
+        // TODO : Mettre directement les données de la table "tags" dans la list au lieu de rentrer à la main
+        List<String> tagList = Arrays.asList("Automobile", "Sport", "Objet");
 
-        ChipGroup chipGroup = findViewById(R.id.chipGroup);
-        List<Integer> checkedChipIds = chipGroup.getCheckedChipIds();
+        // Ajouter les chips à partir de la liste
+        for (String tag : tagList) {
+            Chip chip = new Chip(this);
+            chip.setText(tag);
+            chip.setCheckable(true);
+            chip.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                // Réagir aux changements de sélection du chips
+                if (isChecked) {
+                    // Chip sélectionnée
+                    Log.d("ChipSelection", "Selected: " + tag);
+                } else {
+                    // Chip désélectionnée
+                    Log.d("ChipSelection", "Deselected: " + tag);
+                }
+            });
 
-        for (Integer chipId : checkedChipIds) {
-            Chip selectedChip = findViewById(chipId);
-            String chipText = selectedChip.getText().toString();
-
-            // Traitez chaque chip sélectionné individuellement
+            chipGroup.addView(chip);
         }
-
-        */
     }
 
-    //Fonction permettant de choisir une image sur le téléphone
+    // Fonction permettant de choisir une image sur le téléphone
     public void choisirImage(View view) {
         // Créez un Intent pour ouvrir la galerie d'images
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -67,7 +78,7 @@ public class CreationProfilActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == REQUEST_IMAGE_PICK && resultCode == RESULT_OK && data != null) {
@@ -77,12 +88,35 @@ public class CreationProfilActivity extends AppCompatActivity {
             String nomUtilisateurText = nomUtilisateur.getEditText().getText().toString();
             String bioText = bio.getEditText().getText().toString();
 
+            // Obtenir les chips sélectionnées
+            StringBuilder selectedChipsText = new StringBuilder();
+
+            for (int i = 0; i < chipGroup.getChildCount(); i++) {
+                Chip chip = (Chip) chipGroup.getChildAt(i);
+                if (chip.isChecked()) {
+                    String chipText = chip.getText().toString();
+                    selectedChipsText.append(chipText).append("/");
+                }
+            }
+
+            // Supprimer le dernier "/" si nécessaire
+            if (selectedChipsText.length() > 0 && selectedChipsText.charAt(selectedChipsText.length() - 1) == '/') {
+                selectedChipsText.deleteCharAt(selectedChipsText.length() - 1);
+            }
+
+            Log.d("tags1845515154145", selectedChipsText.toString());
             // Lancer la fonction de création de profil
-            creationProfil(nomUtilisateurText, bioText, imageUri);
+            creationProfil(nomUtilisateurText, bioText, selectedChipsText.toString(), imageUri);
         }
     }
 
-    public void creationProfil(String nomUtilisateurText, String bioText, Uri imageUri) {
+    public void creationProfil(String nomUtilisateurText, String bioText, String textTags, Uri imageUri) {
+        // Logs pour déboguer
+        System.out.println("Pseudo : " + nomUtilisateurText);
+        System.out.println("Bio : " + bioText);
+        System.out.println("Tags : " + textTags);
+        System.out.println("Image : " + imageUri);
+
         // Appel Retrofit
         RetrofitService retrofitService = new RetrofitService();
         UserApi utilisateurApi = retrofitService.getRetrofit().create(UserApi.class);
@@ -99,12 +133,13 @@ public class CreationProfilActivity extends AppCompatActivity {
                     // Créez un objet RequestBody à partir du fichier temporaire
                     RequestBody imageRequestBody = RequestBody.create(MediaType.parse("multipart/form-data"), imageFile);
                     // Créez un MultipartBody.Part à partir de l'objet RequestBody
-                    MultipartBody.Part imagePart = MultipartBody.Part.createFormData("photoProfil", imageFile.getName(), imageRequestBody);
+                    MultipartBody.Part imagePart = MultipartBody.Part.createFormData("imageProfil", imageFile.getName(), imageRequestBody);
 
-                    // Envoie de la demande avec l'image
+                    // Envoi de la demande avec l'image
                     Call<Utilisateur> call = utilisateurApi.creationProfil(
                             RequestBody.create(MediaType.parse("text/plain"), nomUtilisateurText),
                             RequestBody.create(MediaType.parse("text/plain"), bioText),
+                            RequestBody.create(MediaType.parse("text/plain"), textTags),
                             imagePart
                     );
 
@@ -167,7 +202,4 @@ public class CreationProfilActivity extends AppCompatActivity {
         outputStream.close();
         inputStream.close();
     }
-
 }
-
-

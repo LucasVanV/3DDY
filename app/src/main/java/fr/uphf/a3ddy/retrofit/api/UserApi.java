@@ -32,7 +32,8 @@ public interface UserApi {
     Call<Utilisateur> creationProfil(
             @Part("pseudo") RequestBody pseudo,
             @Part("bio") RequestBody bio,
-            @Part MultipartBody.Part photoProfil
+            @Part("tagsPrefere") RequestBody tagsPrefere,
+            @Part MultipartBody.Part imageProfil
     );
 
 }

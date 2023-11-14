@@ -147,23 +147,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="@id/ScrollView_tags"
-            app:singleSelection="false">
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/Chips_Automobile"
-                style="@style/Widget.MaterialComponents.Chip.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Automobile"
-                app:chipBackgroundColor="@color/chip_background_selector" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/Chips_Sport"
-                style="@style/Widget.MaterialComponents.Chip.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sport"
-                app:chipBackgroundColor="@color/chip_background_selector" />
+            app:singleSelection="false"
+            android:clickable="true"
+            android:focusable="true">
 
         </com.google.android.material.chip.ChipGroup>
     </ScrollView>
