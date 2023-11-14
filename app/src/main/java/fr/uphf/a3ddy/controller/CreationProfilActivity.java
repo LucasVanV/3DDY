@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -105,8 +106,15 @@ public class CreationProfilActivity extends AppCompatActivity {
             }
 
             Log.d("tags1845515154145", selectedChipsText.toString());
+
             // Lancer la fonction de création de profil
-            creationProfil(nomUtilisateurText, bioText, selectedChipsText.toString(), imageUri);
+            Button buttonValider  = findViewById(R.id.validateButton);
+            buttonValider.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    creationProfil(nomUtilisateurText, bioText, selectedChipsText.toString(), imageUri);
+                }
+            });
         }
     }
 
