@@ -123,7 +123,31 @@ public class CreationProfilActivity extends AppCompatActivity {
             buttonValider.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    //Gestion d'erreurs
+                    //PP null
+                    if (imageUri == null) {
+                        Toast.makeText(CreationProfilActivity.this, "Vous devez choisir une photo de profil",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                    //Nom d'utilisateur null
+                    if (nomUtilisateurText.isEmpty()) {
+                        Toast.makeText(CreationProfilActivity.this, "Veuillez saisir un nom d'utilisateur",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                    //Bio null
+                    if (bioText.isEmpty()) {
+                        Toast.makeText(CreationProfilActivity.this, "Veuillez saisir une bio",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                    //Tags null
+                    if (selectedChipsText.toString().isEmpty()) {
+                        Toast.makeText(CreationProfilActivity.this, "Vous devez choisir au moins un tag",
+                                Toast.LENGTH_SHORT).show();
+                    }
+
                     creationProfil(nomUtilisateurText, bioText, selectedChipsText.toString(), imageUri);
+                    Toast.makeText(CreationProfilActivity.this, "Inscription réussie, bienvenue sur 3DDY !",
+                            Toast.LENGTH_LONG).show();
                 }
             });
         }
