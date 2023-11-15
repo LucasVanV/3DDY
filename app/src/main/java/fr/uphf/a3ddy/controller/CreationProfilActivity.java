@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -45,6 +46,16 @@ public class CreationProfilActivity extends AppCompatActivity {
         nomUtilisateur = findViewById(R.id.TextInputLayout_nomUtilisateur);
         bio = findViewById(R.id.TextInputLayout_bio);
         chipGroup = findViewById(R.id.chipGroup);
+
+        ImageButton boutonRetour = findViewById(R.id.arrowButton);
+
+        boutonRetour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent_inscription = new Intent(CreationProfilActivity.this, InscriptionActivity.class);
+                startActivity(intent_inscription);
+            }
+        });
 
         // Liste de tags
         // TODO : Mettre directement les données de la table "tags" dans la list au lieu de rentrer à la main
