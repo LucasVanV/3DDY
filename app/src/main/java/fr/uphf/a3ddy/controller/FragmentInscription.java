@@ -95,12 +95,10 @@ public class FragmentInscription extends Fragment {
             public void onResponse(Call<UtilisateurSecurity> call, Response<UtilisateurSecurity> response) {
                 if (response.isSuccessful()) {
                     // Inscription réussie, redirigez l'utilisateur vers l'activité suivante
-                    Fragment fragment = new FragmentChoixAuthentification();
-                    FragmentTransaction transaction = getActivity()
-                            .getSupportFragmentManager()
-                            .beginTransaction();
+                    Fragment fragment = new FragmentCreationProfil();
+                    FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
 
-                    transaction.replace(R.id.creation_profil, fragment)
+                    transaction.replace(R.id.page_inscription, fragment)
                             .addToBackStack(null)
                             .commit();
 

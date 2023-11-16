@@ -31,3 +31,5 @@ s
 Capp/src/main/java/fr/uphf/a3ddy/controller/FragmentInscription.java,d\3\d3c8278f5b3a86483231aa4fdb48e3f95e207c84
 }
 Mapp/src/main/java/fr/uphf/a3ddy/controller/FragmentChoixAuthentification.java,a\0\a01b4dc6350f4324ea658dd04bf3ceb143ff28a9
+v
+Fapp/src/main/java/fr/uphf/a3ddy/controller/FragmentCreationProfil.java,7\9\79896d88d1e0d3dd91e6be9bdfba205b7be64bc8
