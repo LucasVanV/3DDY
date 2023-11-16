@@ -193,7 +193,7 @@ public class CreationProfilActivity extends AppCompatActivity {
                             if (response.isSuccessful()) {
                                 Utilisateur utilisateur = response.body();
                                 // Inscription réussie, redirigez l'utilisateur vers l'activité suivante
-                                Intent intent = new Intent(CreationProfilActivity.this, MainActivity.class);
+                                Intent intent = new Intent(CreationProfilActivity.this, Accueil_fypActivity.class);
                                 startActivity(intent);
                             }
                         }

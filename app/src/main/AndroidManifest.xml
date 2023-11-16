@@ -21,10 +21,13 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".controller.ParamatresActivity"
+            android:name=".controller.CreationProfilActivity"
             android:exported="false" />
         <activity
             android:name=".controller.MonCompteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".controller.Accueil_fypActivity"
             android:exported="false" />
         <activity
             android:name=".controller.PosterActivity"
@@ -39,7 +42,10 @@
             android:name=".controller.InscriptionActivity"
             android:exported="false" />
         <activity
-            android:name=".controller.CreationProfilActivity"
+        android:name=".controller.menuActivity"
+        android:exported="false" />
+        <activity
+            android:name=".controller.ParamatresActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
