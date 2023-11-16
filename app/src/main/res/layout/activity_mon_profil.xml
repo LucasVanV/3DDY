@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/background_color"
     android:padding="16dp"
-    tools:context=".controller.MonCompteActivity">
+    tools:context=".controller.Mon_profil">
 
     <LinearLayout
         android:id="@+id/linearlayout_titre"
@@ -32,18 +32,18 @@
             android:gravity="center"
             android:textSize="@dimen/taille_police_titre"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="Mon compte">
+            android:text="Mon profil">
         </TextView>
     </LinearLayout>
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/TextInputLayout_email"
+        android:id="@+id/TextInputLayout_nom_utilisateur"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:layout_marginTop="32dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Modifier l'email"
+        android:hint="Modifier le nom d'utilisateur"
         android:textColor="@color/blanc"
         android:textColorHint="@color/text_color_blanc"
         app:boxStrokeColor="@color/background_color"
@@ -68,49 +68,52 @@
             android:textColor="@color/blanc" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/TextInputLayout_mdp_confirm"
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintlayout_photoProfil"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="13dp"
-        android:hint="Modifier le mot de passe"
-        android:textColor="@color/blanc"
-        android:textColorHint="@color/text_color_blanc"
-        app:boxStrokeColor="@color/background_color"
-        app:cursorColor="@color/blanc"
-        app:endIconMode="password_toggle"
-        app:endIconTint="@color/blanc"
-        app:errorEnabled="true"
-        app:hintTextColor="@color/text_color_blanc"
-        app:layout_constraintBottom_toTopOf="@+id/button_valider"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.096"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextInputLayout_email"
-        app:startIconDrawable="@drawable/icone_mdp"
-        app:startIconTint="@color/blanc">
+        app:layout_constraintTop_toBottomOf="@+id/TextInputLayout_nom_utilisateur"
+        app:layout_constraintBottom_toTopOf="@id/button_valider">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/TextInputEditText_mdp_confirm"
+        <Button
+            android:id="@+id/bouton_ajouter_photoProfil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
             android:background="@drawable/edittext"
-            android:inputType="textPassword"
-            android:textColor="@color/blanc" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:onClick="choisirImage"
+            android:text="Photo de profil "
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/image_icone_ajouter_photo"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/bouton_ajouter_photoProfil"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/icone_photo_post" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <Button
         android:id="@+id/button_valider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bouton"
+        android:layout_marginTop="32dp"
         android:text="Valider"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.389" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintlayout_photoProfil"
+        app:layout_constraintVertical_bias="0.385" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
