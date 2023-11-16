@@ -10,18 +10,14 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.gson.Gson;
 
 import java.io.IOException;
 
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
+import fr.uphf.a3ddy.retrofit.RetrofitService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import fr.uphf.a3ddy.R;
-import fr.uphf.a3ddy.RetrofitService;
-import fr.uphf.a3ddy.model.Utilisateur;
 import fr.uphf.a3ddy.model.UtilisateurSecurity;
 import fr.uphf.a3ddy.retrofit.api.UserApi;
 
