@@ -10,20 +10,21 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:src="@drawable/logo_3ddy"
-        app:layout_constraintBottom_toTopOf="@id/left_arrow"
-        app:layout_constraintHorizontal_bias="0.863"
+        android:contentDescription="@string/logo_description"
+        app:layout_constraintBottom_toTopOf="@id/left_arrow_button"
         app:layout_constraintLeft_toRightOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
     </ImageView>
 
-    <ImageView
-        android:id="@+id/left_arrow"
+    <ImageButton
+        android:id="@+id/left_arrow_button"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:clickable="true"
         android:src="@drawable/left_arrow"
-        app:layout_constraintBottom_toBottomOf="none"
+        android:background="@drawable/ripple_effect_background"
+        android:contentDescription="@string/text_connexion_return_button"
         app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -37,17 +38,19 @@
         android:text="@string/CONNEXION"
         android:textColor="@color/white"
         android:textSize="30sp"
-        app:layout_constraintLeft_toRightOf="@id/left_arrow"
+        app:layout_constraintLeft_toRightOf="@id/left_arrow_button"
         app:layout_constraintTop_toBottomOf="@id/logo" />
 
     <EditText
         android:id="@+id/editTextEmail"
-        android:layout_width="380dp"
+        android:layout_width="350dp"
         android:layout_height="75dp"
         android:background="@drawable/gray_rounded_background_rectangle"
         android:hint="@string/hintConnexion"
+        android:autofillHints="emailAddress"
         android:textColorHint="@color/hintWhite"
         android:padding="20dp"
+        android:inputType="textEmailAddress"
         app:layout_constraintTop_toBottomOf="@id/connexionTextView"
         app:layout_constraintBottom_toBottomOf="@id/editTextMDP"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -56,12 +59,14 @@
 
     <EditText
         android:id="@+id/editTextMDP"
-        android:layout_width="380dp"
+        android:layout_width="350dp"
         android:layout_height="75dp"
         android:background="@drawable/gray_rounded_background_rectangle"
         android:hint="@string/hintMDP"
         android:padding="20dp"
         android:textColorHint="@color/hintWhite"
+        android:inputType="textPassword"
+        android:autofillHints="password"
         app:layout_constraintBottom_toTopOf="@id/connectionButton"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

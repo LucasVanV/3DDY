@@ -29,18 +29,22 @@
             android:exported="false" />
         <activity
             android:name=".controller.MainActivity"
-            android:exported="false" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".controller.ProfilActivity"
             android:exported="false" />
         <activity
             android:name=".controller.InscriptionActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".controller.ConnexionActivity"
+            android:exported="false">
         </activity>
     </application>
 

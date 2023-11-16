@@ -26,15 +26,16 @@
         android:src="@drawable/arrow"
         app:layout_constraintBottom_toTopOf="@+id/TextInputLayout_nom_utilisateur"
         app:layout_constraintEnd_toStartOf="@+id/titre_inscription"
+        app:layout_constraintHorizontal_bias="0.577"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.536" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/titre_inscription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Inscription"
+        android:text="@string/Inscription"
         android:textColor="@color/text_color_blanc"
         android:textSize="28dp"
         app:layout_constraintBottom_toTopOf="@+id/TextInputLayout_nom_utilisateur"
@@ -46,11 +47,11 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/TextInputLayout_nom_utilisateur"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-        android:layout_marginTop=""
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/nom_utilisateur_hint"
         android:textColor="@color/blanc"
+        android:layout_marginTop="10sp"
         android:textColorHint="@color/text_color_blanc"
         app:boxStrokeColor="@color/background_color"
         app:counterEnabled="true"
@@ -71,9 +72,9 @@
             android:id="@+id/TextInputEditText_nom_utilisateur"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/edittext"
             android:maxLength="21"
-            android:textColor="@color/blanc"
-            android:background="@drawable/edittext"/>
+            android:textColor="@color/blanc" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout

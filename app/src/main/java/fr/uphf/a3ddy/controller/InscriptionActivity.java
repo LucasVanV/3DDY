@@ -37,12 +37,6 @@ public class InscriptionActivity extends AppCompatActivity {
         TextInputEditText mdpConfirm = findViewById(R.id.TextInputLayout_mdp_confirm);
         Button bouton_inscription = findViewById(R.id.bouton_inscription);
 
-        if(nom_utilisateur.getText().toString().isEmpty() || email.getText().toString().isEmpty() || mdp.getText().toString().isEmpty() || mdpConfirm.getText().toString().isEmpty()) {
-            Toast.makeText(InscriptionActivity.this, "Tous les champs doivent être remplis", Toast.LENGTH_SHORT).show();
-        } else {
-            inscription();
-        }
-
     }
 
     private void inscription() {

@@ -14,4 +14,6 @@
     <string name="mdp_confirm_hint">Confirmer le mot de passe</string>
     <string name="Reco">Recommendation</string>
     <string name="inscription">Inscription</string>
+    <string name="text_connexion_return_button">return arrow to get back the previous page</string>
+    <string name="logo_description">logo of the 3DDY application</string>
 </resources>

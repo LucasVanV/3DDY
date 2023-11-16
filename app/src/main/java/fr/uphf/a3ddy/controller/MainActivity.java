@@ -2,8 +2,11 @@ package fr.uphf.a3ddy.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,10 +24,33 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.choix_authentification);
+        //recuperation_JSon();
 
-        recuperation_JSon();
+        Button connexionButton = findViewById(R.id.connexion);
+        Button inscriptionButton = findViewById(R.id.inscription);
+
+        // Renvoie vers la page de connexion
+        connexionButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,ConnexionActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //Renvoie vers la page d'inscription
+        inscriptionButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,InscriptionActivity.class);
+                startActivity(intent);
+            }
+        });
     }
+
+
+
     /**
      *Exemple de requet pour la recuperation de depuis l'api
     */
