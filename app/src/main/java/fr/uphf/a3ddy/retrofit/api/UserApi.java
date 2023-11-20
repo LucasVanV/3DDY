@@ -1,14 +1,17 @@
 package fr.uphf.a3ddy.retrofit.api;
 
 import fr.uphf.a3ddy.controller.InscriptionRequest;
+import fr.uphf.a3ddy.model.ModifRequest;
 import fr.uphf.a3ddy.model.Utilisateur;
 import fr.uphf.a3ddy.model.UtilisateurSecurity;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -34,6 +37,14 @@ public interface UserApi {
             @Part("bio") RequestBody bio,
             @Part("tagsPrefere") RequestBody tagsPrefere,
             @Part MultipartBody.Part imageProfil
+    );
+
+    @FormUrlEncoded
+    @PUT("/api/v1/modif/modificationCompte")
+    Call<ModifRequest> modificationCompte(
+            @Header("Authorization") String authorization,
+            @Field("email") String email,
+            @Field("password") String password
     );
 
 }

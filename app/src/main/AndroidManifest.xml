@@ -24,7 +24,7 @@
             android:name=".controller.ParamatresActivity"
             android:exported="false" />
         <activity
-            android:name=".controller.MonCompteActivity"
+            android:name=".controller.CreationProfilActivity"
             android:exported="false" />
         <activity
             android:name=".controller.Accueil_fypActivity"
@@ -45,7 +45,7 @@
             android:name=".controller.menuActivity"
             android:exported="false" />
         <activity
-            android:name=".controller.CreationProfilActivity"
+            android:name=".controller.MonCompteActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
