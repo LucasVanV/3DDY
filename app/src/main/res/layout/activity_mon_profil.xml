@@ -56,11 +56,41 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearlayout_titre"
-        app:startIconDrawable="@drawable/icone_email"
+        app:startIconDrawable="@drawable/icone_nom_utilisateur"
         app:startIconTint="@color/blanc">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/TextInputEditText_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittext"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/blanc" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/TextInputLayout_bio"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Modifier la bio"
+        android:textColor="@color/blanc"
+        android:textColorHint="@color/text_color_blanc"
+        app:boxStrokeColor="@color/background_color"
+        app:cursorColor="@color/blanc"
+        app:endIconMode="clear_text"
+        app:endIconTint="@color/blanc"
+        app:errorEnabled="true"
+        app:hintTextColor="@color/text_color_blanc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TextInputLayout_nom_utilisateur"
+        app:startIconDrawable="@drawable/icone_nom_utilisateur"
+        app:startIconTint="@color/blanc">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/TextInputEditText_bio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edittext"
@@ -75,7 +105,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.096"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextInputLayout_nom_utilisateur"
+        app:layout_constraintTop_toBottomOf="@+id/TextInputLayout_bio"
         app:layout_constraintBottom_toTopOf="@id/button_valider">
 
         <Button

@@ -16,6 +16,7 @@ import java.io.IOException;
 
 import fr.uphf.a3ddy.R;
 import fr.uphf.a3ddy.model.ModifRequest;
+import fr.uphf.a3ddy.model.UtilisateurSecurity;
 import fr.uphf.a3ddy.retrofit.RetrofitService;
 import fr.uphf.a3ddy.retrofit.api.UserApi;
 import java.security.Key;import retrofit2.Call;
@@ -57,21 +58,22 @@ public class MonCompteActivity extends AppCompatActivity {
     private void modificationCompte(String emailText, String passwordText) {
         // Obtenez le token de votre emplacement de stockage sécurisé
         String authToken = "eyJhbGciOiJIUzI1NiJ9" +
-                ".eyJzdWIiOiJmZXpmQHRlc3QuY29tIiwiaWF0IjoxNzAwNDc4Njg0LCJleHAiOjE3MDA1NjUwODR9.SyyCcU0O6SrJUcAZ5OXTfsCm6q97Z5crSv5YcbMrGIk";
+                ".eyJzdWIiOiJyZGZ2ZGZ2ZGZ2QGdtYWlsLmNvbSIsImlhdCI6MTcwMDQ4ODQ5NSwiZXhwIjoxNzAwNTc0ODk1fQ" +
+                ".NCMUutOJ4ZuqNznXpeTNYQpthzuvh8sAe22ew8EUZ8c";
 
         // Appel Retrofit
         RetrofitService retrofitService = new RetrofitService(authToken);
         UserApi utilisateurApi = retrofitService.getRetrofit().create(UserApi.class);
 
-        Call<ModifRequest> call = utilisateurApi.modificationCompte("Bearer " + authToken,
+        Call<UtilisateurSecurity> call = utilisateurApi.modificationCompte("Bearer " + authToken,
                 emailText, passwordText
         );
 
-        call.enqueue(new Callback<ModifRequest>() {
+        call.enqueue(new Callback<UtilisateurSecurity>() {
             @Override
-            public void onResponse(Call<ModifRequest> call, Response<ModifRequest> response) {
+            public void onResponse(Call<UtilisateurSecurity> call, Response<UtilisateurSecurity> response) {
                 if (response.isSuccessful()) {
-                    ModifRequest modifRequest = response.body();
+                    UtilisateurSecurity modifRequest = response.body();
                     Toast.makeText(MonCompteActivity.this, "Modification réussie ", Toast.LENGTH_LONG).show();
                     // Modification réussie, redirigez l'utilisateur vers l'activité suivante
                     Intent intent = new Intent(MonCompteActivity.this, Accueil_fypActivity.class);
@@ -93,14 +95,14 @@ public class MonCompteActivity extends AppCompatActivity {
                     } else {
                         // Gérez d'autres erreurs ici
                         Log.d("Erreur d'inscription", "Erreur inattendue : " + response.code());
-                        Toast.makeText(MonCompteActivity.this, "Erreur lors de la modification : " + response.code(),
+                        Toast.makeText(MonCompteActivity.this, "Erreur lors de la modification : " + response.body(),
                                 Toast.LENGTH_SHORT).show();
                     }
                 }
             }
 
             @Override
-            public void onFailure(Call<ModifRequest> call, Throwable t) {
+            public void onFailure(Call<UtilisateurSecurity> call, Throwable t) {
                 // Gérez les erreurs de modification de compte, etc.
                 Log.d("Erreur : ", t.getLocalizedMessage());
                 Toast.makeText(MonCompteActivity.this, "Erreur : " + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();

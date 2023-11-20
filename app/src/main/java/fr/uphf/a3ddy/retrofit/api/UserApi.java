@@ -41,7 +41,7 @@ public interface UserApi {
 
     @FormUrlEncoded
     @PUT("/api/v1/modif/modificationCompte")
-    Call<ModifRequest> modificationCompte(
+    Call<UtilisateurSecurity> modificationCompte(
             @Header("Authorization") String authorization,
             @Field("email") String email,
             @Field("password") String password
