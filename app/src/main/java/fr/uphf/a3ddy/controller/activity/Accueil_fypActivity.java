@@ -1,4 +1,4 @@
-package fr.uphf.a3ddy.controller;
+package fr.uphf.a3ddy.controller.activity;
 
 import android.os.Bundle;
 

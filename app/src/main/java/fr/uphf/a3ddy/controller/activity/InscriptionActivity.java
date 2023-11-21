@@ -1,4 +1,4 @@
-package fr.uphf.a3ddy.controller;
+package fr.uphf.a3ddy.controller.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,19 +7,22 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.IOException;
 
-import fr.uphf.a3ddy.retrofit.RetrofitService;
+import fr.uphf.a3ddy.service.EncryptedPreferencesService;
+import fr.uphf.a3ddy.service.interceptor.AuthInterceptor;
+import fr.uphf.a3ddy.service.retrofit.RetrofitService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import fr.uphf.a3ddy.R;
 import fr.uphf.a3ddy.model.UtilisateurSecurity;
-import fr.uphf.a3ddy.retrofit.api.UserApi;
+import fr.uphf.a3ddy.service.retrofit.api.UserApi;
 
 public class InscriptionActivity extends AppCompatActivity {
 
@@ -27,6 +30,19 @@ public class InscriptionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inscription);
+
+
+        ImageButton boutonRetour = findViewById(R.id.imageButton);
+
+        boutonRetour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent_inscription = new Intent(InscriptionActivity.this, InscriptionActivity.class);
+                startActivity(intent_inscription);
+            }
+        });
+
+
 
         Button boutonInscription = findViewById(R.id.bouton_inscription);
 
@@ -50,7 +66,7 @@ public class InscriptionActivity extends AppCompatActivity {
                     return;
                 }
 
-                inscriptionUtilisateur(emailText, mdpText, false);
+                inscriptionUtilisateur(emailText, mdpText);
             }
         });
     }
@@ -62,13 +78,13 @@ public class InscriptionActivity extends AppCompatActivity {
     }
 
     //Fonction permettant l'inscription d'un utilisateur
-    private void inscriptionUtilisateur(String emailText, String mdpText, boolean idAdmin) {
+    private void inscriptionUtilisateur(String emailText, String mdpText) {
         // Appel Retrofit
-        RetrofitService retrofitService = new RetrofitService();
+        RetrofitService retrofitService = new RetrofitService("");
         UserApi utilisateurApi = retrofitService.getRetrofit().create(UserApi.class);
 
         Call<UtilisateurSecurity> call = utilisateurApi.inscription(
-                emailText, mdpText, idAdmin
+                emailText, mdpText
         );
 
         call.enqueue(new Callback<UtilisateurSecurity>() {
@@ -76,9 +92,17 @@ public class InscriptionActivity extends AppCompatActivity {
             public void onResponse(Call<UtilisateurSecurity> call, Response<UtilisateurSecurity> response) {
                 if (response.isSuccessful()) {
                     UtilisateurSecurity utilisateurSecurity1 = response.body();
-                    // Inscription réussie, redirigez l'utilisateur vers l'activité suivante
+                    Log.d("",response.toString());
+                    String token = utilisateurSecurity1.getToken();
+                    Log.d("token de l'utilisateur",token);
+
+                    EncryptedPreferencesService encryptedPreferencesService = new EncryptedPreferencesService(getApplicationContext());
+                    encryptedPreferencesService.saveAuthToken(token);
+                    // réussie, redirigez l'utilisateur vers l'activité suivante
+                    Log.d("token encrypte ", encryptedPreferencesService.getAuthToken());
+
                     Intent intent = new Intent(InscriptionActivity.this, CreationProfilActivity.class);
-                    startActivity(intent);
+                    startActivity(intent);//todo faire passer les infos de l'utilisateur sur la creation du profil
                 } else {
                     // Gestion des erreurs en fonction du code de réponse HTTP
                     if (response.code() == 400) {

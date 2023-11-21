@@ -1,4 +1,4 @@
-package fr.uphf.a3ddy.controller;
+package fr.uphf.a3ddy.controller.activity;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -22,8 +22,9 @@ import java.util.Arrays;
 import java.util.List;
 import fr.uphf.a3ddy.R;
 import fr.uphf.a3ddy.model.Utilisateur;
-import fr.uphf.a3ddy.retrofit.RetrofitService;
-import fr.uphf.a3ddy.retrofit.api.UserApi;
+import fr.uphf.a3ddy.service.EncryptedPreferencesService;
+import fr.uphf.a3ddy.service.retrofit.RetrofitService;
+import fr.uphf.a3ddy.service.retrofit.api.UserApi;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -160,8 +161,11 @@ public class CreationProfilActivity extends AppCompatActivity {
         System.out.println("Tags : " + textTags);
         System.out.println("Image : " + imageUri);
 
+        Log.d("TOKEN avant requet",new EncryptedPreferencesService(getApplicationContext()).getAuthToken());
+
         // Appel Retrofit
-        RetrofitService retrofitService = new RetrofitService();
+        RetrofitService retrofitService = new RetrofitService(new EncryptedPreferencesService(getApplicationContext()).getAuthToken());//TODO
+        //RetrofitService retrofitService = new RetrofitService("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJxdWVudGluQHRlc3QudGVzdCIsImlhdCI6MTcwMDUwNTk2NSwiZXhwIjoxNzAwNTkyMzY1fQ.BXLlNNNAoPiV5BViBF34PpCzqIuQkjvcAeiDEFj2Q8w");
         UserApi utilisateurApi = retrofitService.getRetrofit().create(UserApi.class);
 
         try {
@@ -185,16 +189,18 @@ public class CreationProfilActivity extends AppCompatActivity {
                             RequestBody.create(MediaType.parse("text/plain"), textTags),
                             imagePart
                     );
-
+                    Log.d("Debut enqueue",call.toString());
                     // Exécutez la demande
                     call.enqueue(new Callback<Utilisateur>() {
                         @Override
-                        public void onResponse(Call<Utilisateur> call, Response<Utilisateur> response) {
+                        public void onResponse(Call<Utilisateur> call, Response<Utilisateur> response) { // TODO a verifier
+                            Log.d("BITEEEEEE" , String.valueOf(response.code()));
                             if (response.isSuccessful()) {
                                 Utilisateur utilisateur = response.body();
                                 // Inscription réussie, redirigez l'utilisateur vers l'activité suivante
                                 Intent intent = new Intent(CreationProfilActivity.this, Accueil_fypActivity.class);
                                 startActivity(intent);
+
                             }
                         }
 

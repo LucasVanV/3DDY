@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.InscriptionActivity"
+    tools:context=".controller.activity.InscriptionActivity"
     android:background="@color/background_color" android:padding="16dp">
 
     <ImageView
