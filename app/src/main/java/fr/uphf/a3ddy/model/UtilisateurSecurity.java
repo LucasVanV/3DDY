@@ -10,20 +10,20 @@ public class UtilisateurSecurity {
     private String email;
     @SerializedName("password")
     private String password;
-    @SerializedName("isAdmin")
-    private boolean isAdmin;
     @SerializedName("utilisateur")
     private Utilisateur utilisateur;
+    @SerializedName("acces_token")
+    private String token;
 
     // Constructeur par défaut
     public UtilisateurSecurity(String emailText, String mdpText) {}
 
     // Constructeur paramétrique
-    public UtilisateurSecurity(String email, String password, boolean isAdmin, Utilisateur utilisateur) {
+    public UtilisateurSecurity(String email, String password, Utilisateur utilisateur) {
         this.email = email;
         this.password = password;
-        this.isAdmin = isAdmin;
         this.utilisateur = utilisateur;
+        this.token="";
     }
 
     public UtilisateurSecurity(String emailText, String mdpText, Boolean aBoolean, Utilisateur utilisateur) {
@@ -49,19 +49,23 @@ public class UtilisateurSecurity {
         this.password = password;
     }
 
-    public boolean isAdmin() {
-        return isAdmin;
-    }
-
-    public void setAdmin(boolean admin) {
-        isAdmin = admin;
-    }
-
     public Utilisateur getUtilisateur() {
         return utilisateur;
     }
 
     public void setUtilisateur(Utilisateur utilisateur) {
         this.utilisateur = utilisateur;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

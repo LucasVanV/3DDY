@@ -1,4 +1,4 @@
-package fr.uphf.a3ddy.retrofit.api;
+package fr.uphf.a3ddy.service.retrofit.api;
 
 import fr.uphf.a3ddy.controller.InscriptionRequest;
 import fr.uphf.a3ddy.model.ModifRequest;
@@ -23,15 +23,14 @@ public interface UserApi {
     Call<Utilisateur> connexion();
 
     @FormUrlEncoded
-    @POST("/api/utilisateur/inscription")
+    @POST("/api/v1/auth/register")
     Call<UtilisateurSecurity> inscription(
             @Field("email") String nom,
-            @Field("password") String password,
-            @Field("isAdmin") boolean idAdmin
+            @Field("password") String password
     );
 
     @Multipart
-    @POST("/api/utilisateur/creationProfil")
+    @POST("/api/v1/auth/buildprofil")
     Call<Utilisateur> creationProfil(
             @Part("pseudo") RequestBody pseudo,
             @Part("bio") RequestBody bio,
