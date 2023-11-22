@@ -17,9 +17,11 @@ import java.io.IOException;
 import fr.uphf.a3ddy.R;
 import fr.uphf.a3ddy.model.ModifRequest;
 import fr.uphf.a3ddy.model.UtilisateurSecurity;
-import fr.uphf.a3ddy.retrofit.RetrofitService;
-import fr.uphf.a3ddy.retrofit.api.UserApi;
-import java.security.Key;import retrofit2.Call;
+import java.security.Key;
+
+import fr.uphf.a3ddy.service.retrofit.RetrofitService;
+import fr.uphf.a3ddy.service.retrofit.api.UserApi;
+import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 

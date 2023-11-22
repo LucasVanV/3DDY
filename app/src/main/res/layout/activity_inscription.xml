@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.activity.InscriptionActivity"
+    tools:context=".controller.ChoixAuthentificationActivity"
     android:background="@color/background_color" android:padding="16dp">
 
     <ImageView
@@ -24,7 +24,6 @@
         android:layout_width="68dp"
         android:layout_height="39dp"
         android:backgroundTint="@color/background_color"
-        android:src="@drawable/arrow"
         app:layout_constraintBottom_toTopOf="@+id/TextInputLayout_nom_utilisateur"
         app:layout_constraintEnd_toStartOf="@+id/titre_inscription"
         app:layout_constraintStart_toStartOf="parent"
@@ -49,7 +48,6 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/TextInputLayout_email"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-        android:layout_marginTop=""
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"

@@ -1,7 +1,6 @@
 package fr.uphf.a3ddy.controller;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -20,21 +19,22 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.io.IOException;
 
 import fr.uphf.a3ddy.R;
-import fr.uphf.a3ddy.RetrofitService;
 import fr.uphf.a3ddy.model.UtilisateurSecurity;
-import fr.uphf.a3ddy.retrofit.api.UserApi;
+import fr.uphf.a3ddy.service.EncryptedPreferencesService;
+import fr.uphf.a3ddy.service.retrofit.RetrofitService;
+import fr.uphf.a3ddy.service.retrofit.api.UserApi;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class FragmentInscription extends Fragment {
 
-    View view;
-    ImageButton imageButton;
-    TextInputLayout email;
-    TextInputLayout mdp;
-    TextInputLayout confirmerMDP;
-    Button boutonInscription;
+    private View view;
+    private ImageButton imageButton;
+    private TextInputLayout email;
+    private TextInputLayout mdp;
+    private TextInputLayout confirmerMDP;
+    private Button boutonInscription;
 
     Context context = this.getContext();
 
@@ -49,7 +49,7 @@ public class FragmentInscription extends Fragment {
         boutonInscription = view.findViewById(R.id.bouton_inscription);
 
         imageButton.setOnClickListener(view -> {
-            Fragment fragment = new FragmentChoixAuthentification();
+            Fragment fragment = new ChoixAuthentificationActivity();
             FragmentTransaction transaction = getActivity()
                     .getSupportFragmentManager()
                     .beginTransaction();
@@ -71,6 +71,12 @@ public class FragmentInscription extends Fragment {
         return view;
     }
 
+    //Fonction permettant de vérifier le regex pour le mot de passe
+    private boolean motDePasseValidation(String password) {
+        String regex = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[.#?!@$%^&*-]).{8,}$";
+        return password.matches(regex);
+    }
+
     private void inscription() {
 
         String emailText = email.getEditText().getText().toString();
@@ -82,18 +88,27 @@ public class FragmentInscription extends Fragment {
             return;
         }
 
-        // Appel Retrofit
-        RetrofitService retrofitService = new RetrofitService();
+        RetrofitService retrofitService = new RetrofitService("");
         UserApi utilisateurApi = retrofitService.getRetrofit().create(UserApi.class);
 
         Call<UtilisateurSecurity> call = utilisateurApi.inscription(
-                emailText, mdpText, false, null
+                emailText, mdpText
         );
 
         call.enqueue(new Callback<UtilisateurSecurity>() {
             @Override
             public void onResponse(Call<UtilisateurSecurity> call, Response<UtilisateurSecurity> response) {
                 if (response.isSuccessful()) {
+                    UtilisateurSecurity utilisateurSecurity1 = response.body();
+                    Log.d("",response.toString());
+                    String token = utilisateurSecurity1.getToken();
+                    Log.d("token de l'utilisateur",token);
+
+                    EncryptedPreferencesService encryptedPreferencesService =
+                            new EncryptedPreferencesService(getContext());
+                    encryptedPreferencesService.saveAuthToken(token);
+
+
                     // Inscription réussie, redirigez l'utilisateur vers l'activité suivante
                     Fragment fragment = new FragmentCreationProfil();
                     FragmentTransaction transaction = getChildFragmentManager().beginTransaction();

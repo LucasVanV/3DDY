@@ -1,7 +1,5 @@
 package fr.uphf.a3ddy.service.retrofit.api;
 
-import fr.uphf.a3ddy.controller.InscriptionRequest;
-import fr.uphf.a3ddy.model.ModifRequest;
 import fr.uphf.a3ddy.model.Utilisateur;
 import fr.uphf.a3ddy.model.UtilisateurSecurity;
 import retrofit2.Call;

@@ -2,6 +2,7 @@ package fr.uphf.a3ddy.controller;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -12,13 +13,13 @@ import android.view.ViewGroup;
 
 import fr.uphf.a3ddy.R;
 
-public class FragmentChoixAuthentification extends Fragment {
+public class ChoixAuthentificationActivity extends AppCompatActivity {
 
     View view;
     Button buttonInscription;
     Button buttonConnexion;
 
-    @Override
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.choix_authentification, container, false);
@@ -27,7 +28,7 @@ public class FragmentChoixAuthentification extends Fragment {
         buttonInscription.setOnClickListener(view -> {
 
             Fragment fragment = new FragmentInscription();
-            FragmentTransaction transaction = getActivity()
+            FragmentTransaction transaction = fragment.getActivity()
                     .getSupportFragmentManager()
                     .beginTransaction();
 
