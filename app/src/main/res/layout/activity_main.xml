@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:background="#2D2828">
 
+
     <TextView
         android:id="@+id/textJsonTest"
         android:layout_width="wrap_content"

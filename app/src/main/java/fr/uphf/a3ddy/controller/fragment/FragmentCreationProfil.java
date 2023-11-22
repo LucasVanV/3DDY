@@ -1,4 +1,4 @@
-package fr.uphf.a3ddy.controller;
+package fr.uphf.a3ddy.controller.fragment;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -44,9 +44,7 @@ import retrofit2.Response;
 
 public class FragmentCreationProfil extends Fragment {
     View view;
-
     Context context = this.getContext();
-
     private static final int REQUEST_IMAGE_PICK = 1;
     private TextInputLayout nomUtilisateur;
     private TextInputLayout bio;
@@ -83,7 +81,6 @@ public class FragmentCreationProfil extends Fragment {
 
             chipGroup.addView(chip);
         }
-
         return view;
     }
 

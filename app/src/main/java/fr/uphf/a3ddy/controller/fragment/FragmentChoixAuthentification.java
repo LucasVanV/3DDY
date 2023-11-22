@@ -1,22 +1,17 @@
-package fr.uphf.a3ddy.controller;
+package fr.uphf.a3ddy.controller.fragment;
 
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.widget.Button;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.Objects;
-
 import fr.uphf.a3ddy.R;
 
 public class FragmentChoixAuthentification extends Fragment {
-
 
     View view;
 
@@ -31,14 +26,15 @@ public class FragmentChoixAuthentification extends Fragment {
         }
         view = inflater.inflate(R.layout.choix_authentification, container, false);
         view.findViewById(R.id.inscription).setOnClickListener(v -> loadFragment(new FragmentInscription()));
-        //TODO connexion
+        // TODO: Ajouter un écouteur pour la connexion
+        // view.findViewById(R.id.connexion).setOnClickListener(v -> loadFragment(new FragmentConnexion()));
 
         return view;
     }
 
-    public void loadFragment(Fragment fragment) {
-        requireActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.choix_authe, fragment)
+    private void loadFragment(Fragment fragment) {
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.main,fragment)
                 .addToBackStack(null)
                 .commit();
     }
