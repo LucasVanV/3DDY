@@ -49,7 +49,7 @@ public class FragmentInscription extends Fragment {
         boutonInscription = view.findViewById(R.id.bouton_inscription);
 
         imageButton.setOnClickListener(view -> {
-            Fragment fragment = new ChoixAuthentificationActivity();
+            Fragment fragment = new FragmentChoixAuthentification();
             FragmentTransaction transaction = getActivity()
                     .getSupportFragmentManager()
                     .beginTransaction();

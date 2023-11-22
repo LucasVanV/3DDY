@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 
 import fr.uphf.a3ddy.R;
 
-public class ChoixAuthentificationActivity extends AppCompatActivity {
+public class FragmentChoixAuthentification extends Fragment {
 
     View view;
     Button buttonInscription;

@@ -7,6 +7,13 @@
     android:layout_height="match_parent"
     android:background="#2D2828">
 
+    <!-- Conteneur pour les fragments -->
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/logo"/>
+
     <!-- Auto layout, variables, and unit scale are not yet supported -->
     <ImageView
         android:id="@+id/logo"
@@ -38,6 +45,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

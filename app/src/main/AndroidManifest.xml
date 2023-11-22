@@ -41,17 +41,14 @@
             android:name=".controller.activity.ProfilActivity"
             android:exported="false" />
         <activity
-            android:name=".controller.activity.InscriptionActivity"
-            android:exported="false" />
-        <activity
             android:name=".controller.activity.menuActivity"
             android:exported="false" />
         <activity
 
-            android:name=".controller.activity.CreationProfilActivity"
+            android:name=".controller.activity.ChoixAuthentificationActivity"
 
             android:exported="true">
-            <intent-filter>     
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
