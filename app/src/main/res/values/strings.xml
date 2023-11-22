@@ -14,4 +14,8 @@
     <string name="mdp_confirm_hint">Confirmer le mot de passe</string>
     <string name="reco">Recommendation</string>
     <string name="inscription">Inscription</string>
-</resources>
+    <string name="connexion">Connexion</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+$</resources>

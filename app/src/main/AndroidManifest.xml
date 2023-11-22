@@ -3,13 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
+        android:enableOnBackInvokedCallback="true"
         android:allowBackup="true"
-
-        android:usesCleartextTraffic="true"
-
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -17,26 +17,41 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Base.Theme._3DDY"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".controller.ParamatresActivity"
+            android:name=".controller.Mon_profil"
             android:exported="false" />
         <activity
-            android:name=".controller.MonCompteActivity"
+            android:name=".controller.activity.ParamatresActivity"
             android:exported="false" />
         <activity
-            android:name=".controller.PosterActivity"
+            android:name=".controller.activity.MonCompteActivity"
             android:exported="false" />
         <activity
-            android:name=".controller.MainActivity"
+            android:name=".controller.activity.Accueil_fypActivity"
             android:exported="false" />
         <activity
-            android:name=".controller.ProfilActivity"
+            android:name=".controller.activity.PosterActivity"
             android:exported="false" />
         <activity
-            android:name=".controller.InscriptionActivity"
+            android:name=".controller.activity.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".controller.activity.ProfilActivity"
+            android:exported="false" />
+        <activity
+            android:name=".controller.activity.InscriptionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".controller.activity.menuActivity"
+            android:exported="false" />
+        <activity
+
+            android:name=".controller.activity.CreationProfilActivity"
+
             android:exported="true">
-            <intent-filter>
+            <intent-filter>     
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />

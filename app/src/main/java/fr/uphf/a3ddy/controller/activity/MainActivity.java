@@ -1,4 +1,4 @@
-package fr.uphf.a3ddy.controller;
+package fr.uphf.a3ddy.controller.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,8 +9,8 @@ import android.widget.Toast;
 
 import fr.uphf.a3ddy.R;
 import fr.uphf.a3ddy.model.Utilisateur;
-import fr.uphf.a3ddy.RetrofitService;
-import fr.uphf.a3ddy.retrofit.api.UserApi;
+import fr.uphf.a3ddy.service.retrofit.RetrofitService;
+import fr.uphf.a3ddy.service.retrofit.api.UserApi;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         TextView textView = (TextView) findViewById(R.id.textJsonTest);
 
         // creation d'un object retrofit voir class fr.uphf.a3ddy.retrofit.RetrofitService
-        RetrofitService retrofitService = new RetrofitService();
+        RetrofitService retrofitService = new RetrofitService("");
 
         //Utilisation d'une api faite a la mano pour les diferentes requete (VOir quentin pour plus d'explication)
         UserApi utilisateurAPi = retrofitService.getRetrofit().create(UserApi.class);

@@ -30,4 +30,8 @@
     </style>
 
     <style name="Theme.TodoListandroid" parent="Base.Theme._3DDY" />
+    <style name="ThemeOverlay._3DDY.FullscreenContainer" parent="">
+        <item name="fullscreenBackgroundColor">@color/light_blue_900</item>
+        <item name="fullscreenTextColor">@color/light_blue_A400</item>
+    </style>
 </resources>
