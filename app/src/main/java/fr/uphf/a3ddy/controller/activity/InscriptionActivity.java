@@ -1,6 +1,9 @@
 package fr.uphf.a3ddy.controller.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,10 +20,12 @@ import java.io.IOException;
 import fr.uphf.a3ddy.service.EncryptedPreferencesService;
 import fr.uphf.a3ddy.service.interceptor.AuthInterceptor;
 import fr.uphf.a3ddy.service.retrofit.RetrofitService;
+import fr.uphf.a3ddy.databinding.ActivityMainBinding;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import fr.uphf.a3ddy.R;
+import fr.uphf.a3ddy.RetrofitService;
 import fr.uphf.a3ddy.model.UtilisateurSecurity;
 import fr.uphf.a3ddy.service.retrofit.api.UserApi;
 
@@ -29,8 +34,11 @@ public class InscriptionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_inscription);
-
+        setContentView(R.layout.activity_main);
+        getSupportFragmentManager().beginTransaction()
+                .setReorderingAllowed(true)
+                .add(R.id.main, FragmentChoixAuthentification.class, null)
+                .commit();
 
         ImageButton boutonRetour = findViewById(R.id.imageButton);
 
