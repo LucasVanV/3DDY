@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import fr.uphf.a3ddy.R;
 import fr.uphf.a3ddy.model.UtilisateurSecurity;
@@ -41,7 +42,7 @@ public class FragmentInscription extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.activity_inscription, container, false);
+        view = inflater.inflate(R.layout.activity_inscription, container, true);
         imageButton = view.findViewById(R.id.imageButton);
         email = view.findViewById(R.id.TextInputLayout_email);
         mdp = view.findViewById(R.id.TextInputLayout_mdp);
@@ -78,10 +79,13 @@ public class FragmentInscription extends Fragment {
     }
 
     private void inscription() {
+        email = view.findViewById(R.id.TextInputLayout_email);
+        mdp = view.findViewById(R.id.TextInputLayout_mdp);
+        confirmerMDP = view.findViewById(R.id.TextInputLayout_mdp_confirm);
 
-        String emailText = email.getEditText().getText().toString();
-        String mdpText = mdp.getEditText().getText().toString();
-        String mdpConfirmText = mdp.getEditText().getText().toString();
+        String emailText = Objects.requireNonNull(email.getEditText()).getText().toString();
+        String mdpText = Objects.requireNonNull(mdp.getEditText()).getText().toString();
+        String mdpConfirmText = Objects.requireNonNull(confirmerMDP.getEditText()).getText().toString();
 
         if (!mdpText.equals(mdpConfirmText)) {
             Toast.makeText(context, "Les mots de passe sont différents", Toast.LENGTH_SHORT);

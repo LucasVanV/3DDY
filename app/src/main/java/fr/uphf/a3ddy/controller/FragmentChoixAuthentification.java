@@ -11,35 +11,35 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.Objects;
+
 import fr.uphf.a3ddy.R;
 
 public class FragmentChoixAuthentification extends Fragment {
 
+
     View view;
-    Button buttonInscription;
-    Button buttonConnexion;
 
-
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        if (view != null) {
+            ViewGroup parent = (ViewGroup) view.getParent();
+            if (parent != null) {
+                parent.removeView(view);
+            }
+            return view;
+        }
         view = inflater.inflate(R.layout.choix_authentification, container, false);
-        buttonInscription = view.findViewById(R.id.inscription);
-        buttonConnexion = view.findViewById(R.id.connexion);
-        buttonInscription.setOnClickListener(view -> {
-
-            Fragment fragment = new FragmentInscription();
-            FragmentTransaction transaction = fragment.getActivity()
-                    .getSupportFragmentManager()
-                    .beginTransaction();
-
-            transaction.replace(R.id.choix_authe, fragment)
-                    .addToBackStack(null)
-                    .commit();
-
-            view.setVisibility(View.INVISIBLE);
-            buttonConnexion.setVisibility(View.INVISIBLE);
-        });
+        view.findViewById(R.id.inscription).setOnClickListener(v -> loadFragment(new FragmentInscription()));
+        //TODO connexion
 
         return view;
+    }
+
+    public void loadFragment(Fragment fragment) {
+        requireActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.choix_authe, fragment)
+                .addToBackStack(null)
+                .commit();
     }
 }
