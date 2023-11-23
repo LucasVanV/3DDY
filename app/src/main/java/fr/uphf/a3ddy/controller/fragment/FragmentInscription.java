@@ -41,7 +41,7 @@ public class FragmentInscription extends Fragment {
     Context context = this.getContext();
 
 
-    private void iniUI(){
+    public void iniUI(){
         imageButton = view.findViewById(R.id.imageButton);
         email = view.findViewById(R.id.TextInputLayout_email);
         mdp = view.findViewById(R.id.TextInputLayout_mdp);
@@ -49,7 +49,7 @@ public class FragmentInscription extends Fragment {
         boutonInscription = view.findViewById(R.id.bouton_inscription);
     }
 
-    private void setListeners() {
+    public void setListeners() {
         imageButton.setOnClickListener(v -> loadFragment(new FragmentChoixAuthentification()));
         boutonInscription.setOnClickListener(v -> inscription());
     }
@@ -59,17 +59,16 @@ public class FragmentInscription extends Fragment {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         // Masquer le fragment actuel s'il y en a un
         Fragment currentFragment = getFragmentManager().findFragmentById(R.id.fragment_container);
+
         if (currentFragment != null) {
             transaction.hide(currentFragment);
         }
-
         // Remplacer le fragment ou l'ajouter s'il n'y en a pas
         if (getChildFragmentManager().findFragmentByTag(fragment.getClass().getSimpleName()) == null) {
             transaction.add(R.id.main, fragment, fragment.getClass().getSimpleName());
         } else {
             transaction.show(fragment);
         }
-
         transaction.addToBackStack(null);
         transaction.commit();
     }
@@ -124,11 +123,10 @@ public class FragmentInscription extends Fragment {
 
 
                     // Inscription réussie, redirigez l'utilisateur vers l'activité suivante
+
+                    loadFragment(new FragmentCreationProfil());
+
                     /**
-                    Fragment fragment = new FragmentCreationProfil();
-                    FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-
-
                     transaction.replace(R.id.page_inscription, fragment)
                             .addToBackStack(null)
                             .commit();
