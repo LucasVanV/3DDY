@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.Objects;
+
 import fr.uphf.a3ddy.R;
 
 public class FragmentChoixAuthentification extends Fragment {
@@ -26,14 +28,13 @@ public class FragmentChoixAuthentification extends Fragment {
         }
         view = inflater.inflate(R.layout.choix_authentification, container, false);
         view.findViewById(R.id.inscription).setOnClickListener(v -> loadFragment(new FragmentInscription()));
-        // TODO: Ajouter un écouteur pour la connexion
-        // view.findViewById(R.id.connexion).setOnClickListener(v -> loadFragment(new FragmentConnexion()));
+        view.findViewById(R.id.connexion).setOnClickListener(v -> loadFragment(new FragmentConnexion()));
 
         return view;
     }
 
     private void loadFragment(Fragment fragment) {
-        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.main,fragment)
                 .addToBackStack(null)
                 .commit();

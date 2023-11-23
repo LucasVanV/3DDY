@@ -121,26 +121,6 @@ public class FragmentInscription extends Fragment {
                     EncryptedPreferencesService encryptedPreferencesService =
                             new EncryptedPreferencesService(getContext());
                     encryptedPreferencesService.saveAuthToken(token);
-
-
-                    // Inscription réussie, redirigez l'utilisateur vers l'activité suivante
-                    /**
-                    Fragment fragment = new FragmentCreationProfil();
-                    FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-
-
-                    transaction.replace(R.id.page_inscription, fragment)
-                            .addToBackStack(null)
-                            .commit();
-
-                    view.setVisibility(View.INVISIBLE);
-                    imageButton.setVisibility(View.INVISIBLE);
-                    email.setVisibility(View.INVISIBLE);
-                    mdp.setVisibility(View.INVISIBLE);
-                    confirmerMDP.setVisibility(View.INVISIBLE);
-                    boutonInscription.setVisibility(View.INVISIBLE);
-                     **/
-
                 } else {
                     // Gestion des erreurs en fonction du code de réponse HTTP
                     if (response.code() == 400) {

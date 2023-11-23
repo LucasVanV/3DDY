@@ -44,4 +44,10 @@ public interface UserApi {
             @Field("password") String password
     );
 
+    @FormUrlEncoded
+    @POST("/api/v1/auth/authenticate")
+    Call<UtilisateurSecurity> connexion(
+            @Field("email") String email,
+            @Field("password") String password
+    );
 }
