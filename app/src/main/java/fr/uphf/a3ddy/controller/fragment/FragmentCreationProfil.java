@@ -53,7 +53,8 @@ public class FragmentCreationProfil extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        context = this.getContext();
+
+        context=getContext();
         view = inflater.inflate(R.layout.creation_profil, container, false);
         nomUtilisateur = view.findViewById(R.id.TextInputLayout_nomUtilisateur);
         bio = view.findViewById(R.id.TextInputLayout_bio);
@@ -81,6 +82,14 @@ public class FragmentCreationProfil extends Fragment {
 
             chipGroup.addView(chip);
         }
+
+        Button button = view.findViewById(R.id.bouton_ajouter_photoProfil);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                choisirImage(v);
+            }
+        });
         return view;
     }
 
@@ -93,8 +102,6 @@ public class FragmentCreationProfil extends Fragment {
         startActivityForResult(intent, REQUEST_IMAGE_PICK);
     }
 
-
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -102,7 +109,6 @@ public class FragmentCreationProfil extends Fragment {
         if (requestCode == REQUEST_IMAGE_PICK && resultCode == RESULT_OK && data != null) {
             // L'utilisateur a choisi une image
             Uri imageUri = data.getData();
-
             String nomUtilisateurText = nomUtilisateur.getEditText().getText().toString();
             String bioText = bio.getEditText().getText().toString();
 
@@ -122,10 +128,8 @@ public class FragmentCreationProfil extends Fragment {
                 selectedChipsText.deleteCharAt(selectedChipsText.length() - 1);
             }
 
-            Log.d("tags1845515154145", selectedChipsText.toString());
-
             // Lancer la fonction de création de profil
-            Button buttonValider  = view.findViewById(R.id.validateButton);
+            Button buttonValider = view.findViewById(R.id.validateButton);
             buttonValider.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -158,7 +162,6 @@ public class FragmentCreationProfil extends Fragment {
             });
         }
     }
-
 
     public void creationProfil(String nomUtilisateurText, String bioText, String textTags, Uri imageUri) {
         // Logs pour déboguer
@@ -195,28 +198,9 @@ public class FragmentCreationProfil extends Fragment {
                             RequestBody.create(MediaType.parse("text/plain"), textTags),
                             imagePart
                     );
-                    Log.d("Debut enqueue",call.toString());
                     // Exécutez la demande
-                    call.enqueue(new Callback<Utilisateur>() {
-                        @Override
-                        public void onResponse(Call<Utilisateur> call, Response<Utilisateur> response) { // TODO a verifier
-                            Log.d("BITEEEEEE" , String.valueOf(response.code()));
-                            if (response.isSuccessful()) {
-                                Utilisateur utilisateur = response.body();
-                                // Inscription réussie, redirigez l'utilisateur vers l'activité suivante
-                                Intent intent = new Intent(context, Accueil_fypActivity.class);
-                                startActivity(intent);
+                    requestCreateProfil(call);
 
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<Utilisateur> call, Throwable t) {
-                            Log.d("Erreur : ", t.getLocalizedMessage());
-                            Toast.makeText(context, "Erreur : " + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                            call.cancel();
-                        }
-                    });
                 } else {
                     Toast.makeText(context, "Erreur de création du fichier temporaire", Toast.LENGTH_SHORT).show();
                 }
@@ -231,9 +215,27 @@ public class FragmentCreationProfil extends Fragment {
         }
     }
 
+    public void requestCreateProfil(Call call){
+        call.enqueue(new Callback<Utilisateur>() {
+            @Override
+            public void onResponse(Call<Utilisateur> call, Response<Utilisateur> response) { // TODO a verifier
+                if (response.isSuccessful()) {
+                    Utilisateur utilisateur = response.body();
+                    // Inscription réussie, redirigez l'utilisateur vers l'activité suivante
+                    Intent intent = new Intent(context, Accueil_fypActivity.class);
+                    startActivity(intent);
+                }
+            }
+            @Override
+            public void onFailure(Call<Utilisateur> call, Throwable t) {
+                Log.d("Erreur : ", t.getLocalizedMessage());
+                Toast.makeText(context, "Erreur : " + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                call.cancel();
+            }
+        });
+    }
 
-
-    private File createTempImageFile() {
+    public File createTempImageFile() {
         try {
             // Créez un fichier temporaire dans le répertoire de cache de l'application
             File cacheDir = context.getCacheDir();
@@ -247,8 +249,7 @@ public class FragmentCreationProfil extends Fragment {
             return null;
         }
     }
-
-    private void writeInputStreamToFile(InputStream inputStream, File outputFile) throws IOException {
+    public void writeInputStreamToFile(InputStream inputStream, File outputFile) throws IOException {
         OutputStream outputStream = new FileOutputStream(outputFile);
         byte[] buffer = new byte[4 * 1024];
         int bytesRead;
