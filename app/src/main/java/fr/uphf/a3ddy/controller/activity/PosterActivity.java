@@ -49,7 +49,6 @@ public class PosterActivity extends AppCompatActivity {
                 startActivityForResult(intent, PICK_IMAGE_REQUEST);
             }
         });
-
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

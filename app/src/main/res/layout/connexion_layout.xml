@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/page_connexion"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/darkBackground">
+    tools:context=".controller.FragmentChoixAuthentification"
+    android:background="@color/background_color" android:padding="16dp">
 
     <ImageView
         android:id="@+id/logo"
@@ -36,52 +38,83 @@
         android:layout_marginEnd="44dp"
         android:layout_marginTop="20dp"
         android:gravity="center"
-        android:text="@string/CONNEXION"
+        android:text="Connexion"
         android:textColor="@color/white"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/logo" />
 
-    <EditText
-        android:id="@+id/editTextEmail"
-        android:layout_width="380dp"
-        android:layout_height="75dp"
-        android:background="@drawable/gray_rounded_background_rectangle"
-        android:hint="@string/hintConnexion"
-        android:textColorHint="@color/hintWhite"
-        android:padding="20dp"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/TextInputLayout_email"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:hint="@string/email_hint"
+        android:textColor="@color/blanc"
+        android:textColorHint="@color/text_color_blanc"
+        app:boxStrokeColor="@color/background_color"
+        app:cursorColor="@color/blanc"
+        app:endIconMode="clear_text"
+        app:endIconTint="@color/blanc"
+        app:errorEnabled="true"
+        app:hintTextColor="@color/text_color_blanc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/connexionTextView"
-        app:layout_constraintBottom_toBottomOf="@id/editTextMDP"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintVertical_bias="0.3" />
+        app:startIconDrawable="@drawable/icone_email"
+        app:startIconTint="@color/blanc">
 
-    <EditText
-        android:id="@+id/editTextMDP"
-        android:layout_width="380dp"
-        android:layout_height="75dp"
-        android:background="@drawable/gray_rounded_background_rectangle"
-        android:hint="@string/hintMDP"
-        android:padding="20dp"
-        android:textColorHint="@color/hintWhite"
-        app:layout_constraintBottom_toTopOf="@id/connectionButton"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextEmail" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/TextInputEditText_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/blanc"
+            android:inputType="textEmailAddress"
+            android:background="@drawable/edittext"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/TextInputLayout_mdp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="@string/mdp_hint"
+        android:textColor="@color/blanc"
+        android:textColorHint="@color/text_color_blanc"
+        app:boxStrokeColor="@color/background_color"
+        app:cursorColor="@color/blanc"
+        app:endIconMode="password_toggle"
+        app:endIconTint="@color/blanc"
+        app:errorEnabled="true"
+        app:hintTextColor="@color/text_color_blanc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/TextInputLayout_email"
+        app:startIconDrawable="@drawable/icone_mdp"
+        app:startIconTint="@color/blanc">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/TextInputEditText_mdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/blanc"
+            android:inputType="textPassword"
+            android:background="@drawable/edittext"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/connectionButton"
-        android:layout_width="300dp"
-        android:layout_height="60dp"
-        android:background="@drawable/gray_rounded_background_rectangle"
-        android:hint="@string/CONNEXION"
-        android:padding="10dp"
-        android:textColorHint="@color/white"
-        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/bouton"
+        android:text="Connexion"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextMDP" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TextInputLayout_mdp"
+        app:layout_constraintVertical_bias="0.468"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

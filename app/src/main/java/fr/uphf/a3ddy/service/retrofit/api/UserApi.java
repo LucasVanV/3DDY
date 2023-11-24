@@ -17,8 +17,6 @@ import okhttp3.RequestBody;
 
 public interface UserApi {
 
-    @GET("/connexion")
-    Call<Utilisateur> connexion();
 
     @FormUrlEncoded
     @POST("/api/v1/auth/register")
@@ -44,4 +42,10 @@ public interface UserApi {
             @Field("password") String password
     );
 
+    @FormUrlEncoded
+    @POST("/api/v1/auth/authenticate")
+    Call<UtilisateurSecurity> connexion(
+            @Field("email") String email,
+            @Field("password") String password
+    );
 }

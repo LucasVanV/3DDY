@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.Objects;
+
 import fr.uphf.a3ddy.R;
 
 public class FragmentChoixAuthentification extends Fragment {
@@ -32,7 +34,7 @@ public class FragmentChoixAuthentification extends Fragment {
     }
 
     private void loadFragment(Fragment fragment) {
-        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.main,fragment)
                 .addToBackStack(null)
                 .commit();
