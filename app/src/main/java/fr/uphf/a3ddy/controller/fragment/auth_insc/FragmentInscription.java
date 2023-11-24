@@ -1,10 +1,9 @@
-package fr.uphf.a3ddy.controller.fragment;
+package fr.uphf.a3ddy.controller.fragment.auth_insc;
 
 import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
@@ -75,10 +74,10 @@ public class FragmentInscription extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         context = getContext();
-        view = inflater.inflate(R.layout.activity_inscription, container, false);
+        view = inflater.inflate(R.layout.fragment_inscription, container, false);
         iniUI();
         setListeners();
-         return view;
+        return view;
     }
 
     //Fonction permettant de vérifier le regex pour le mot de passe

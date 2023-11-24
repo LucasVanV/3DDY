@@ -1,4 +1,4 @@
-package fr.uphf.a3ddy.controller.fragment;
+package fr.uphf.a3ddy.controller.fragment.auth_insc;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -90,6 +89,7 @@ public class FragmentConnexion extends Fragment {
 
                     Intent intent = new Intent(context, Accueil_fypActivity.class);
                     startActivity(intent);
+                    requireActivity().finish();
                 } else {
                     Log.d("help",response.toString());
                 }
@@ -107,9 +107,10 @@ public class FragmentConnexion extends Fragment {
 
 
     public void loadFragment(Fragment fragment) {
-        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
         // Masquer le fragment actuel s'il y en a un
-        Fragment currentFragment = getChildFragmentManager().findFragmentById(R.id.fragment_container);
+        Fragment currentFragment = getFragmentManager().findFragmentById(R.id.fragment_container);
+
         if (currentFragment != null) {
             transaction.hide(currentFragment);
         }

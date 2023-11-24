@@ -12,17 +12,13 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import fr.uphf.a3ddy.R;
-import fr.uphf.a3ddy.controller.fragment.FragmentInscription;
-import fr.uphf.a3ddy.controller.fragment.FragmentProfil;
+import fr.uphf.a3ddy.controller.fragment.monCompte.FragmentProfil;
 
 public class Accueil_fypActivity extends AppCompatActivity {
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.accueil);
-
-
-
 
         //On inclus le menu sur l'activité principale
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomAppBar);

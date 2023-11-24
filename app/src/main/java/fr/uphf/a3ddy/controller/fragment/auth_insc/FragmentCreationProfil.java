@@ -1,4 +1,4 @@
-package fr.uphf.a3ddy.controller.fragment;
+package fr.uphf.a3ddy.controller.fragment.auth_insc;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -224,6 +224,7 @@ public class FragmentCreationProfil extends Fragment {
                     // Inscription réussie, redirigez l'utilisateur vers l'activité suivante
                     Intent intent = new Intent(context, Accueil_fypActivity.class);
                     startActivity(intent);
+                    requireActivity().finish();
                 }
             }
             @Override

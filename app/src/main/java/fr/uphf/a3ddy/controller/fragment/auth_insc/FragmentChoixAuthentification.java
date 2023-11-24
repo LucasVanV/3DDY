@@ -1,4 +1,4 @@
-package fr.uphf.a3ddy.controller.fragment;
+package fr.uphf.a3ddy.controller.fragment.auth_insc;
 
 import android.os.Bundle;
 
@@ -8,8 +8,6 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import java.util.Objects;
 
 import fr.uphf.a3ddy.R;
 
@@ -27,8 +25,8 @@ public class FragmentChoixAuthentification extends Fragment {
             return view;
         }
         view = inflater.inflate(R.layout.choix_authentification, container, false);
-        view.findViewById(R.id.inscription).setOnClickListener(v -> loadFragment(new FragmentInscription()));
-        view.findViewById(R.id.connexion).setOnClickListener(v -> loadFragment(new FragmentConnexion()));
+        view.findViewById(R.id.inscription).setOnClickListener(v -> loadFragment(new FragmentInscription()));//TODO a corriger
+        view.findViewById(R.id.connexion).setOnClickListener(v -> loadFragment(new FragmentConnexion()));//TODO a corriger
 
         return view;
     }

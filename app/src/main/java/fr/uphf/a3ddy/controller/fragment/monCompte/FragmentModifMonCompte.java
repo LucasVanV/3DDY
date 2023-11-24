@@ -1,67 +1,77 @@
-package fr.uphf.a3ddy.controller.activity;
+package fr.uphf.a3ddy.controller.fragment.monCompte;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.IOException;
 
 import fr.uphf.a3ddy.R;
-import fr.uphf.a3ddy.model.ModifRequest;
+import fr.uphf.a3ddy.controller.activity.Accueil_fypActivity;
 import fr.uphf.a3ddy.model.UtilisateurSecurity;
-import java.security.Key;
 
+import fr.uphf.a3ddy.service.EncryptedPreferencesService;
 import fr.uphf.a3ddy.service.retrofit.RetrofitService;
 import fr.uphf.a3ddy.service.retrofit.api.UserApi;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MonCompteActivity extends AppCompatActivity {
+public class FragmentModifMonCompte extends Fragment {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mon_compte);
+    View view;
+    Context context;
+    private ImageButton boutonRetour;
+    private Button buttonValider;
 
-        ImageButton boutonRetour = findViewById(R.id.retour);
 
-        boutonRetour.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent_mon_compte = new Intent(MonCompteActivity.this, ParamatresActivity.class);
-                startActivity(intent_mon_compte);
-            }
-        });
+    private void iniUI(){
+        boutonRetour = view.findViewById(R.id.retour);
+        buttonValider = view.findViewById(R.id.button_valider);
+    }
 
-        Button buttonValider = findViewById(R.id.button_valider);
+    private void setListeners() {
+        boutonRetour.setOnClickListener(v-> loadFragment(new FragmentModifMonCompte()));
         buttonValider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TextInputLayout email = findViewById(R.id.TextInputLayout_email);
-                TextInputLayout password = findViewById(R.id.TextInputLayout_mdp_confirm);
-
+                TextInputLayout email = view.findViewById(R.id.TextInputLayout_email);
+                TextInputLayout password = view.findViewById(R.id.TextInputLayout_mdp_confirm);
                 String emailText = email.getEditText().getText().toString();
                 String passwordText = password.getEditText().getText().toString();
-
                 modificationCompte(emailText, passwordText);
             }
         });
     }
 
-    private void modificationCompte(String emailText, String passwordText) {
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        context = getContext();
+        view = inflater.inflate(R.layout.fragment_modif_mon_compte, container, false);
+        iniUI();
+        setListeners();
+        return view;
+    }
+
+    public void modificationCompte(String emailText, String passwordText) {
         // Obtenez le token de votre emplacement de stockage sécurisé
-        String authToken = "eyJhbGciOiJIUzI1NiJ9" +
-                ".eyJzdWIiOiJyZGZ2ZGZ2ZGZ2QGdtYWlsLmNvbSIsImlhdCI6MTcwMDQ4ODQ5NSwiZXhwIjoxNzAwNTc0ODk1fQ" +
-                ".NCMUutOJ4ZuqNznXpeTNYQpthzuvh8sAe22ew8EUZ8c";
+        EncryptedPreferencesService encryptedPreferencesService =
+                new EncryptedPreferencesService(getContext());
+
+        String authToken =  encryptedPreferencesService.getAuthToken();
 
         // Appel Retrofit
         RetrofitService retrofitService = new RetrofitService(authToken);
@@ -76,10 +86,9 @@ public class MonCompteActivity extends AppCompatActivity {
             public void onResponse(Call<UtilisateurSecurity> call, Response<UtilisateurSecurity> response) {
                 if (response.isSuccessful()) {
                     UtilisateurSecurity modifRequest = response.body();
-                    Toast.makeText(MonCompteActivity.this, "Modification réussie ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Modification réussie ", Toast.LENGTH_LONG).show();
                     // Modification réussie, redirigez l'utilisateur vers l'activité suivante
-                    Intent intent = new Intent(MonCompteActivity.this, Accueil_fypActivity.class);
-                    startActivity(intent);
+                    loadFragment( new FragmentModifMonCompte());
                 } else {
                     // Gestion des erreurs en fonction du code de réponse HTTP
                     if (response.code() == 400) {
@@ -87,17 +96,17 @@ public class MonCompteActivity extends AppCompatActivity {
                         try {
                             String errorBody = response.errorBody().string();
                             Log.d("Erreur d'inscription", errorBody); // Enregistrez le message d'erreur dans les logs
-                            Toast.makeText(MonCompteActivity.this, "Erreur lors de la modification : " + errorBody,
+                            Toast.makeText(getActivity(), "Erreur lors de la modification : " + errorBody,
                                     Toast.LENGTH_LONG).show();
                         } catch (IOException e) {
                             e.printStackTrace();
                             Log.d("Erreur d'inscription", "Erreur lors de l'inscription"); // Enregistrez le message d'erreur dans les logs
-                            Toast.makeText(MonCompteActivity.this, "Erreur lors de la modification", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity(), "Erreur lors de la modification", Toast.LENGTH_LONG).show();
                         }
                     } else {
                         // Gérez d'autres erreurs ici
                         Log.d("Erreur d'inscription", "Erreur inattendue : " + response.code());
-                        Toast.makeText(MonCompteActivity.this, "Erreur lors de la modification : " + response.body(),
+                        Toast.makeText(getActivity(), "Erreur lors de la modification : " + response.body(),
                                 Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -107,9 +116,29 @@ public class MonCompteActivity extends AppCompatActivity {
             public void onFailure(Call<UtilisateurSecurity> call, Throwable t) {
                 // Gérez les erreurs de modification de compte, etc.
                 Log.d("Erreur : ", t.getLocalizedMessage());
-                Toast.makeText(MonCompteActivity.this, "Erreur : " + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Erreur : " + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                 call.cancel();
             }
         });
     }
+
+
+    public void loadFragment(Fragment fragment) {
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        // Masquer le fragment actuel s'il y en a un
+        Fragment currentFragment = getChildFragmentManager().findFragmentById(R.id.fragment_container);
+        if (currentFragment != null) {
+            transaction.hide(currentFragment);
+        }
+        // Remplacer le fragment ou l'ajouter s'il n'y en a pas
+        if (getChildFragmentManager().findFragmentByTag(fragment.getClass().getSimpleName()) == null) {
+            transaction.add(R.id.bloc_fragment_accueil, fragment, fragment.getClass().getSimpleName());
+        } else {
+            transaction.show(fragment);
+        }
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+
 }
