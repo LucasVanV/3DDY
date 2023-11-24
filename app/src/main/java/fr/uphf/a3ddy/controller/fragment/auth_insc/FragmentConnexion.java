@@ -1,4 +1,4 @@
-package fr.uphf.a3ddy.controller.fragment;
+package fr.uphf.a3ddy.controller.fragment.auth_insc;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 

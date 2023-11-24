@@ -12,8 +12,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import fr.uphf.a3ddy.R;
-import fr.uphf.a3ddy.controller.fragment.FragmentInscription;
-import fr.uphf.a3ddy.controller.fragment.FragmentProfil;
+import fr.uphf.a3ddy.controller.fragment.monCompte.FragmentProfil;
 
 public class Accueil_fypActivity extends AppCompatActivity {
     @Override

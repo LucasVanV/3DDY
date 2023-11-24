@@ -6,7 +6,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import fr.uphf.a3ddy.R;
-import fr.uphf.a3ddy.controller.fragment.FragmentChoixAuthentification;
+import fr.uphf.a3ddy.controller.fragment.auth_insc.FragmentChoixAuthentification;
 
 public class ChoixAuthentificationActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package fr.uphf.a3ddy.controller.fragment;
+package fr.uphf.a3ddy.controller.fragment.monCompte;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

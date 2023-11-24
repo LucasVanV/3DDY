@@ -1,4 +1,4 @@
-package fr.uphf.a3ddy.controller.fragment;
+package fr.uphf.a3ddy.controller.fragment.auth_insc;
 
 import static android.app.Activity.RESULT_OK;
 

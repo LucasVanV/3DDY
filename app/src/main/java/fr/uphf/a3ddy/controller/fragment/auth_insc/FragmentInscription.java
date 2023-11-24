@@ -1,10 +1,9 @@
-package fr.uphf.a3ddy.controller.fragment;
+package fr.uphf.a3ddy.controller.fragment.auth_insc;
 
 import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;

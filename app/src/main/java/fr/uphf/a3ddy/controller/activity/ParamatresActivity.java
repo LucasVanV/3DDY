@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.os.Bundle;
 import android.widget.ImageButton;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import fr.uphf.a3ddy.R;
 
