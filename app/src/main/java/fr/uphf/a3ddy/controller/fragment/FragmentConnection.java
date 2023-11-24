@@ -21,11 +21,10 @@ public class FragmentConnection extends Fragment {
     private EditText editTextPassword;
     private Button boutonLogin;
 
-
     private void iniUI(){
         imageButton = view.findViewById(R.id.imageButton);
-        editTextEmail = view.findViewById(R.id.editTextEmail);
-        editTextPassword = view.findViewById(R.id.editTextMDP);
+        editTextEmail = view.findViewById(R.id.TextInputEditText_email);
+        editTextPassword = view.findViewById(R.id.TextInputLayout_mdp);
         boutonLogin = view.findViewById(R.id.connectionButton);
     }
 
