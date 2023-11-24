@@ -37,8 +37,7 @@ public class FragmentInscription extends Fragment {
     private TextInputLayout mdp;
     private TextInputLayout confirmerMDP;
     private Button boutonInscription;
-
-    Context context = this.getContext();
+    Context context;
 
 
     public void iniUI(){
@@ -75,9 +74,10 @@ public class FragmentInscription extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            view = inflater.inflate(R.layout.activity_inscription, container, false);
-            iniUI();
-            setListeners();
+        context = getContext();
+        view = inflater.inflate(R.layout.activity_inscription, container, false);
+        iniUI();
+        setListeners();
          return view;
     }
 
@@ -113,31 +113,14 @@ public class FragmentInscription extends Fragment {
             public void onResponse(Call<UtilisateurSecurity> call, Response<UtilisateurSecurity> response) {
                 if (response.isSuccessful()) {
                     UtilisateurSecurity utilisateurSecurity1 = response.body();
-                    Log.d("",response.toString());
                     String token = utilisateurSecurity1.getToken();
-                    Log.d("token de l'utilisateur",token);
-
+                
                     EncryptedPreferencesService encryptedPreferencesService =
                             new EncryptedPreferencesService(getContext());
                     encryptedPreferencesService.saveAuthToken(token);
 
-
-                    // Inscription réussie, redirigez l'utilisateur vers l'activité suivante
-
                     loadFragment(new FragmentCreationProfil());
 
-                    /**
-                    transaction.replace(R.id.page_inscription, fragment)
-                            .addToBackStack(null)
-                            .commit();
-
-                    view.setVisibility(View.INVISIBLE);
-                    imageButton.setVisibility(View.INVISIBLE);
-                    email.setVisibility(View.INVISIBLE);
-                    mdp.setVisibility(View.INVISIBLE);
-                    confirmerMDP.setVisibility(View.INVISIBLE);
-                    boutonInscription.setVisibility(View.INVISIBLE);
-                     **/
 
                 } else {
                     // Gestion des erreurs en fonction du code de réponse HTTP

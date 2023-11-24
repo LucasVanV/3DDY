@@ -53,6 +53,7 @@ public class FragmentCreationProfil extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         context=getContext();
         view = inflater.inflate(R.layout.creation_profil, container, false);
         nomUtilisateur = view.findViewById(R.id.TextInputLayout_nomUtilisateur);
@@ -197,7 +198,6 @@ public class FragmentCreationProfil extends Fragment {
                             RequestBody.create(MediaType.parse("text/plain"), textTags),
                             imagePart
                     );
-                    Log.d("Debut enqueue",call.toString());
                     // Exécutez la demande
                     requestCreateProfil(call);
 
