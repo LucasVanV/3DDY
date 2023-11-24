@@ -20,7 +20,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".controller.Mon_profil"
+            android:name=".controller.fragment.Mon_profil"
             android:exported="false" />
         <activity
             android:name=".controller.activity.ParamatresActivity"
@@ -29,23 +29,20 @@
             android:name=".controller.activity.MonCompteActivity"
             android:exported="false" />
         <activity
-            android:name=".controller.activity.Accueil_fypActivity"
+            android:name=".controller.activity.ChoixAuthentificationActivity"
             android:exported="false" />
         <activity
             android:name=".controller.activity.PosterActivity"
             android:exported="false" />
         <activity
-            android:name=".controller.activity.MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".controller.activity.ProfilActivity"
+        android:name=".controller.activity.ProfilActivity"
             android:exported="false" />
         <activity
             android:name=".controller.activity.menuActivity"
             android:exported="false" />
         <activity
 
-            android:name=".controller.activity.ChoixAuthentificationActivity"
+            android:name=".controller.activity.Accueil_fypActivity"
 
             android:exported="true">
             <intent-filter>

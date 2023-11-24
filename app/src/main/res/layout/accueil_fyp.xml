@@ -8,6 +8,7 @@
     android:clipToOutline="true"
     android:background="#2D2828">
 
+
     <TableLayout
         android:id="@+id/title"
         android:layout_width="wrap_content"
@@ -73,6 +74,9 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="188dp"
         tools:ignore="MissingConstraints" />
+
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

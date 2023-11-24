@@ -29,12 +29,5 @@ public class ProfilActivity extends AppCompatActivity {
                 startActivity(intent_parametre);
             }
         });
-
-
-        //Permet de mettre en surbrillance la page Mon compte dans le menu
-        BottomNavigationView bottomNavigation = findViewById(R.id.bottom_navigation);
-        bottomNavigation.setSelectedItemId(R.id.compte);
-
-
     }
 }

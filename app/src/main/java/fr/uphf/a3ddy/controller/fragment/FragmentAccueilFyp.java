@@ -4,47 +4,21 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import fr.uphf.a3ddy.R;
 
-public class FragmentConnection extends Fragment {
+public class FragmentAccueilFyp extends Fragment {
+    View view;
 
-    private View view;
-    private ImageButton imageButton;
-    private EditText editTextEmail;
-    private EditText editTextPassword;
-    private Button boutonLogin;
-
-
-    private void iniUI(){
-        imageButton = view.findViewById(R.id.imageButton);
-        editTextEmail = view.findViewById(R.id.editTextEmail);
-        editTextPassword = view.findViewById(R.id.editTextMDP);
-        boutonLogin = view.findViewById(R.id.connectionButton);
-    }
-
-
-    private void setListeners() {
-        imageButton.setOnClickListener(v -> loadFragment(new FragmentChoixAuthentification()));
-        boutonLogin.setOnClickListener(v -> connection());
-    }
+    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.connexion_layout, container, false);
-        iniUI();
-        setListeners();
+        view = inflater.inflate(R.layout.accueil_fyp, container, false);
         return view;
-    }
-
-
-    private void connection() {
-        //TODO
     }
 
 
@@ -58,7 +32,7 @@ public class FragmentConnection extends Fragment {
 
         // Remplacer le fragment ou l'ajouter s'il n'y en a pas
         if (getChildFragmentManager().findFragmentByTag(fragment.getClass().getSimpleName()) == null) {
-            transaction.add(R.id.main, fragment, fragment.getClass().getSimpleName());
+            transaction.add(R.id.accueil, fragment, fragment.getClass().getSimpleName());
         } else {
             transaction.show(fragment);
         }
