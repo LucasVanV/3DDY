@@ -29,7 +29,7 @@
             android:name=".controller.activity.MonCompteActivity"
             android:exported="false" />
         <activity
-            android:name=".controller.activity.ChoixAuthentificationActivity"
+            android:name=".controller.activity.Accueil_fypActivity"
             android:exported="false" />
         <activity
             android:name=".controller.activity.PosterActivity"
@@ -42,7 +42,7 @@
             android:exported="false" />
         <activity
 
-            android:name=".controller.activity.Accueil_fypActivity"
+            android:name=".controller.activity.ChoixAuthentificationActivity"
 
             android:exported="true">
             <intent-filter>

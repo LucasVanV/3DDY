@@ -28,7 +28,7 @@ public class FragmentChoixAuthentification extends Fragment {
         }
         view = inflater.inflate(R.layout.choix_authentification, container, false);
         view.findViewById(R.id.inscription).setOnClickListener(v -> loadFragment(new FragmentInscription()));
-        view.findViewById(R.id.connexion).setOnClickListener(v -> loadFragment(new FragmentConnection()));
+        view.findViewById(R.id.connexion).setOnClickListener(v -> loadFragment(new FragmentConnexion()));
 
         return view;
     }
