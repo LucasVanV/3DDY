@@ -37,8 +37,7 @@ public class FragmentInscription extends Fragment {
     private TextInputLayout mdp;
     private TextInputLayout confirmerMDP;
     private Button boutonInscription;
-
-    Context context = this.getContext();
+    Context context;
 
 
     private void iniUI(){
@@ -62,23 +61,22 @@ public class FragmentInscription extends Fragment {
         if (currentFragment != null) {
             transaction.hide(currentFragment);
         }
-
         // Remplacer le fragment ou l'ajouter s'il n'y en a pas
         if (getChildFragmentManager().findFragmentByTag(fragment.getClass().getSimpleName()) == null) {
             transaction.add(R.id.main, fragment, fragment.getClass().getSimpleName());
         } else {
             transaction.show(fragment);
         }
-
         transaction.addToBackStack(null);
         transaction.commit();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            view = inflater.inflate(R.layout.activity_inscription, container, false);
-            iniUI();
-            setListeners();
+        context = getContext();
+        view = inflater.inflate(R.layout.activity_inscription, container, false);
+        iniUI();
+        setListeners();
          return view;
     }
 
@@ -121,6 +119,9 @@ public class FragmentInscription extends Fragment {
                     EncryptedPreferencesService encryptedPreferencesService =
                             new EncryptedPreferencesService(getContext());
                     encryptedPreferencesService.saveAuthToken(token);
+                    Log.d("Chargement du fragment ", "bite" );
+                    loadFragment(new FragmentCreationProfil());
+
                 } else {
                     // Gestion des erreurs en fonction du code de réponse HTTP
                     if (response.code() == 400) {

@@ -45,11 +45,11 @@ public class FragmentConnexion extends Fragment {
         boutonLogin = view.findViewById(R.id.connectionButton);
     }
 
-
     private void setListeners() {
         imageButton.setOnClickListener(v -> loadFragment(new FragmentChoixAuthentification()));
         boutonLogin.setOnClickListener(v -> connection());
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         context = getContext();
@@ -107,9 +107,9 @@ public class FragmentConnexion extends Fragment {
 
 
     public void loadFragment(Fragment fragment) {
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         // Masquer le fragment actuel s'il y en a un
-        Fragment currentFragment = getFragmentManager().findFragmentById(R.id.fragment_container);
+        Fragment currentFragment = getChildFragmentManager().findFragmentById(R.id.fragment_container);
         if (currentFragment != null) {
             transaction.hide(currentFragment);
         }

@@ -44,7 +44,7 @@ import retrofit2.Response;
 
 public class FragmentCreationProfil extends Fragment {
     View view;
-    Context context = this.getContext();
+    Context context;
     private static final int REQUEST_IMAGE_PICK = 1;
     private TextInputLayout nomUtilisateur;
     private TextInputLayout bio;
@@ -53,7 +53,7 @@ public class FragmentCreationProfil extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        context = this.getContext();
         view = inflater.inflate(R.layout.creation_profil, container, false);
         nomUtilisateur = view.findViewById(R.id.TextInputLayout_nomUtilisateur);
         bio = view.findViewById(R.id.TextInputLayout_bio);

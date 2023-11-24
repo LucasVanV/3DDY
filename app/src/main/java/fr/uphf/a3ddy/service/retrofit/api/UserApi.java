@@ -17,8 +17,6 @@ import okhttp3.RequestBody;
 
 public interface UserApi {
 
-    @GET("/connexion")
-    Call<Utilisateur> connexion();
 
     @FormUrlEncoded
     @POST("/api/v1/auth/register")
