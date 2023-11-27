@@ -1,8 +1,6 @@
 
 |
 Lapp/src/main/java/fr/uphf/a3ddy/controller/activity/Accueil_fypActivity.java,9\2\928483e64c06cf571c7520854c7c8fe6e25030d1
-u
-Eapp/src/main/java/fr/uphf/a3ddy/controller/activity/menuActivity.java,9\d\9d242d0732e843e0c44e5bff6c0623a6e999cb60
 z
 Japp/src/main/java/fr/uphf/a3ddy/controller/activity/MonCompteActivity.java,0\2\023b704dc7b227bac77f05a91789cf9176006209
 {
@@ -19,19 +17,9 @@ q
 Aapp/src/main/java/fr/uphf/a3ddy/service/retrofit/api/UserApi.java,c\b\cb32e50c4f5457148d4068ec8289665bad4fdc06
 n
 >app/src/main/java/fr/uphf/a3ddy/model/UtilisateurSecurity.java,5\1\510d151c84ed0c107c398e9aa1997f4a23d7545c
-|
-Lapp/src/main/java/fr/uphf/a3ddy/controller/fragment/FragmentInscription.java,c\b\cbd7fb5f8cabad50dd8f4caff41e50b1e9a1f422
-†
-Vapp/src/main/java/fr/uphf/a3ddy/controller/fragment/FragmentChoixAuthentification.java,8\6\86af46f914caff9ff3d1ce19788cb92ed7df8b17
-
-Oapp/src/main/java/fr/uphf/a3ddy/controller/fragment/FragmentCreationProfil.java,2\b\2b940d99e985f7a77eb83e033adf6b78c0c4b2ae
 g
 7app/src/main/java/fr/uphf/a3ddy/model/ModifRequest.java,e\5\e5fbef99d8fe416928d9cdad30ce108d69b58cfc
 ^
 .app/src/main/java/fr/uphf/a3ddy/model/Tag.java,8\b\8b8e2394a5709ed1e5b12c5f1980290b32c31d73
 f
 6app/src/main/java/fr/uphf/a3ddy/model/Utilisateur.java,2\0\200363e486c3999d609c0072eddd66ba4c926808
-s
-Capp/src/main/java/fr/uphf/a3ddy/controller/fragment/Mon_profil.java,c\6\c6dd2c5d105aecc77fcd30fe66968a82e1e1f182
-z
-Japp/src/main/java/fr/uphf/a3ddy/controller/fragment/FragmentConnexion.java,3\d\3d8636dbad7889ac88fdbb8ee15a4cc85e8fdc2b

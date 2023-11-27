@@ -9,15 +9,16 @@
 
     <ImageView
         android:id="@+id/post_image2"
-        android:layout_width="410dp"
-        android:layout_height="310dp"
+        android:layout_width="match_parent"
+        android:layout_height="309dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:background="@drawable/default_post"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="85dp" />
 
     <ImageView
@@ -42,40 +43,127 @@
     <ImageButton
         android:layout_width="30dp"
         android:layout_height="30dp"
+        android:background="@drawable/comments"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="405dp" />
+
+    <ImageButton
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/share"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="54dp"
+        tools:layout_editor_absoluteY="405dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton4"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:background="@drawable/star"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="130dp"
         tools:layout_editor_absoluteY="405dp" />
 
     <ImageButton
+        android:id="@+id/imageButton5"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:background="@drawable/star"
+        app:layout_constraintStart_toEndOf="@+id/imageButton4"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="160dp"
+        tools:layout_editor_absoluteY="405dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton6"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/empty_star"
+        app:layout_constraintStart_toEndOf="@+id/imageButton5"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="405dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton7"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/empty_star"
+        app:layout_constraintStart_toEndOf="@+id/imageButton6"
+        tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteY="405dp" />
 
     <ImageButton
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:background="@drawable/empty_star"
-        tools:layout_editor_absoluteX="190dp"
-        tools:layout_editor_absoluteY="405dp"
+        app:layout_constraintStart_toEndOf="@+id/imageButton7"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="405dp" />
+
+    <ImageButton
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/not_favorite"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="365dp"
+        tools:layout_editor_absoluteY="405dp" />
+
+    <TextView
+        android:layout_width="35dp"
+        android:layout_height="20dp"
+        android:text="1000"
+        tools:layout_editor_absoluteX="148dp"
+        tools:layout_editor_absoluteY="442dp"
         tools:ignore="MissingConstraints" />
 
     <ImageButton
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:background="@drawable/empty_star"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/baseline_file_download_24"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="220dp"
-        tools:layout_editor_absoluteY="405dp" />
+        tools:layout_editor_absoluteX="183dp"
+        tools:layout_editor_absoluteY="442dp" />
 
     <ImageButton
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:background="@drawable/empty_star"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/star"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="250dp"
-        tools:layout_editor_absoluteY="405dp" />
+        tools:layout_editor_absoluteX="220dp"
+        tools:layout_editor_absoluteY="442dp" />
+
+    <TextView
+        android:layout_width="22dp"
+        android:layout_height="20dp"
+        android:text="2.3"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="246dp"
+        tools:layout_editor_absoluteY="442dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="187dp"
+        android:layout_height="35dp"
+        android:text="Nom du modèle"
+        android:textSize="25sp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="15dp"
+        tools:layout_editor_absoluteY="486dp" />
+
+    <Button
+        android:layout_width="84dp"
+        android:layout_height="35dp"
+        android:text="100,99 €"
+        android:textSize="10sp"
+        tools:layout_editor_absoluteX="311dp"
+        tools:layout_editor_absoluteY="486dp" />
+
+    <TextView
+        android:layout_width="96dp"
+        android:layout_height="21dp"
+        android:text="15 / 01 / 2023"
+        android:textSize="15sp"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="15dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
