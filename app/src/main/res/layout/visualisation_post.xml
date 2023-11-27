@@ -154,9 +154,10 @@
         android:layout_width="84dp"
         android:layout_height="35dp"
         android:text="100,99 €"
-        android:textSize="10sp"
+        android:textSize="11sp"
         tools:layout_editor_absoluteX="311dp"
-        tools:layout_editor_absoluteY="486dp" />
+        tools:layout_editor_absoluteY="486dp"
+        tools:ignore="MissingConstraints,SmallSp" />
 
     <TextView
         android:layout_width="96dp"
@@ -166,4 +167,79 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="15dp" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="379dp"
+        android:layout_height="169dp"
+        android:background="@drawable/edittext"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="545dp" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/default_user"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="23dp"
+        tools:layout_editor_absoluteY="628dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="96dp"
+        android:layout_height="21dp"
+        android:text="Mme. X"
+        android:textSize="16sp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="84dp"
+        tools:layout_editor_absoluteY="628dp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="284dp"
+        android:layout_height="30dp"
+        android:text="Exemple de commentaire"
+        android:textSize="14sp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="84dp"
+        tools:layout_editor_absoluteY="649dp" />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/default_user"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="23dp"
+        tools:layout_editor_absoluteY="555dp" />
+
+    <TextView
+        android:layout_width="96dp"
+        android:layout_height="21dp"
+        android:text="Mr. X"
+        android:textSize="16sp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="84dp"
+        tools:layout_editor_absoluteY="555dp" />
+
+    <TextView
+        android:layout_width="284dp"
+        android:layout_height="30dp"
+        android:text="Exemple de commentaire"
+        android:textSize="14sp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="84dp"
+        tools:layout_editor_absoluteY="576dp" />
+
+    <ImageView
+        android:layout_width="373dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="2dp"
+        android:background="#2D2828"
+        app:layout_constraintEnd_toEndOf="@+id/imageView3"
+        app:layout_constraintStart_toStartOf="@+id/imageView3"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="615dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
