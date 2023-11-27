@@ -13,6 +13,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import fr.uphf.a3ddy.R;
 import fr.uphf.a3ddy.controller.fragment.monCompte.FragmentProfil;
+import fr.uphf.a3ddy.controller.fragment.posts.FragmentPoster;
 
 public class Accueil_fypActivity extends AppCompatActivity {
     @Override
@@ -41,8 +42,7 @@ public class Accueil_fypActivity extends AppCompatActivity {
                 return true;
             } else if (itemId == R.id.publier) {
                 // Redirection vers la page de publication
-                // Intent intentPublier = new Intent(menuActivity.this, PublierActivity.class);
-                // startActivity(intentPublier);
+                loadFragment(new FragmentPoster());
                 return true;
             } else if (itemId == R.id.message) {
                 // Redirection vers la page de messages
