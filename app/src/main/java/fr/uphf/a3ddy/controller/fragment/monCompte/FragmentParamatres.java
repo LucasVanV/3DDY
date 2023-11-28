@@ -3,7 +3,9 @@ package fr.uphf.a3ddy.controller.fragment.monCompte;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +15,6 @@ import android.widget.ImageButton;
 
 
 import fr.uphf.a3ddy.R;
-import fr.uphf.a3ddy.controller.fragment.FragmentAccueilFyp;
 
 public class FragmentParamatres extends Fragment {
 
@@ -21,16 +22,19 @@ public class FragmentParamatres extends Fragment {
     Context context;
     private Button boutonMonCompte;
     private ImageButton boutonRetour;
+    private Button buttonDeconnexion;
 
 
     public void iniUI(){
         boutonMonCompte = view.findViewById(R.id.monComptebutton);
         boutonRetour = view.findViewById(R.id.retour);
+        buttonDeconnexion = view.findViewById(R.id.button_deconnexion);
     }
 
     private void setListener() {
-        boutonMonCompte.setOnClickListener(v-> loadFragment(new FragmentModifMonCompte()));//TODO
-        boutonRetour.setOnClickListener(v -> loadFragment(new FragmentProfil()));//TODO
+        boutonMonCompte.setOnClickListener(v-> loadFragment(new FragmentModifMonCompte()));
+        boutonRetour.setOnClickListener(v -> loadFragment(new FragmentProfil()));
+        buttonDeconnexion.setOnClickListener(v -> deconnection());
     }
 
     @Override
@@ -43,6 +47,30 @@ public class FragmentParamatres extends Fragment {
         setListener();
 
         return view;
+    }
+
+    public void deconnection(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Deconnection");
+        builder.setMessage("Voulez-vous vous deconecter");
+
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                // Action pour le bouton "OK"
+
+            }
+        });
+        builder.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                // Action pour le bouton "Annuler"
+                dialogInterface.dismiss();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     public void loadFragment(Fragment fragment) {

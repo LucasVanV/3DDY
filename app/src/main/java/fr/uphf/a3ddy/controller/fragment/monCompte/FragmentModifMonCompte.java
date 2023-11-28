@@ -43,7 +43,7 @@ public class FragmentModifMonCompte extends Fragment {
     }
 
     private void setListeners() {
-        boutonRetour.setOnClickListener(v-> loadFragment(new FragmentModifMonCompte()));
+        boutonRetour.setOnClickListener(v-> loadFragment(new FragmentProfil()));
         buttonValider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
