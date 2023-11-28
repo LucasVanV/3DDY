@@ -207,7 +207,8 @@ public class FragmentPoster extends Fragment {
         // Appel Retrofit
         //RetrofitService retrofitService = new RetrofitService(new EncryptedPreferencesService(context).getAuthToken
         // ());
-        RetrofitService retrofitService = new RetrofitService("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGVvdmVzcXVlMTIzNEBnbWFpbC5jb20iLCJpYXQiOjE3MDEwNjkwMzUsImV4cCI6MTcwMTE1NTQzNX0.i-iwJse-owEmmvY6TCQJT3UnGd7d4LijsKruvLaM-hI");
+        RetrofitService retrofitService = new RetrofitService("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGVvdmVzcXVlMT" +
+                "IzNHJndnJlZ0BnbWFpbC5jb20iLCJpYXQiOjE3MDExNTU1MzIsImV4cCI6MTcwMTI0MTkzMn0.BVCGDuKZT20U9i1UuzYoViu8xEtGgxPmUYPaQ6FWo9o");
 
         PostApi postApi = retrofitService.getRetrofit().create(PostApi.class);
 

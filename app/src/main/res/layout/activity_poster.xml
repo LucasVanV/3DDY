@@ -27,7 +27,7 @@
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titre_nouvelle_publication">
+        app:layout_constraintTop_toBottomOf="@+id/TextInputLayout_prix">
 
         <ImageView
             android:id="@+id/image_icone_ajouter_models"
@@ -60,11 +60,11 @@
         android:id="@+id/constraintlayout_photoModel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.096"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titre_nouvelle_publication">
+        app:layout_constraintTop_toBottomOf="@+id/constraintlayout_Model">
 
         <Button
             android:id="@+id/bouton_ajouter_photo"
@@ -107,7 +107,7 @@
         app:hintTextColor="@color/text_color_blanc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/constraintlayout_photoModel"
+        app:layout_constraintTop_toBottomOf="@id/titre_nouvelle_publication"
         app:startIconDrawable="@drawable/baseline_sort_24"
         app:startIconTint="@color/blanc">
 
@@ -222,12 +222,11 @@
         android:id="@+id/validateButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
         android:text="Valider"
-        android:layout_marginTop="36dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextInputLayout_prix"
-        app:layout_constraintVertical_bias="0.415" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintlayout_photoModel" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
