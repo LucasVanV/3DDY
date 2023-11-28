@@ -19,6 +19,7 @@ public interface PostApi {
             @Part("description") RequestBody description,
             @Part("tagsReference") RequestBody tagsReference,
             @Part("commentaires") RequestBody commentaires,
+            @Part("tagsPrefere") RequestBody tagsPrefere,
             @Part MultipartBody.Part imagePost,
             @Part MultipartBody.Part modele3d
             );

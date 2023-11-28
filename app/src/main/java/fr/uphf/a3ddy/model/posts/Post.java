@@ -15,7 +15,7 @@ public class Post {
     private Long id;
 
     @SerializedName("datePost")
-    private LocalDateTime datePost;
+    private String datePost;
 
     @SerializedName("image")
     private String image;
@@ -38,9 +38,8 @@ public class Post {
     @SerializedName("tagsReferences")
     private Set<Tag> tagsReferences;
 
-    public Post(Long id, LocalDateTime datePost, String image, String titre, String description, String commentaires, String nbTelechargement, Utilisateur utilisateurPost, Set<Tag> tagsReferences) {
+    public Post(Long id, String image, String titre, String description, String commentaires, String nbTelechargement, Utilisateur utilisateurPost, Set<Tag> tagsReferences) {
         this.id = id;
-        this.datePost = datePost;
         this.image = image;
         this.titre = titre;
         this.description = description;
@@ -58,11 +57,11 @@ public class Post {
         this.id = id;
     }
 
-    public LocalDateTime getDatePost() {
+    public String getDatePost() {
         return datePost;
     }
 
-    public void setDatePost(LocalDateTime datePost) {
+    public void setDatePost(String datePost) {
         this.datePost = datePost;
     }
 

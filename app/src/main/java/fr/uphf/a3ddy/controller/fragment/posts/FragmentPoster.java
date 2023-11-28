@@ -34,7 +34,9 @@ import java.util.List;
 
 import fr.uphf.a3ddy.R;
 import fr.uphf.a3ddy.controller.activity.Accueil_fypActivity;
+import fr.uphf.a3ddy.controller.fragment.FragmentAccueilFyp;
 import fr.uphf.a3ddy.model.Utilisateur;
+import fr.uphf.a3ddy.model.posts.Post;
 import fr.uphf.a3ddy.model.posts.PostRequest;
 import fr.uphf.a3ddy.service.EncryptedPreferencesService;
 import fr.uphf.a3ddy.service.retrofit.RetrofitService;
@@ -184,7 +186,8 @@ public class FragmentPoster extends Fragment {
                 @Override
                 public void onClick(View view) {
                     //TODO changer les commentaires pour mettre le fichier JSON
-                    addPost(titreText, descriptionText, selectedChipsText.toString(), "commentaires/", imageUri, fileUri);
+                    addPost(titreText, descriptionText, "commentaires/", selectedChipsText.toString(), imageUri,
+                            fileUri);
                     Toast.makeText(context, "Publication postée !",
                             Toast.LENGTH_LONG).show();
                 }
@@ -197,7 +200,9 @@ public class FragmentPoster extends Fragment {
 
 
 
-    public void addPost(String titre, String description, String textTags, String commentaires, Uri imagePost, Uri modele3d) {
+    public void addPost(String titre, String description, String commentaires, String textTags,
+                        Uri imagePost,
+                        Uri modele3d) {
         // Logs pour déboguer
         System.out.println("Pseudo : " + titre);
         System.out.println("Bio : " + description);
@@ -243,6 +248,7 @@ public class FragmentPoster extends Fragment {
                             RequestBody.create(MediaType.parse("text/plain"), description),
                             RequestBody.create(MediaType.parse("text/plain"), textTags),
                             RequestBody.create(MediaType.parse("text/plain"), commentaires),
+                            RequestBody.create(MediaType.parse("text/plain"), textTags),
                             imagePart,
                             modele3dPart
                     );
@@ -251,36 +257,36 @@ public class FragmentPoster extends Fragment {
                     requestPost(call);
 
                 } else {
-                    Toast.makeText(context, "Erreur de création du fichier temporaire", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Erreur de création du fichier temporaire", Toast.LENGTH_LONG).show();
                 }
 
                 // N'oubliez pas de fermer les InputStream lorsque vous avez terminé
                 imageInputStream.close();
                 modele3dInputStream.close();
             } else {
-                Toast.makeText(context, "Erreur de récupération de l'image ou du modèle 3D", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Erreur de récupération de l'image ou du modèle 3D", Toast.LENGTH_LONG).show();
             }
         } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(context, "Erreur : " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            Log.d("erreur", e.getLocalizedMessage());
+            Toast.makeText(context, "Erreur : " + e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
         }
     }
 
     public void requestPost(Call call){
-        call.enqueue(new Callback<Utilisateur>() {
+        call.enqueue(new Callback<PostRequest>() {
             @Override
-            public void onResponse(Call<Utilisateur> call, Response<Utilisateur> response) { // TODO a verifier
+            public void onResponse(Call<PostRequest> call, Response<PostRequest> response) { // TODO a verifier
                 if (response.isSuccessful()) {
-                    Utilisateur utilisateur = response.body();
+                    PostRequest postRequest = response.body();
                     // Post réussi, redirigez l'utilisateur vers l'activité de la page d'accueil
-                    Intent intent = new Intent(context, Accueil_fypActivity.class);
-                    startActivity(intent);
+                    loadFragment(new FragmentAccueilFyp());
                 }
             }
             @Override
-            public void onFailure(Call<Utilisateur> call, Throwable t) {
+            public void onFailure(Call<PostRequest> call, Throwable t) {
                 Log.d("Erreur : ", t.getLocalizedMessage());
-                Toast.makeText(context, "Erreur : " + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Erreur : " + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                 call.cancel();
             }
         });
