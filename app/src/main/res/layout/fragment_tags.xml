@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="@color/background_color"
     android:padding="16dp"
-    tools:context=".controller.Mes_tags">
+    tools:context=".controller.fragment.monCompte.FragmentTags">
+    *
     <LinearLayout
         android:id="@+id/linearlayout_titre"
         android:layout_width="wrap_content"
@@ -32,4 +33,28 @@
             android:text="Mes tags">
         </TextView>
     </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/ScrollView_tags"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearlayout_titre">
+
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/ScrollView_tags"
+            app:singleSelection="false"
+            android:clickable="true"
+            android:focusable="true">
+
+        </com.google.android.material.chip.ChipGroup>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

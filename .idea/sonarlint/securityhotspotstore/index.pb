@@ -11,8 +11,6 @@ q
 Aapp/src/main/java/fr/uphf/a3ddy/service/retrofit/api/UserApi.java,c\b\cb32e50c4f5457148d4068ec8289665bad4fdc06
 n
 >app/src/main/java/fr/uphf/a3ddy/model/UtilisateurSecurity.java,5\1\510d151c84ed0c107c398e9aa1997f4a23d7545c
-g
-7app/src/main/java/fr/uphf/a3ddy/model/ModifRequest.java,e\5\e5fbef99d8fe416928d9cdad30ce108d69b58cfc
 ^
 .app/src/main/java/fr/uphf/a3ddy/model/Tag.java,8\b\8b8e2394a5709ed1e5b12c5f1980290b32c31d73
 f
@@ -23,8 +21,6 @@ u
 Eapp/src/main/java/fr/uphf/a3ddy/service/retrofit/RetrofitService.java,5\2\52ad82a713f024eb547fb8c4b9a2a28b7739256c
 {
 Kapp/src/main/java/fr/uphf/a3ddy/controller/fragment/FragmentAccueilFyp.java,6\8\682fa9b122773eacfc94b487350a77ca85a2351b
-Ñ
-Tapp/src/main/java/fr/uphf/a3ddy/controller/fragment/monCompte/FragmentMonCompte.java,a\1\a14599ae04fafe924f461562d4d58fa7506f40ba
 Ö
 Uapp/src/main/java/fr/uphf/a3ddy/controller/fragment/monCompte/FragmentParamatres.java,9\f\9f002aedf418d5fc4640f6b376daf2883c6a2fd9
 Å
@@ -35,7 +31,7 @@ Vapp/src/main/java/fr/uphf/a3ddy/controller/fragment/auth_insc/FragmentInscripti
 Yapp/src/main/java/fr/uphf/a3ddy/controller/fragment/auth_insc/FragmentCreationProfil.java,a\c\acd6de4f52161e61fedb2da3b7e71360e7d05680
 Ñ
 Tapp/src/main/java/fr/uphf/a3ddy/controller/fragment/auth_insc/FragmentConnexion.java,7\b\7b7df8f6a44a91f97ad46a145ee479deac278f44
-l
-<app/src/main/java/fr/uphf/a3ddy/service/FragmentService.java,9\3\938a4edad9720fb791f174004d81de75a27cde44
 ê
 `app/src/main/java/fr/uphf/a3ddy/controller/fragment/auth_insc/FragmentChoixAuthentification.java,7\b\7bc3e06fc0a3ec943203c8b3e1f9ad2bbfc6b31a
+
+Oapp/src/main/java/fr/uphf/a3ddy/controller/fragment/monCompte/FragmentTags.java,7\2\727a299fc784b0f3209e22a844fac9cb4156bb1c
