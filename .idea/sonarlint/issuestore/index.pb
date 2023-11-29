@@ -35,3 +35,5 @@ s
 Capp/src/main/java/fr/uphf/a3ddy/controller/fragment/Mon_profil.java,c\6\c6dd2c5d105aecc77fcd30fe66968a82e1e1f182
 z
 Japp/src/main/java/fr/uphf/a3ddy/controller/fragment/FragmentConnexion.java,3\d\3d8636dbad7889ac88fdbb8ee15a4cc85e8fdc2b
+Å
+Qapp/src/main/java/fr/uphf/a3ddy/controller/fragment/monCompte/FragmentProfil.java,5\1\51a84a8ae0ec8c9550a6fb58f9e74cadfa3b7b20
