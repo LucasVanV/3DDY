@@ -1,0 +1,112 @@
+{
+  "id": "43a88e8f-b48f-4765-b7e2-13d6b95a417e",
+  "version": "2.0",
+  "name": "testConnexionMarlymoove",
+  "url": "http://localhost",
+  "tests": [{
+    "id": "e0d0c23f-fc33-43ef-a28f-ba952a411364",
+    "name": "connexion",
+    "commands": [{
+      "id": "4d749a90-b426-4fb2-ae4d-4b33587ded46",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ffb630ed-979a-4eca-9f3f-980b89ab96ac",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1152x648",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6f817319-f836-489c-bece-893ef314e3e6",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Connexion",
+      "targets": [
+        ["linkText=Connexion", "linkText"],
+        ["css=.nav-item:nth-child(7) > .nav-link", "css:finder"],
+        ["xpath=//a[contains(text(),'Connexion')]", "xpath:link"],
+        ["xpath=//div[@id='lienNav']/ul/li[7]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/inscription.php')]", "xpath:href"],
+        ["xpath=//li[7]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Connexion')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "8ae8d54e-7e84-45b6-b218-e6d0432c93b2",
+      "comment": "",
+      "command": "click",
+      "target": "name=login",
+      "targets": [
+        ["name=login", "name"],
+        ["xpath=//input[@id='login']", "xpath:attributes"],
+        ["xpath=//form[@id='login']/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/form/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a12e3bff-5fd2-4854-8b2f-77ce4d243540",
+      "comment": "",
+      "command": "type",
+      "target": "name=login",
+      "targets": [
+        ["name=login", "name"],
+        ["xpath=//input[@id='login']", "xpath:attributes"],
+        ["xpath=//form[@id='login']/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/form/div/input", "xpath:position"]
+      ],
+      "value": "admin.admin@admin.fr"
+    }, {
+      "id": "42941fa3-be8b-45d7-a0ab-11771267dfd8",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//form[@id='login']/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/form/div[2]/input", "xpath:position"]
+      ],
+      "value": "admin"
+    }, {
+      "id": "a20cbde6-de4b-4009-b4a6-a576a2e8b953",
+      "comment": "",
+      "command": "sendKeys",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//form[@id='login']/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/form/div[2]/input", "xpath:position"]
+      ],
+      "value": "${KEY_ENTER}"
+    }, {
+      "id": "4fb632bb-fdf2-4b63-8d3b-7da969d5bdbe",
+      "comment": "",
+      "command": "click",
+      "target": "css=body",
+      "targets": [
+        ["css=body", "css:finder"],
+        ["xpath=//body", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "2c58bdbc-7d1b-4027-b959-dd4a9bdc491b",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["e0d0c23f-fc33-43ef-a28f-ba952a411364"]
+  }],
+  "urls": ["http://localhost/"],
+  "plugins": []
+}

@@ -43,9 +43,34 @@ public interface UserApi {
     );
 
     @FormUrlEncoded
+    @PUT("/api/v1/modif/modificationProfil/bio")
+    Call<Utilisateur>modificationProfilBio(
+        @Header("Authorization") String authorization,
+        @Field("bio") String bio);
+
+    @FormUrlEncoded
+    @PUT("/api/v1/modif/modificationProfil/pseudo")
+    Call<Utilisateur>modificationProfilPseudo(
+            @Header("Authorization") String authorization,
+            @Field("pseudo") String pseudo);
+
+
+    @FormUrlEncoded
+    @PUT("/api/v1/modif/modificationProfil/photoProfil")
+    Call<Utilisateur>modificationProfilImg(
+            @Header("Authorization") String authorization,
+            @Field("photoProfil") String photoProfil);
+
+
+
+    @FormUrlEncoded
     @POST("/api/v1/auth/authenticate")
     Call<UtilisateurSecurity> connexion(
             @Field("email") String email,
             @Field("password") String password
     );
+
+    @POST("/api/v1/auth/logout")
+    Call<String> logout();
+
 }

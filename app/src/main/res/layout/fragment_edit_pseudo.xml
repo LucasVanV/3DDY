@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:padding="16dp">
+
+
+
+    <ImageButton
+        android:id="@+id/arrowButton"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="39dp"
+        android:background="@drawable/baseline_arrow_back_24"
+        app:layout_constraintEnd_toStartOf="@+id/titre"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/titre"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="Edit Pseudo"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/arrowButton"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/TextInputLayout_nomUtilisateur"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Pseudo"
+        android:layout_marginTop="50dp"
+        android:textColor="@color/blanc"
+        android:textColorHint="@color/text_color_blanc"
+        app:boxStrokeColor="@color/background_color"
+        app:cursorColor="@color/blanc"
+        app:endIconMode="clear_text"
+        app:endIconTint="@color/blanc"
+        app:errorEnabled="true"
+        app:hintTextColor="@color/text_color_blanc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titre"
+        app:startIconDrawable="@drawable/baseline_person_outline_24"
+        app:startIconTint="@color/blanc">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/TextInputEdit_pseudo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittext"
+            android:inputType="textAutoComplete|textMultiLine"
+            android:textColor="@color/blanc"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/enregistrer"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/bouton"
+        android:text="Enregistre"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0.468"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

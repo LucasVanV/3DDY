@@ -2,46 +2,39 @@ package fr.uphf.a3ddy.controller.fragment.monCompte;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.google.android.material.textfield.TextInputLayout;
-
-import java.io.IOException;
-
 import fr.uphf.a3ddy.R;
-import fr.uphf.a3ddy.model.Utilisateur;
-import fr.uphf.a3ddy.model.UtilisateurSecurity;
 import fr.uphf.a3ddy.service.EncryptedPreferencesService;
 import fr.uphf.a3ddy.service.retrofit.RetrofitService;
 import fr.uphf.a3ddy.service.retrofit.api.UserApi;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
-public class FragmentModifProfil extends Fragment {
+public class FragmentEditImg extends Fragment {
 
     View view;
     Context context;
 
-    private ImageButton butonRetour;
+    private ImageButton buttonRetour;
+    private Button enregister;
 
 
-    public void iniUI() {
-        butonRetour = view.findViewById(R.id.retour);
-        //TODO
+    public void iniUI(){
+        buttonRetour = view.findViewById(R.id.retour);
+        enregister = view.findViewById(R.id.enregistrer);
+        //TODO recuperation du edit test champ
     }
+
     public void setListeners() {
-        butonRetour.setOnClickListener(v-> loadFragment(new FragmentParamatres()));
-        //TODO
+        buttonRetour.setOnClickListener(v -> loadFragment(new FragmentParamatres()));
+        //TODO enregister.setOnClickListener(v -> a faire );
+
     }
 
     @Override
@@ -54,7 +47,20 @@ public class FragmentModifProfil extends Fragment {
         return view;
     }
 
-    //TODO
+
+    public void modificationPseudo(String emailText, String passwordText) {
+        // Obtenez le token de votre emplacement de stockage sécurisé
+        EncryptedPreferencesService encryptedPreferencesService =
+                new EncryptedPreferencesService(getContext());
+        String authToken = encryptedPreferencesService.getAuthToken();
+
+        // Appel Retrofit
+        RetrofitService retrofitService = new RetrofitService(authToken);
+        UserApi utilisateurApi = retrofitService.getRetrofit().create(UserApi.class);
+
+        //Call<Utilisateur> call = utilisateurApi.modificationProfilPseudo();
+        //TODO
+    }
 
     public void loadFragment(Fragment fragment) {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();

@@ -13,8 +13,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import fr.uphf.a3ddy.R;
 import fr.uphf.a3ddy.controller.fragment.monCompte.FragmentProfil;
+import fr.uphf.a3ddy.model.Utilisateur;
+import fr.uphf.a3ddy.model.UtilisateurSecurity;
 
 public class Accueil_fypActivity extends AppCompatActivity {
+
+    private UtilisateurSecurity currentUserSecurity;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +60,12 @@ public class Accueil_fypActivity extends AppCompatActivity {
             }
         });
     }
+/*
+    public void ExtractionUserS(){
+        Intent intent = getIntent();
+        currentUserSecurity= intent.get(UtilisateurSecurity);
+    }
+    */
 
     private void loadFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

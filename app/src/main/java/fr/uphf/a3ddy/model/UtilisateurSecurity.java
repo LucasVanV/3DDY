@@ -2,7 +2,7 @@ package fr.uphf.a3ddy.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class UtilisateurSecurity {
+public class UtilisateurSecurity{
 
     @SerializedName("id")
     private Long id;
@@ -15,10 +15,13 @@ public class UtilisateurSecurity {
     @SerializedName("acces_token")
     private String token;
 
-    // Constructeur par défaut
+    // Constructeur par default
+    public UtilisateurSecurity() {}
+
+    // Constructeur par parametrique 1
     public UtilisateurSecurity(String emailText, String mdpText) {}
 
-    // Constructeur paramétrique
+    // Constructeur paramétrique 2
     public UtilisateurSecurity(String email, String password, Utilisateur utilisateur) {
         this.email = email;
         this.password = password;

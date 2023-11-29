@@ -6,15 +6,28 @@ import androidx.fragment.app.FragmentTransaction;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.os.Bundle;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
+
+import java.io.IOException;
 
 import fr.uphf.a3ddy.R;
+import fr.uphf.a3ddy.controller.activity.ChoixAuthentificationActivity;
+import fr.uphf.a3ddy.model.UtilisateurSecurity;
+import fr.uphf.a3ddy.service.EncryptedPreferencesService;
+import fr.uphf.a3ddy.service.retrofit.RetrofitService;
+import fr.uphf.a3ddy.service.retrofit.api.UserApi;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class FragmentParamatres extends Fragment {
 
@@ -57,8 +70,11 @@ public class FragmentParamatres extends Fragment {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                // Action pour le bouton "OK"
-
+                // Action pour le bouton "OK
+                logout();
+                Intent intent = new Intent(context, ChoixAuthentificationActivity.class);
+                startActivity(intent);
+                requireActivity().finish();
             }
         });
         builder.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
@@ -68,10 +84,43 @@ public class FragmentParamatres extends Fragment {
                 dialogInterface.dismiss();
             }
         });
-
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
+    public void logout() {
+        // Obtenez le token de votre emplacement de stockage sécurisé
+        EncryptedPreferencesService encryptedPreferencesService =
+                new EncryptedPreferencesService(getContext());
+        String authToken =  encryptedPreferencesService.getAuthToken();
+        // Appel Retrofit
+        RetrofitService retrofitService = new RetrofitService(authToken);
+        UserApi utilisateurApi = retrofitService.getRetrofit().create(UserApi.class);
+
+        Call<String> call = utilisateurApi.logout();
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (response.isSuccessful()) {
+                    // La déconnexion a réussi
+                    // Ici, vous pouvez par exemple effacer les données de l'utilisateur
+                    // stockées localement ou naviguer vers l'écran de connexion
+                    Log.d("Logout", "Déconnexion réussie: " + response.body());
+                } else {
+                    // Gérer la réponse en cas d'échec
+                    Log.d("Logout", "Échec de la déconnexion: " + response.code());
+                    // Afficher un message d'erreur à l'utilisateur, par exemple
+                }
+            }
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                // Gérer l'échec total de la requête (par exemple, pas de connexion Internet)
+                Log.d("Logout", "Erreur de requête: " + t.getMessage());
+                // Afficher un message d'erreur à l'utilisateur, par exemple
+            }
+        });
+    }
+
 
     public void loadFragment(Fragment fragment) {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
