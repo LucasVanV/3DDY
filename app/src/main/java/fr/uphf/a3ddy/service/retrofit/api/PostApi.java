@@ -4,10 +4,13 @@ import fr.uphf.a3ddy.model.posts.PostRequest;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
-import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.DELETE;
+import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Part;
+import retrofit2.http.Query;
 
 public interface PostApi {
 
@@ -23,4 +26,25 @@ public interface PostApi {
             @Part MultipartBody.Part imagePost,
             @Part MultipartBody.Part modele3d
             );
+
+
+    @Multipart
+    @PUT("/api/v1/posts/updatePost")
+    Call<PostRequest> updatePost(
+            @Header("Authorization") String authorization,
+            @Part("titre") RequestBody titre,
+            @Part("description") RequestBody description,
+            @Part("tagsReference") RequestBody tagsReference,
+            @Part("commentaires") RequestBody commentaires,
+            @Part("tagsPrefere") RequestBody tagsPrefere,
+            @Part("idUpdatedPost") RequestBody idUpdatedPost,
+            @Part MultipartBody.Part imagePost,
+            @Part MultipartBody.Part modele3d
+    );
+
+
+    @DELETE("/api/v1/posts/deletePost")
+    Call<Long> deletePost(
+            @Query("idPost") Long idPost
+    );
 }

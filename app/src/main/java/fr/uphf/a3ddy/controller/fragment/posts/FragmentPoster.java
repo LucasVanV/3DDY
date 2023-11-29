@@ -59,12 +59,14 @@ public class FragmentPoster extends Fragment {
     private ChipGroup chipGroup;
     private TextInputLayout titre;
     private TextInputLayout description;
+    private Button modifier_post;
     private Uri imageUri;
     private Uri fileUri;
 
     private void iniUI() {
         Button bouton_ajouter_model = view.findViewById(R.id.bouton_ajouter_model_3d);
         Button bouton_photo_model = view.findViewById(R.id.bouton_ajouter_photo);
+        modifier_post = view.findViewById(R.id.modifierPost);
         titre = view.findViewById(R.id.TextInputLayout_titre);
         description = view.findViewById(R.id.TextInputLayout_description);
         chipGroup = view.findViewById(R.id.chipGroup);
@@ -77,6 +79,9 @@ public class FragmentPoster extends Fragment {
         iniUI(); // récupère le xml
         button_model(view.findViewById(R.id.bouton_ajouter_model_3d)); // bouton pour les models 3D
         button_image(view.findViewById(R.id.bouton_ajouter_photo)); // bouton pour l'image du model
+
+        modifier_post.setOnClickListener(view1 -> loadFragment(new FragmentPostsTemporaire()));
+
         chipGroup = view.findViewById(R.id.chipGroup);
         ajouterTags(); // ajoute une liste de tags au chipGroup
         return view;
@@ -212,8 +217,7 @@ public class FragmentPoster extends Fragment {
         // Appel Retrofit
         //RetrofitService retrofitService = new RetrofitService(new EncryptedPreferencesService(context).getAuthToken
         // ());
-        RetrofitService retrofitService = new RetrofitService("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGVvdmVzcXVlMT" +
-                "IzNHJndnJlZ0BnbWFpbC5jb20iLCJpYXQiOjE3MDExNTU1MzIsImV4cCI6MTcwMTI0MTkzMn0.BVCGDuKZT20U9i1UuzYoViu8xEtGgxPmUYPaQ6FWo9o");
+        RetrofitService retrofitService = new RetrofitService("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGVvdmVzcXVlMUBnbWFpbC5jb20iLCJpYXQiOjE3MDEyNDY5NTIsImV4cCI6MTcwMTMzMzM1Mn0.5pnQKrwrKfBGuc_Ll3kfxKbZRO-uwDlpUF7wTfRElK8");
 
         PostApi postApi = retrofitService.getRetrofit().create(PostApi.class);
 
@@ -322,7 +326,7 @@ public class FragmentPoster extends Fragment {
     public void loadFragment(Fragment fragment) {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         // Masquer le fragment actuel s'il y en a un
-        Fragment currentFragment = getFragmentManager().findFragmentById(R.id.fragment_container);
+        Fragment currentFragment = getFragmentManager().findFragmentById(R.id.bloc_fragment_accueil);
         if (currentFragment != null) {
             transaction.hide(currentFragment);
         }
