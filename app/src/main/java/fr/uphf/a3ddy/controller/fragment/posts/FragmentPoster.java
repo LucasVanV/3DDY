@@ -35,6 +35,7 @@ import java.util.List;
 import fr.uphf.a3ddy.R;
 import fr.uphf.a3ddy.controller.activity.Accueil_fypActivity;
 import fr.uphf.a3ddy.controller.fragment.FragmentAccueilFyp;
+import fr.uphf.a3ddy.controller.fragment.monCompte.FragmentProfil;
 import fr.uphf.a3ddy.model.Utilisateur;
 import fr.uphf.a3ddy.model.posts.Post;
 import fr.uphf.a3ddy.model.posts.PostRequest;
@@ -60,6 +61,8 @@ public class FragmentPoster extends Fragment {
     private TextInputLayout titre;
     private TextInputLayout description;
     private Button modifier_post;
+    Bundle bundle;
+    Long postIdUpdated;
     private Uri imageUri;
     private Uri fileUri;
 
@@ -74,11 +77,28 @@ public class FragmentPoster extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        context=getContext();
+        context = getContext();
         view = inflater.inflate(R.layout.activity_poster, container, false);
         iniUI(); // récupère le xml
         button_model(view.findViewById(R.id.bouton_ajouter_model_3d)); // bouton pour les models 3D
         button_image(view.findViewById(R.id.bouton_ajouter_photo)); // bouton pour l'image du model
+
+        // Récupérer l'id du post à partir du Bundle
+        bundle = getArguments();
+        if (bundle != null) {
+            postIdUpdated = bundle.getLong("postId", -1L);
+            // Faites quelque chose avec l'id du post ici
+            Log.d("FragmentPoster", "Post ID: " + postIdUpdated);
+        }
+
+        //Permet de faire la différence entre poster ou modifier post :
+        //On utilise le même layout alors si bundle (bundle = id post à modifier) == null on post sinon on modifie
+        if (bundle == null) {
+            Log.d("bundle", "pas de bundle");
+        } else if (bundle != null) {
+            Log.d("bundle", "bundle " +
+                    "présent");
+        }
 
         modifier_post.setOnClickListener(view1 -> loadFragment(new FragmentPostsTemporaire()));
 
@@ -191,8 +211,18 @@ public class FragmentPoster extends Fragment {
                 @Override
                 public void onClick(View view) {
                     //TODO changer les commentaires pour mettre le fichier JSON
-                    addPost(titreText, descriptionText, "commentaires/", selectedChipsText.toString(), imageUri,
-                            fileUri);
+
+                    if (bundle == null) {
+                        Log.d("bundle", "pas de bundle on poste");
+                        addPost(titreText, descriptionText, "commentaires/", selectedChipsText.toString(), imageUri,
+                                fileUri);
+                    } else if (bundle != null) {
+                        Log.d(
+                                "bundle", "bundle présent on modifie le post");
+                        updatePost(titreText, descriptionText, "commentaires/", selectedChipsText.toString(),
+                                imageUri, fileUri);
+                    }
+
                     Toast.makeText(context, "Publication postée !",
                             Toast.LENGTH_LONG).show();
                 }
@@ -203,17 +233,9 @@ public class FragmentPoster extends Fragment {
     }
 
 
-
-
     public void addPost(String titre, String description, String commentaires, String textTags,
                         Uri imagePost,
                         Uri modele3d) {
-        // Logs pour déboguer
-        System.out.println("Pseudo : " + titre);
-        System.out.println("Bio : " + description);
-        System.out.println("Tags : " + textTags);
-        System.out.println("Image : " + commentaires);
-
         // Appel Retrofit
         //RetrofitService retrofitService = new RetrofitService(new EncryptedPreferencesService(context).getAuthToken
         // ());
@@ -277,16 +299,89 @@ public class FragmentPoster extends Fragment {
         }
     }
 
-    public void requestPost(Call call){
+
+    public void updatePost(String titre, String description, String commentaires, String textTags,
+                           Uri imagePost,
+                           Uri modele3d) {
+        // Appel Retrofit
+        //RetrofitService retrofitService = new RetrofitService(new EncryptedPreferencesService(context).getAuthToken
+        // ());
+        RetrofitService retrofitService = new RetrofitService("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGVvdmVzcXVlMUBnbWFpbC5jb20iLCJpYXQiOjE3MDEyNDY5NTIsImV4cCI6MTcwMTMzMzM1Mn0.5pnQKrwrKfBGuc_Ll3kfxKbZRO-uwDlpUF7wTfRElK8");
+
+        PostApi postApi = retrofitService.getRetrofit().create(PostApi.class);
+
+        try {
+            // Utilisez ContentResolver pour ouvrir un InputStream à partir de l'URI
+            InputStream imageInputStream = context.getContentResolver().openInputStream(imagePost);
+            InputStream modele3dInputStream = context.getContentResolver().openInputStream(modele3d);
+
+            if (imageInputStream != null && modele3dInputStream != null) {
+                // Créez des fichiers temporaires distincts pour l'image et le modèle 3D
+                File imageFile = createTempImageFile();
+                File modele3dFile = createTempImageFile();
+
+                if (imageFile != null && modele3dFile != null) {
+                    // Copiez les données de l'InputStream vers les fichiers temporaires
+                    writeInputStreamToFile(imageInputStream, imageFile);
+                    writeInputStreamToFile(modele3dInputStream, modele3dFile);
+
+                    // Créez des objets RequestBody à partir des fichiers temporaires
+                    RequestBody imageRequestBody = RequestBody.create(MediaType.parse("multipart/form-data"), imageFile);
+                    RequestBody modele3dRequestBody = RequestBody.create(MediaType.parse("multipart/form-data"), modele3dFile);
+
+                    // Créez des MultipartBody.Part à partir des objets RequestBody
+                    MultipartBody.Part imagePart = MultipartBody.Part.createFormData("imagePost", imageFile.getName(),
+                            imageRequestBody);
+                    MultipartBody.Part modele3dPart = MultipartBody.Part.createFormData("modele3d",
+                            modele3dFile.getName(), modele3dRequestBody);
+
+                    //récupération du post à update
+                    Long postId = bundle.getLong("postId", -1L);
+                    Log.d("id post", String.valueOf(postIdUpdated));
+
+                    // Envoi de la demande avec l'image
+                    Call<PostRequest> call = postApi.updatePost(
+                            RequestBody.create(MediaType.parse("text/plain"), titre),
+                            RequestBody.create(MediaType.parse("text/plain"), description),
+                            RequestBody.create(MediaType.parse("text/plain"), textTags),
+                            RequestBody.create(MediaType.parse("text/plain"), commentaires),
+                            RequestBody.create(MediaType.parse("text/plain"), textTags),
+                            RequestBody.create(MediaType.parse("text/plain"), String.valueOf(postIdUpdated)),
+                            imagePart,
+                            modele3dPart
+                    );
+
+                    requestPost(call);
+
+                } else {
+                    Toast.makeText(context, "Erreur de création du fichier temporaire", Toast.LENGTH_LONG).show();
+                }
+
+                // N'oubliez pas de fermer les InputStream lorsque vous avez terminé
+                imageInputStream.close();
+                modele3dInputStream.close();
+            } else {
+                Toast.makeText(context, "Erreur de récupération de l'image ou du modèle 3D", Toast.LENGTH_LONG).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.d("erreur", e.getLocalizedMessage());
+            Toast.makeText(context, "Erreur : " + e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
+
+
+    public void requestPost(Call call) {
         call.enqueue(new Callback<PostRequest>() {
             @Override
-            public void onResponse(Call<PostRequest> call, Response<PostRequest> response) { // TODO a verifier
+            public void onResponse(Call<PostRequest> call, Response<PostRequest> response) {
                 if (response.isSuccessful()) {
                     PostRequest postRequest = response.body();
                     // Post réussi, redirigez l'utilisateur vers l'activité de la page d'accueil
-                    loadFragment(new FragmentAccueilFyp());
+                    loadFragment(new FragmentProfil());
                 }
             }
+
             @Override
             public void onFailure(Call<PostRequest> call, Throwable t) {
                 Log.d("Erreur : ", t.getLocalizedMessage());
@@ -310,6 +405,7 @@ public class FragmentPoster extends Fragment {
             return null;
         }
     }
+
     public void writeInputStreamToFile(InputStream inputStream, File outputFile) throws IOException {
         OutputStream outputStream = new FileOutputStream(outputFile);
         byte[] buffer = new byte[4 * 1024];

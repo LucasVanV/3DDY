@@ -31,7 +31,6 @@ public interface PostApi {
     @Multipart
     @PUT("/api/v1/posts/updatePost")
     Call<PostRequest> updatePost(
-            @Header("Authorization") String authorization,
             @Part("titre") RequestBody titre,
             @Part("description") RequestBody description,
             @Part("tagsReference") RequestBody tagsReference,

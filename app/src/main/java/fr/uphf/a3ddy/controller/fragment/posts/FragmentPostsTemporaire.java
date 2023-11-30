@@ -43,11 +43,16 @@ public class FragmentPostsTemporaire extends Fragment {
         view = inflater.inflate(R.layout.fragment_posts_temporaire, container, false);
         iniUI();
 
+        updatePostButton.setOnClickListener(view1 -> {
+            Bundle bundle = new Bundle();
+            bundle.putLong("postId", 510L);
+            loadFragment(new FragmentPoster(), bundle);
+        });
         deletePostButton.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        deletePost(252L);
+                        deletePost(502L);
                     }
                 }
         );
@@ -72,7 +77,7 @@ public class FragmentPostsTemporaire extends Fragment {
             public void onResponse(Call<Long> call, Response<Long> response) {
                 if (response.isSuccessful()) {
                     // Le post a été supprimé avec succès
-                    // Vous pouvez gérer la suite ici (par exemple, actualiser l'interface utilisateur)
+                    // rediriger vers la page d'accueil
                 } else {
                     // Gérer les erreurs de la requête
                 }
@@ -86,7 +91,7 @@ public class FragmentPostsTemporaire extends Fragment {
     }
 
 
-    public void loadFragment(Fragment fragment) {
+    public void loadFragment(Fragment fragment, Bundle bundle) {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         // Masquer le fragment actuel s'il y en a un
         Fragment currentFragment = getFragmentManager().findFragmentById(R.id.fragment_container);
@@ -96,6 +101,7 @@ public class FragmentPostsTemporaire extends Fragment {
 
         // Remplacer le fragment ou l'ajouter s'il n'y en a pas
         if (getChildFragmentManager().findFragmentByTag(fragment.getClass().getSimpleName()) == null) {
+            fragment.setArguments(bundle); // Passer le bundle au fragment
             transaction.add(R.id.accueil, fragment, fragment.getClass().getSimpleName());
         } else {
             transaction.show(fragment);
