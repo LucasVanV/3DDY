@@ -7,7 +7,7 @@
     android:background="@color/background_color"
     android:padding="16dp"
     tools:context=".controller.fragment.monCompte.FragmentTags">
-    *
+
     <LinearLayout
         android:id="@+id/linearlayout_titre"
         android:layout_width="wrap_content"
@@ -38,7 +38,7 @@
         android:id="@+id/ScrollView_tags"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="50dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -57,4 +57,16 @@
 
         </com.google.android.material.chip.ChipGroup>
     </ScrollView>
+
+    <Button
+        android:id="@+id/button_valider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bouton"
+        android:layout_marginTop="50dp"
+        android:text="Valider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ScrollView_tags"
+        app:layout_constraintVertical_bias="0.385" />
 </androidx.constraintlayout.widget.ConstraintLayout>

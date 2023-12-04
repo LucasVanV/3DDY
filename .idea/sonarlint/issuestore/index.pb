@@ -23,3 +23,11 @@ Uapp/src/main/java/fr/uphf/a3ddy/controller/fragment/monCompte/FragmentParamatre
 Oapp/src/main/java/fr/uphf/a3ddy/controller/fragment/monCompte/FragmentTags.java,7\2\727a299fc784b0f3209e22a844fac9cb4156bb1c
 ‰
 Yapp/src/main/java/fr/uphf/a3ddy/controller/fragment/auth_insc/FragmentCreationProfil.java,a\c\acd6de4f52161e61fedb2da3b7e71360e7d05680
+†
+Vapp/src/main/java/fr/uphf/a3ddy/controller/fragment/monCompte/FragmentModifProfil.java,7\7\77c4a649bd0721c04cef570c174d795ee829057d
+‰
+Yapp/src/main/java/fr/uphf/a3ddy/controller/fragment/monCompte/FragmentModifMonCompte.java,0\b\0b40486669149050f0bc48eb949fa0edee8caa3e
+„
+Tapp/src/main/java/fr/uphf/a3ddy/controller/fragment/auth_insc/FragmentConnexion.java,7\b\7b7df8f6a44a91f97ad46a145ee479deac278f44
+x
+Happ/src/main/java/fr/uphf/a3ddy/service/EncryptedPreferencesService.java,f\3\f30b4755f652e7f1dcad709af18bd86abfde28dd

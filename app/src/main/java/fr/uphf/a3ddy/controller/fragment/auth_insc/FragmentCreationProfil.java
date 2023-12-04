@@ -173,7 +173,7 @@ public class FragmentCreationProfil extends Fragment {
         Log.d("TOKEN avant requet",new EncryptedPreferencesService(context).getAuthToken());
 
         // Appel Retrofit
-        RetrofitService retrofitService = new RetrofitService(new EncryptedPreferencesService(context).getAuthToken());//TODO
+        RetrofitService retrofitService = new RetrofitService(new EncryptedPreferencesService(context).getAuthToken());
         //RetrofitService retrofitService = new RetrofitService("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJxdWVudGluQHRlc3QudGVzdCIsImlhdCI6MTcwMDUwNTk2NSwiZXhwIjoxNzAwNTkyMzY1fQ.BXLlNNNAoPiV5BViBF34PpCzqIuQkjvcAeiDEFj2Q8w");
         UserApi utilisateurApi = retrofitService.getRetrofit().create(UserApi.class);
 
