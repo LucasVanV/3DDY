@@ -54,6 +54,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bouton"
             android:text="Changer Photo"
+            android:layout_marginTop="12dp"
             />
     </LinearLayout>
 

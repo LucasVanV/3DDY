@@ -70,6 +70,11 @@ public interface UserApi {
             @Field("password") String password
     );
 
+    @GET("api/v1/auth/loadUser")
+    Call<Utilisateur> loadUser(
+            @Header("Authorization") String authorization
+    );
+
     @POST("/api/v1/auth/logout")
     Call<String> logout();
 

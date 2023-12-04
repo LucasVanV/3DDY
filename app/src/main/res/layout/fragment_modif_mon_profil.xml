@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res"
-    xmlns:app2="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color"
     android:padding="16dp"
-    tools:context=".controller.">
+    tools:context=".controller.activity.Accueil_fypActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,7 +20,7 @@
             android:orientation="horizontal">
 
             <ImageButton
-                android:id="@+id/arrowButton"
+                android:id="@+id/retour"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_marginLeft="10dp"
@@ -40,7 +39,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:text="Edit Biographie"
+                android:text="Edition Profil"
                 android:textSize="30sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/arrowButton"
@@ -76,7 +75,7 @@
             <!-- Repeat the following structure for each item (Nom, Nom d'utilisateur, Photo de profil, Avatar) -->
 
             <Button
-                android:id="@+id/change_pseudo"
+                android:id="@+id/edit_pseudo"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="12dp"
@@ -88,7 +87,7 @@
                 app:layout_constraintVertical_bias="0.468" />
 
             <Button
-                android:id="@+id/change_bio"
+                android:id="@+id/edit_bio"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="12dp"

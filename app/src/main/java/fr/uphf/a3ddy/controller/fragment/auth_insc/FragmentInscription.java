@@ -1,5 +1,6 @@
 package fr.uphf.a3ddy.controller.fragment.auth_insc;
 
+import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -19,6 +20,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.io.IOException;
 import java.util.Objects;
 
+import fr.uphf.a3ddy.AppService;
 import fr.uphf.a3ddy.R;
 import fr.uphf.a3ddy.model.UtilisateurSecurity;
 import fr.uphf.a3ddy.service.EncryptedPreferencesService;
@@ -37,6 +39,7 @@ public class FragmentInscription extends Fragment {
     private TextInputLayout confirmerMDP;
     private Button boutonInscription;
     Context context;
+    private AppService appService;
 
 
     public void iniUI(){
@@ -77,6 +80,7 @@ public class FragmentInscription extends Fragment {
         view = inflater.inflate(R.layout.fragment_inscription, container, false);
         iniUI();
         setListeners();
+        appService = (AppService) getActivity().getApplication();
         return view;
     }
 
@@ -103,6 +107,7 @@ public class FragmentInscription extends Fragment {
         RetrofitService retrofitService = new RetrofitService("");
         UserApi utilisateurApi = retrofitService.getRetrofit().create(UserApi.class);
 
+
         Call<UtilisateurSecurity> call = utilisateurApi.inscription(
                 emailText, mdpText
         );
@@ -111,13 +116,15 @@ public class FragmentInscription extends Fragment {
             @Override
             public void onResponse(Call<UtilisateurSecurity> call, Response<UtilisateurSecurity> response) {
                 if (response.isSuccessful()) {
-                    UtilisateurSecurity utilisateurSecurity1 = response.body();
-                    String token = utilisateurSecurity1.getToken();
+                    UtilisateurSecurity utilisateurSecurity = response.body();
+                    utilisateurSecurity.setEmail(emailText);
+                    Log.d("Utilisateur.tostring", utilisateurSecurity.toString());
+                    String token = utilisateurSecurity.getToken();
                 
                     EncryptedPreferencesService encryptedPreferencesService =
                             new EncryptedPreferencesService(getContext());
                     encryptedPreferencesService.saveAuthToken(token);
-
+                    appService.setUtilisateurSecurity(utilisateurSecurity);
                     loadFragment(new FragmentCreationProfil());
 
 

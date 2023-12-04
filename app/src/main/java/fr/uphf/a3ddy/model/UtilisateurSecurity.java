@@ -2,7 +2,9 @@ package fr.uphf.a3ddy.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class UtilisateurSecurity{
+import java.io.Serializable;
+
+public class UtilisateurSecurity implements Serializable {
 
     @SerializedName("id")
     private Long id;
@@ -27,9 +29,6 @@ public class UtilisateurSecurity{
         this.password = password;
         this.utilisateur = utilisateur;
         this.token="";
-    }
-
-    public UtilisateurSecurity(String emailText, String mdpText, Boolean aBoolean, Utilisateur utilisateur) {
     }
 
     public Long getId() {
@@ -71,4 +70,16 @@ public class UtilisateurSecurity{
     public void setToken(String token) {
         this.token = token;
     }
+
+    @Override
+    public String toString() {
+        return "UtilisateurSecurity{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", token=" + token +
+                ", utilisateur=" + utilisateur +
+                '}';
+    }
+
 }

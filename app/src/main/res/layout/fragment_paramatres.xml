@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/paramtre_page"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color"
@@ -90,6 +89,37 @@
                     app:layout_constraintEnd_toEndOf="@+id/monComptebutton"
                     app:layout_constraintStart_toStartOf="@+id/monComptebutton"
                     app:layout_constraintTop_toBottomOf="@+id/monComptebutton" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintlayout_profil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/titre_parametres">
+
+                <ImageView
+                    android:id="@+id/imageView2profil"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/icone_mon_compte" />
+
+                <Button
+                    android:id="@+id/monProfil"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bouton"
+                    android:text="Mon Profil"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imageView2profil"
+                    app:layout_constraintTop_toTopOf="parent" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout

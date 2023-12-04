@@ -18,8 +18,10 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Objects;
 
+import fr.uphf.a3ddy.AppService;
 import fr.uphf.a3ddy.R;
 import fr.uphf.a3ddy.controller.activity.Accueil_fypActivity;
+import fr.uphf.a3ddy.model.Utilisateur;
 import fr.uphf.a3ddy.model.UtilisateurSecurity;
 import fr.uphf.a3ddy.service.EncryptedPreferencesService;
 import fr.uphf.a3ddy.service.retrofit.RetrofitService;
@@ -35,7 +37,9 @@ public class FragmentConnexion extends Fragment {
     private TextInputLayout email;
     private TextInputLayout mdp;
     private Button boutonLogin;
-
+    private AppService appService;
+    private UserApi utilisateurApi;
+    private RetrofitService retrofitService;
 
     private void iniUI(){
         imageButton = view.findViewById(R.id.imageButton);
@@ -53,8 +57,12 @@ public class FragmentConnexion extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         context = getContext();
         view = inflater.inflate(R.layout.connexion_layout, container, false);
+        RetrofitService retrofitService = new RetrofitService("");
+        utilisateurApi = retrofitService.getRetrofit().create(UserApi.class);
+        appService = (AppService) this.getActivity().getApplication();
         iniUI();
         setListeners();
+
         return view;
     }
 
@@ -66,9 +74,6 @@ public class FragmentConnexion extends Fragment {
         String emailText = Objects.requireNonNull(email.getEditText()).getText().toString();
         String mdpText = Objects.requireNonNull(mdp.getEditText()).getText().toString();
 
-        RetrofitService retrofitService = new RetrofitService("");
-        UserApi utilisateurApi = retrofitService.getRetrofit().create(UserApi.class);
-
         Call<UtilisateurSecurity> call = utilisateurApi.connexion(
                 emailText,
                 mdpText
@@ -78,15 +83,16 @@ public class FragmentConnexion extends Fragment {
             @Override
             public void onResponse(Call<UtilisateurSecurity> call, Response<UtilisateurSecurity> response) {
                 if(response.isSuccessful()) {
-                    UtilisateurSecurity utilisateurSecurity1 = response.body();
-                    Log.d("bite",response.toString());
-                    String token = utilisateurSecurity1.getToken();
-                    Log.d("token de l'utilisateur",token);
+                    UtilisateurSecurity utilisateurSecurity = response.body();
+                    utilisateurSecurity.setEmail(emailText);
+                    // ajout de l'utilisateur security
+                    appService.setUtilisateurSecurity(utilisateurSecurity);
 
+                    String token = utilisateurSecurity.getToken();
                     EncryptedPreferencesService encryptedPreferencesService =
                             new EncryptedPreferencesService(getContext());
                     encryptedPreferencesService.saveAuthToken(token);
-
+                    loadUSer(token);
                     Intent intent = new Intent(context, Accueil_fypActivity.class);
                     startActivity(intent);
                     requireActivity().finish();
@@ -105,6 +111,30 @@ public class FragmentConnexion extends Fragment {
         });
     }
 
+
+    public void loadUSer(String authToken){
+        Call<Utilisateur> call = utilisateurApi.loadUser(
+                "Bearer " + authToken
+        );
+        call.enqueue(new Callback<Utilisateur>() {
+            @Override
+            public void onResponse(Call<Utilisateur> call, Response<Utilisateur> response) {
+                if(response.isSuccessful()) {
+                    Utilisateur utilisateur = response.body();
+                    appService.getUtilisateurSecurity().setUtilisateur(utilisateur);
+                    Log.d("UserLoader","userLoaded");
+                } else {
+                    Log.d("help",response.toString());
+                }
+            }
+            @Override
+            public void onFailure(Call<Utilisateur> call, Throwable t) {
+                Log.d("Erreur : ", t.getLocalizedMessage());
+                Toast.makeText(context, "Erreur : " + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                call.cancel();
+            }
+        });
+    }
 
     public void loadFragment(Fragment fragment) {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();

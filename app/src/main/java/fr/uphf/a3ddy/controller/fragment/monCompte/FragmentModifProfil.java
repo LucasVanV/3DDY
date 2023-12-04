@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -17,6 +18,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.IOException;
 
+import fr.uphf.a3ddy.AppService;
 import fr.uphf.a3ddy.R;
 import fr.uphf.a3ddy.model.Utilisateur;
 import fr.uphf.a3ddy.model.UtilisateurSecurity;
@@ -31,17 +33,22 @@ public class FragmentModifProfil extends Fragment {
 
     View view;
     Context context;
-
     private ImageButton butonRetour;
-
+    private Button editPseudo;
+    private Button editBio;
+    private Button editImgProfile;
 
     public void iniUI() {
         butonRetour = view.findViewById(R.id.retour);
-        //TODO
+        editPseudo = view.findViewById(R.id.edit_pseudo);
+        editBio = view.findViewById(R.id.edit_bio);
+        editImgProfile = view.findViewById(R.id.change_photo);
     }
     public void setListeners() {
         butonRetour.setOnClickListener(v-> loadFragment(new FragmentParamatres()));
-        //TODO
+        editImgProfile.setOnClickListener(v->loadFragment(new FragmentEditImg()));
+        editBio.setOnClickListener(v->loadFragment(new FragmentEditBio()));
+        editPseudo.setOnClickListener(v->loadFragment(new FragmentEditPseudo()));
     }
 
     @Override
@@ -51,10 +58,16 @@ public class FragmentModifProfil extends Fragment {
         view = inflater.inflate(R.layout.fragment_modif_mon_profil, container, false);
         iniUI();
         setListeners();
+        setTextInView();
         return view;
     }
 
-    //TODO
+    public void setTextInView(){
+        AppService appService = (AppService) getActivity().getApplication();
+        UtilisateurSecurity utilisateurSecurity = appService.getUtilisateurSecurity();
+        TextView textViewpseudo = view.findViewById(R.id.user_name);
+        textViewpseudo.setText(utilisateurSecurity.getUtilisateur().getPseudo());
+    }
 
     public void loadFragment(Fragment fragment) {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();

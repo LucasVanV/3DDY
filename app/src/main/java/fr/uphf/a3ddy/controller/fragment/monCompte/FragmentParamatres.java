@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import java.io.IOException;
 
+import fr.uphf.a3ddy.AppService;
 import fr.uphf.a3ddy.R;
 import fr.uphf.a3ddy.controller.activity.ChoixAuthentificationActivity;
 import fr.uphf.a3ddy.model.UtilisateurSecurity;
@@ -36,18 +37,21 @@ public class FragmentParamatres extends Fragment {
     private Button boutonMonCompte;
     private ImageButton boutonRetour;
     private Button buttonDeconnexion;
+    private Button buttonMonProfil;
 
 
     public void iniUI(){
         boutonMonCompte = view.findViewById(R.id.monComptebutton);
         boutonRetour = view.findViewById(R.id.retour);
         buttonDeconnexion = view.findViewById(R.id.button_deconnexion);
+        buttonMonProfil = view.findViewById(R.id.monProfil);
     }
 
     private void setListener() {
         boutonMonCompte.setOnClickListener(v-> loadFragment(new FragmentModifMonCompte()));
         boutonRetour.setOnClickListener(v -> loadFragment(new FragmentProfil()));
         buttonDeconnexion.setOnClickListener(v -> deconnection());
+        buttonMonProfil.setOnClickListener(v->loadFragment(new FragmentModifProfil()));
     }
 
     @Override
@@ -56,9 +60,7 @@ public class FragmentParamatres extends Fragment {
         view = inflater.inflate(R.layout.fragment_paramatres, container, false);
         context = getContext();
         iniUI();
-
         setListener();
-
         return view;
     }
 

@@ -70,7 +70,6 @@ public class FragmentEditPseudo extends Fragment {
         Call<Utilisateur> call = utilisateurApi.modificationProfilPseudo("Bearer " + authToken ,
                 );
 
-
          */
     }
 
