@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,6 +62,7 @@ public class FragmentPoster extends Fragment {
     private TextInputLayout titre;
     private TextInputLayout description;
     private Button modifier_post;
+    private TextView textViewTitre;
     Bundle bundle;
     Long postIdUpdated;
     private Uri imageUri;
@@ -73,6 +75,7 @@ public class FragmentPoster extends Fragment {
         titre = view.findViewById(R.id.TextInputLayout_titre);
         description = view.findViewById(R.id.TextInputLayout_description);
         chipGroup = view.findViewById(R.id.chipGroup);
+        textViewTitre  = view.findViewById(R.id.titre_nouvelle_publication);
     }
 
     @Override
@@ -96,8 +99,8 @@ public class FragmentPoster extends Fragment {
         if (bundle == null) {
             Log.d("bundle", "pas de bundle");
         } else if (bundle != null) {
-            Log.d("bundle", "bundle " +
-                    "présent");
+            Log.d("bundle", "bundle présent");
+            textViewTitre.setText("Modification post");
         }
 
         modifier_post.setOnClickListener(view1 -> loadFragment(new FragmentPostsTemporaire()));
@@ -228,8 +231,6 @@ public class FragmentPoster extends Fragment {
                 }
             });
         }
-
-
     }
 
 
@@ -239,7 +240,7 @@ public class FragmentPoster extends Fragment {
         // Appel Retrofit
         //RetrofitService retrofitService = new RetrofitService(new EncryptedPreferencesService(context).getAuthToken
         // ());
-        RetrofitService retrofitService = new RetrofitService("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGVvdmVzcXVlMUBnbWFpbC5jb20iLCJpYXQiOjE3MDEyNDY5NTIsImV4cCI6MTcwMTMzMzM1Mn0.5pnQKrwrKfBGuc_Ll3kfxKbZRO-uwDlpUF7wTfRElK8");
+        RetrofitService retrofitService = new RetrofitService("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGVvdmVzcXVlMTJmZXpmNTQ4MTRAZ21haWwuY29tIiwiaWF0IjoxNzAxNjczODczLCJleHAiOjE3MDE3NjAyNzN9.E4eZ2yhVbkOcLwx5-__10HpKldFttIUa5Ye6yFQw5xo");
 
         PostApi postApi = retrofitService.getRetrofit().create(PostApi.class);
 
@@ -306,7 +307,7 @@ public class FragmentPoster extends Fragment {
         // Appel Retrofit
         //RetrofitService retrofitService = new RetrofitService(new EncryptedPreferencesService(context).getAuthToken
         // ());
-        RetrofitService retrofitService = new RetrofitService("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGVvdmVzcXVlMUBnbWFpbC5jb20iLCJpYXQiOjE3MDEyNDY5NTIsImV4cCI6MTcwMTMzMzM1Mn0.5pnQKrwrKfBGuc_Ll3kfxKbZRO-uwDlpUF7wTfRElK8");
+        RetrofitService retrofitService = new RetrofitService("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGVvdmVzcXVlMTJmZXpmNTQ4MTRAZ21haWwuY29tIiwiaWF0IjoxNzAxNjczODczLCJleHAiOjE3MDE3NjAyNzN9.E4eZ2yhVbkOcLwx5-__10HpKldFttIUa5Ye6yFQw5xo");
 
         PostApi postApi = retrofitService.getRetrofit().create(PostApi.class);
 

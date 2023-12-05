@@ -1,13 +1,13 @@
 package fr.uphf.a3ddy.controller.fragment.posts;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,12 +15,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import fr.uphf.a3ddy.R;
-import fr.uphf.a3ddy.controller.fragment.FragmentAccueilFyp;
-import fr.uphf.a3ddy.model.posts.PostRequest;
+import fr.uphf.a3ddy.controller.activity.Accueil_fypActivity;
+import fr.uphf.a3ddy.controller.fragment.model3d.Model3dFragment;
 import fr.uphf.a3ddy.service.retrofit.RetrofitService;
 import fr.uphf.a3ddy.service.retrofit.api.PostApi;
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,10 +30,12 @@ public class FragmentPostsTemporaire extends Fragment {
     Context context;
     Button updatePostButton;
     Button deletePostButton;
+    Button showModel;
 
     private void iniUI() {
         updatePostButton = view.findViewById(R.id.button_update_post);
         deletePostButton = view.findViewById(R.id.button_delete_post);
+        showModel = view.findViewById(R.id.button_show_model);
     }
 
     @Override
@@ -43,26 +43,36 @@ public class FragmentPostsTemporaire extends Fragment {
         view = inflater.inflate(R.layout.fragment_posts_temporaire, container, false);
         iniUI();
 
+        context = getContext();
+
         updatePostButton.setOnClickListener(view1 -> {
             Bundle bundle = new Bundle();
-            bundle.putLong("postId", 510L);
+            bundle.putLong("postId",1103L);
             loadFragment(new FragmentPoster(), bundle);
         });
         deletePostButton.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        deletePost(502L);
+                        deletePost(1103L);
                     }
                 }
         );
+        showModel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, Model3dFragment.class);
+                startActivity(intent);
+            }
+        });
+
 
         return view;
     }
 
 
     public void deletePost(Long id) {
-        RetrofitService retrofitService = new RetrofitService("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGVvdmVzcXVlMUBnbWFpbC5jb20iLCJpYXQiOjE3MDEyNDY5NTIsImV4cCI6MTcwMTMzMzM1Mn0.5pnQKrwrKfBGuc_Ll3kfxKbZRO-uwDlpUF7wTfRElK8");
+        RetrofitService retrofitService = new RetrofitService("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGVvdmVzcXVlMTJmZXpmNTQ4MTRAZ21haWwuY29tIiwiaWF0IjoxNzAxNjczODczLCJleHAiOjE3MDE3NjAyNzN9.E4eZ2yhVbkOcLwx5-__10HpKldFttIUa5Ye6yFQw5xo");
         PostApi postApi = retrofitService.getRetrofit().create(PostApi.class);
 
 

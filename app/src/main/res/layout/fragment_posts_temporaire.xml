@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textViewTemp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="/!\\ Page temporaire, les boutons doivent être intégrés quand on consulte un post"
@@ -23,7 +23,7 @@
         android:layout_marginTop="40dp"
         android:hint="Supprimer Post"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewTemp" />
 
     <Button
         android:id="@+id/button_update_post"
@@ -31,6 +31,14 @@
         android:layout_height="wrap_content"
         android:hint="Modifier Post"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView" />
+        app:layout_constraintTop_toBottomOf="@id/button_delete_post" />
+
+    <Button
+        android:id="@+id/button_show_model"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Visualiser le model"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_update_post" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
