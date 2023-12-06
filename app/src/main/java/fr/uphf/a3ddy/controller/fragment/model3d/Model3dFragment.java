@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
+import android.widget.Button;
 
 import org.rajawali3d.surface.RajawaliSurfaceView;
 
@@ -14,14 +15,19 @@ import fr.uphf.a3ddy.service.model3d.MyRenderer;
 public class Model3dFragment extends Activity {
     private MyRenderer mRenderer;
     private RajawaliSurfaceView mSurfaceView;
+    Button zoomInButton;
+    Button zoomOutButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_model_3d);
 
+        zoomInButton = findViewById(R.id.zoomInButton);
+        zoomOutButton = findViewById(R.id.zoomOutButton);
+
         mSurfaceView = findViewById(R.id.mySurfaceView);
-        mRenderer = new MyRenderer(this) {
+        mRenderer = new MyRenderer(this, zoomInButton, zoomOutButton) {
             @Override
             public void onOffsetsChanged(float xOffset, float yOffset, float xOffsetStep, float yOffsetStep, int xPixelOffset, int yPixelOffset) {
                 // Handle offsets change if needed
