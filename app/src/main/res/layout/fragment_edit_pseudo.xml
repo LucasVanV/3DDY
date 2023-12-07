@@ -5,12 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color"
-    android:padding="16dp">
+    android:padding="16dp"
+    tools:context=".controller.activity.Accueil_fypActivity"
+    >
 
 
 
     <ImageButton
-        android:id="@+id/arrowButton"
+        android:id="@+id/retour"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_marginLeft="10dp"
@@ -32,7 +34,7 @@
         android:text="Edit Pseudo"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/arrowButton"
+        app:layout_constraintStart_toEndOf="@+id/retour"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
@@ -71,8 +73,9 @@
         android:id="@+id/enregistrer"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginBottom="45dp"
         android:background="@drawable/bouton"
-        android:text="Enregistre"
+        android:text="Enregistrer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

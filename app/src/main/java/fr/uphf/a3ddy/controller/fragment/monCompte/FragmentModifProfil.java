@@ -59,6 +59,7 @@ public class FragmentModifProfil extends Fragment {
         iniUI();
         setListeners();
         setTextInView();
+
         return view;
     }
 

@@ -37,7 +37,6 @@ public interface UserApi {
     @FormUrlEncoded
     @PUT("/api/v1/modif/modificationCompte")
     Call<UtilisateurSecurity> modificationCompte(
-            @Header("Authorization") String authorization,
             @Field("email") String email,
             @Field("password") String password
     );
@@ -45,21 +44,22 @@ public interface UserApi {
     @FormUrlEncoded
     @PUT("/api/v1/modif/modificationProfil/bio")
     Call<Utilisateur>modificationProfilBio(
-        @Header("Authorization") String authorization,
+        @Field("id") Long id,
         @Field("bio") String bio);
 
     @FormUrlEncoded
     @PUT("/api/v1/modif/modificationProfil/pseudo")
     Call<Utilisateur>modificationProfilPseudo(
-            @Header("Authorization") String authorization,
+            @Field("id") Long id,
             @Field("pseudo") String pseudo);
 
 
-    @FormUrlEncoded
+    @Multipart
     @PUT("/api/v1/modif/modificationProfil/photoProfil")
     Call<Utilisateur>modificationProfilImg(
-            @Header("Authorization") String authorization,
-            @Field("photoProfil") String photoProfil);
+            @Field("id") Long id,
+            @Part MultipartBody.Part photoProfil
+    );
 
 
 
@@ -70,10 +70,8 @@ public interface UserApi {
             @Field("password") String password
     );
 
-    @GET("api/v1/auth/loadUser")
-    Call<Utilisateur> loadUser(
-            @Header("Authorization") String authorization
-    );
+    @GET("/api/v1/auth/loadUser")
+    Call<Utilisateur> loadUser();
 
     @POST("/api/v1/auth/logout")
     Call<String> logout();

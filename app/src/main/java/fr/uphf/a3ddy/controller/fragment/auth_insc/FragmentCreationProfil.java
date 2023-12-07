@@ -57,7 +57,7 @@ public class FragmentCreationProfil extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        context=getContext();
+        context = getContext();
         view = inflater.inflate(R.layout.creation_profil, container, false);
         nomUtilisateur = view.findViewById(R.id.TextInputLayout_nomUtilisateur);
         bio = view.findViewById(R.id.TextInputLayout_bio);
@@ -178,8 +178,7 @@ public class FragmentCreationProfil extends Fragment {
         Log.d("TOKEN avant requet",new EncryptedPreferencesService(context).getAuthToken());
 
         // Appel Retrofit
-        RetrofitService retrofitService = new RetrofitService(new EncryptedPreferencesService(context).getAuthToken());//TODO
-        //RetrofitService retrofitService = new RetrofitService("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJxdWVudGluQHRlc3QudGVzdCIsImlhdCI6MTcwMDUwNTk2NSwiZXhwIjoxNzAwNTkyMzY1fQ.BXLlNNNAoPiV5BViBF34PpCzqIuQkjvcAeiDEFj2Q8w");
+        RetrofitService retrofitService = new RetrofitService(new EncryptedPreferencesService(context).getAuthToken());
         UserApi utilisateurApi = retrofitService.getRetrofit().create(UserApi.class);
 
         try {

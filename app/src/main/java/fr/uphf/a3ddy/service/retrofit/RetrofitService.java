@@ -6,7 +6,6 @@ import java.util.concurrent.TimeUnit;
 
 import fr.uphf.a3ddy.service.OkHttpClientService;
 import fr.uphf.a3ddy.service.interceptor.AuthInterceptor;
-import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 

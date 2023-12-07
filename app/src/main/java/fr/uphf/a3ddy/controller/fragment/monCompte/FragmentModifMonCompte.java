@@ -19,7 +19,6 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.io.IOException;
 
 import fr.uphf.a3ddy.R;
-import fr.uphf.a3ddy.controller.activity.Accueil_fypActivity;
 import fr.uphf.a3ddy.model.UtilisateurSecurity;
 
 import fr.uphf.a3ddy.service.EncryptedPreferencesService;
@@ -77,8 +76,9 @@ public class FragmentModifMonCompte extends Fragment {
         RetrofitService retrofitService = new RetrofitService(authToken);
         UserApi utilisateurApi = retrofitService.getRetrofit().create(UserApi.class);
 
-        Call<UtilisateurSecurity> call = utilisateurApi.modificationCompte("Bearer " + authToken,
-                emailText, passwordText
+        Call<UtilisateurSecurity> call = utilisateurApi.modificationCompte(
+                emailText,
+                passwordText
         );
 
         call.enqueue(new Callback<UtilisateurSecurity>() {
