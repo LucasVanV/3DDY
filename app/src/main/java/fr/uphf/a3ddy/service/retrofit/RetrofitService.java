@@ -4,8 +4,8 @@ import com.google.gson.Gson;
 
 import java.util.concurrent.TimeUnit;
 
+import fr.uphf.a3ddy.service.OkHttpClientService;
 import fr.uphf.a3ddy.service.interceptor.AuthInterceptor;
-import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -17,12 +17,7 @@ public class RetrofitService {
     {
         // Création et configuration d'un client OkHttpClient
         // Ajoute l'AuthInterceptor pour gérer le token d'authentification
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .addInterceptor(new AuthInterceptor(authToken))
-                .connectTimeout(30, TimeUnit.SECONDS)
-                .readTimeout(30, TimeUnit.SECONDS)
-                .writeTimeout(30, TimeUnit.SECONDS)
-                .build();
+        OkHttpClientService okHttpClientService = new OkHttpClientService();
 
         // Construction de l'instance Retrofit
         // Définit l'URL de base pour les requêtes
@@ -30,7 +25,7 @@ public class RetrofitService {
         // Ajoute un convertisseur Gson pour la sérialisation et la désérialisation des objets
         this.retrofit = new Retrofit.Builder()
                 .baseUrl("http://192.168.56.1:8080/") // URL de base de l'API
-                .client(okHttpClient)                 // Ajout du client OkHttpClient
+                .client(okHttpClientService.initialyzer(authToken))                 // Ajout du client OkHttpClient
                 .addConverterFactory(GsonConverterFactory.create(new Gson()))
                 .build();
     }

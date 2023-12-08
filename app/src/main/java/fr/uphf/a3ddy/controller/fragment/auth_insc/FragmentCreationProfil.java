@@ -29,9 +29,11 @@ import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.List;
 
+import fr.uphf.a3ddy.AppService;
 import fr.uphf.a3ddy.R;
 import fr.uphf.a3ddy.controller.activity.Accueil_fypActivity;
 import fr.uphf.a3ddy.model.Utilisateur;
+import fr.uphf.a3ddy.model.UtilisateurSecurity;
 import fr.uphf.a3ddy.service.EncryptedPreferencesService;
 import fr.uphf.a3ddy.service.retrofit.RetrofitService;
 import fr.uphf.a3ddy.service.retrofit.api.UserApi;
@@ -49,16 +51,19 @@ public class FragmentCreationProfil extends Fragment {
     private TextInputLayout nomUtilisateur;
     private TextInputLayout bio;
     private ChipGroup chipGroup;
+    private AppService appService;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        context=getContext();
+        context = getContext();
         view = inflater.inflate(R.layout.creation_profil, container, false);
         nomUtilisateur = view.findViewById(R.id.TextInputLayout_nomUtilisateur);
         bio = view.findViewById(R.id.TextInputLayout_bio);
         chipGroup = view.findViewById(R.id.chipGroup);
+
+        appService = (AppService) getActivity().getApplication();
 
         // Liste de tags
         // TODO : Mettre directement les données de la table "tags" dans la list au lieu de rentrer à la main
@@ -174,7 +179,7 @@ public class FragmentCreationProfil extends Fragment {
 
         // Appel Retrofit
         RetrofitService retrofitService = new RetrofitService(new EncryptedPreferencesService(context).getAuthToken());
-        //RetrofitService retrofitService = new RetrofitService("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJxdWVudGluQHRlc3QudGVzdCIsImlhdCI6MTcwMDUwNTk2NSwiZXhwIjoxNzAwNTkyMzY1fQ.BXLlNNNAoPiV5BViBF34PpCzqIuQkjvcAeiDEFj2Q8w");
+
         UserApi utilisateurApi = retrofitService.getRetrofit().create(UserApi.class);
 
         try {
@@ -221,7 +226,13 @@ public class FragmentCreationProfil extends Fragment {
             public void onResponse(Call<Utilisateur> call, Response<Utilisateur> response) { // TODO a verifier
                 if (response.isSuccessful()) {
                     Utilisateur utilisateur = response.body();
+                    UtilisateurSecurity utilisateurSecurity = appService.getUtilisateurSecurity();
+                    utilisateurSecurity.setUtilisateur(utilisateur);
+                    Log.d("show me UserS", utilisateurSecurity.toString());
+                    Log.d("UserProfile",utilisateur.toString());
                     // Inscription réussie, redirigez l'utilisateur vers l'activité suivante
+                    appService.setUtilisateurSecurity(utilisateurSecurity);
+
                     Intent intent = new Intent(context, Accueil_fypActivity.class);
                     startActivity(intent);
                     requireActivity().finish();

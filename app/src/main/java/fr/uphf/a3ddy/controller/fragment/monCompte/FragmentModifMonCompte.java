@@ -19,7 +19,6 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.io.IOException;
 
 import fr.uphf.a3ddy.R;
-import fr.uphf.a3ddy.controller.activity.Accueil_fypActivity;
 import fr.uphf.a3ddy.model.UtilisateurSecurity;
 
 import fr.uphf.a3ddy.service.EncryptedPreferencesService;
@@ -43,7 +42,7 @@ public class FragmentModifMonCompte extends Fragment {
     }
 
     private void setListeners() {
-        boutonRetour.setOnClickListener(v-> loadFragment(new FragmentProfil()));
+        boutonRetour.setOnClickListener(v-> loadFragment(new FragmentParamatres()));
         buttonValider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,8 +76,9 @@ public class FragmentModifMonCompte extends Fragment {
         RetrofitService retrofitService = new RetrofitService(authToken);
         UserApi utilisateurApi = retrofitService.getRetrofit().create(UserApi.class);
 
-        Call<UtilisateurSecurity> call = utilisateurApi.modificationCompte("Bearer " + authToken,
-                emailText, passwordText
+        Call<UtilisateurSecurity> call = utilisateurApi.modificationCompte(
+                emailText,
+                passwordText
         );
 
         call.enqueue(new Callback<UtilisateurSecurity>() {
@@ -124,9 +124,9 @@ public class FragmentModifMonCompte extends Fragment {
 
 
     public void loadFragment(Fragment fragment) {
-        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
         // Masquer le fragment actuel s'il y en a un
-        Fragment currentFragment = getChildFragmentManager().findFragmentById(R.id.fragment_container);
+        Fragment currentFragment = getFragmentManager().findFragmentById(R.id.fragment_container);
         if (currentFragment != null) {
             transaction.hide(currentFragment);
         }
@@ -139,6 +139,4 @@ public class FragmentModifMonCompte extends Fragment {
         transaction.addToBackStack(null);
         transaction.commit();
     }
-
-
 }
