@@ -8,9 +8,9 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        android:enableOnBackInvokedCallback="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
+        android:enableOnBackInvokedCallback="true"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -20,30 +20,22 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".controller.fragment.Mon_profil"
-            android:exported="false" />
-        <activity
             android:name=".controller.activity.ParamatresActivity"
             android:exported="false" />
         <activity
             android:name=".controller.activity.MonCompteActivity"
             android:exported="false" />
         <activity
-            android:name=".controller.activity.Accueil_fypActivity"
-            android:exported="false" />
-        <activity
-            android:name=".controller.activity.PosterActivity"
-            android:exported="false" />
-        <activity
-        android:name=".controller.activity.ProfilActivity"
-            android:exported="false" />
-        <activity
-            android:name=".controller.activity.menuActivity"
-            android:exported="false" />
-        <activity
-
             android:name=".controller.activity.ChoixAuthentificationActivity"
-
+            android:exported="false" />
+        <activity
+            android:name=".controller.activity.ProfilActivity"
+            android:exported="false" />
+        <activity
+            android:name=".controller.fragment.model3d.Model3dFragment"
+            android:exported="false" />
+        <activity
+            android:name=".controller.activity.Accueil_fypActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
