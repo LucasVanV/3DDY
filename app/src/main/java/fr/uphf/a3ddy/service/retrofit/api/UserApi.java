@@ -1,5 +1,8 @@
 package fr.uphf.a3ddy.service.retrofit.api;
 
+import java.util.Set;
+
+import fr.uphf.a3ddy.model.Tag;
 import fr.uphf.a3ddy.model.Utilisateur;
 import fr.uphf.a3ddy.model.UtilisateurSecurity;
 import retrofit2.Call;
@@ -70,6 +73,12 @@ public interface UserApi {
             @Field("password") String password
     );
 
+    @FormUrlEncoded
+    @PUT("/api/v1/modif/modificationTags")
+    Call<UtilisateurSecurity> modificationTags(
+            @Header("Authorization") String authorization,
+            @Field("tags") String tags
+    );
     @GET("/api/v1/auth/loadUser")
     Call<Utilisateur> loadUser();
 

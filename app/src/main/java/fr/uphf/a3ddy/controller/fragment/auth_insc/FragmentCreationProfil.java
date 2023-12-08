@@ -179,6 +179,7 @@ public class FragmentCreationProfil extends Fragment {
 
         // Appel Retrofit
         RetrofitService retrofitService = new RetrofitService(new EncryptedPreferencesService(context).getAuthToken());
+
         UserApi utilisateurApi = retrofitService.getRetrofit().create(UserApi.class);
 
         try {

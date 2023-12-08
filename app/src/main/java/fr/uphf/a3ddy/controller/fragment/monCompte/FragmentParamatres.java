@@ -37,6 +37,7 @@ public class FragmentParamatres extends Fragment {
     private Button boutonMonCompte;
     private ImageButton boutonRetour;
     private Button buttonDeconnexion;
+    private Button buttonTags;
     private Button buttonMonProfil;
 
 
@@ -44,12 +45,14 @@ public class FragmentParamatres extends Fragment {
         boutonMonCompte = view.findViewById(R.id.monComptebutton);
         boutonRetour = view.findViewById(R.id.retour);
         buttonDeconnexion = view.findViewById(R.id.button_deconnexion);
+        buttonTags = view.findViewById(R.id.button_tags);
         buttonMonProfil = view.findViewById(R.id.monProfil);
     }
 
     private void setListener() {
         boutonMonCompte.setOnClickListener(v-> loadFragment(new FragmentModifMonCompte()));
         boutonRetour.setOnClickListener(v -> loadFragment(new FragmentProfil()));
+        buttonTags.setOnClickListener(v -> loadFragment(new FragmentTags()));
         buttonDeconnexion.setOnClickListener(v -> deconnection());
         buttonMonProfil.setOnClickListener(v->loadFragment(new FragmentModifProfil()));
     }
