@@ -1,6 +1,5 @@
 package fr.uphf.a3ddy.controller.fragment.monCompte;
 
-import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,22 +8,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.IOException;
 
-import fr.uphf.a3ddy.AppService;
+import fr.uphf.a3ddy.service.AppService;
 import fr.uphf.a3ddy.R;
 import fr.uphf.a3ddy.model.Utilisateur;
 import fr.uphf.a3ddy.model.UtilisateurSecurity;
 import fr.uphf.a3ddy.service.EncryptedPreferencesService;
+import fr.uphf.a3ddy.service.LoadFragmentService;
 import fr.uphf.a3ddy.service.retrofit.RetrofitService;
 import fr.uphf.a3ddy.service.retrofit.api.UserApi;
 import retrofit2.Call;
@@ -41,7 +39,7 @@ public class FragmentEditPseudo extends Fragment {
     private Button enregistrer;
     private TextInputEditText textInputEditTextpseudo;
     private AppService appService;
-
+    private LoadFragmentService loadFragmentService;
 
     public void iniUI(){
         buttonRetour = view.findViewById(R.id.retour);
@@ -50,7 +48,11 @@ public class FragmentEditPseudo extends Fragment {
     }
 
     public void setListeners() {
-        buttonRetour.setOnClickListener(v -> loadFragment(new FragmentParamatres()));
+        buttonRetour.setOnClickListener(v -> loadFragmentService.loadFragment(
+                new FragmentParamatres(),
+                getActivity(),
+                R.id.bloc_fragment_accueil)
+        );
         enregistrer.setOnClickListener(v-> modificationPseudo());
     }
 
@@ -85,7 +87,11 @@ public class FragmentEditPseudo extends Fragment {
                 public void onResponse(Call<Utilisateur> call, Response<Utilisateur> response) {
                     if (response.isSuccessful()) {
                         userS.setUtilisateur(response.body());
-                        loadFragment(new FragmentModifProfil());
+                        loadFragmentService.loadFragment(
+                                new FragmentModifProfil(),
+                                getActivity(),
+                                R.id.bloc_fragment_accueil
+                        );
                     }
                     else{
                         String errorBody = null;
@@ -109,22 +115,5 @@ public class FragmentEditPseudo extends Fragment {
                 }
             });
         }
-    }
-
-    public void loadFragment(Fragment fragment) {
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        // Masquer le fragment actuel s'il y en a un
-        Fragment currentFragment = getFragmentManager().findFragmentById(R.id.fragment_container);
-        if (currentFragment != null) {
-            transaction.hide(currentFragment);
-        }
-        // Remplacer le fragment ou l'ajouter s'il n'y en a pas
-        if (getChildFragmentManager().findFragmentByTag(fragment.getClass().getSimpleName()) == null) {
-            transaction.add(R.id.bloc_fragment_accueil, fragment, fragment.getClass().getSimpleName());
-        } else {
-            transaction.show(fragment);
-        }
-        transaction.addToBackStack(null);
-        transaction.commit();
     }
 }

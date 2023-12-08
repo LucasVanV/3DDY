@@ -1,11 +1,9 @@
 package fr.uphf.a3ddy.service.retrofit.api;
 
-import java.util.Set;
-
-import fr.uphf.a3ddy.model.Tag;
 import fr.uphf.a3ddy.model.Utilisateur;
 import fr.uphf.a3ddy.model.UtilisateurSecurity;
 import retrofit2.Call;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -60,10 +58,9 @@ public interface UserApi {
     @Multipart
     @PUT("/api/v1/modif/modificationProfil/photoProfil")
     Call<Utilisateur>modificationProfilImg(
-            @Field("id") Long id,
+            @Part("id") Long id,
             @Part MultipartBody.Part photoProfil
     );
-
 
 
     @FormUrlEncoded
@@ -79,6 +76,10 @@ public interface UserApi {
             @Header("Authorization") String authorization,
             @Field("tags") String tags
     );
+
+    @DELETE("/api/utilisateur/deleteUser")
+    Call<String> deleteProfil();
+
     @GET("/api/v1/auth/loadUser")
     Call<Utilisateur> loadUser();
 
