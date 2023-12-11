@@ -61,7 +61,7 @@ public class FragmentEditImg extends Fragment {
     }
 
     public void setListeners() {
-        buttonRetour.setOnClickListener(v -> loadFragmentService.loadFragment(new FragmentParamatres(),getActivity(),R.id.bloc_fragment_accueil));
+        buttonRetour.setOnClickListener(v -> loadFragmentService.loadFragment(new FragmentParamatres(),R.id.bloc_fragment_accueil));
         selectImg.setOnClickListener(this::choisirImage);
     }
 
@@ -69,6 +69,7 @@ public class FragmentEditImg extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = getContext();
+        loadFragmentService = new LoadFragmentService(this);
         view = inflater.inflate(R.layout.fragment_edit_imagebio, container, false);
         appService = (AppService) getActivity().getApplication();
         userS = appService.getUtilisateurSecurity();

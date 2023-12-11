@@ -65,7 +65,6 @@ public class FragmentConnexion extends Fragment {
         loadFragmentService = new LoadFragmentService(this);
         iniUI();
         setListeners();
-
         return view;
     }
 
@@ -94,6 +93,7 @@ public class FragmentConnexion extends Fragment {
                 Log.d("OnResponce code", String.valueOf(response.code()));
 
                 if(response.code() == 200) {
+                    Log.d("ECHO LOG CODE LODER USER", String.valueOf(response.code()));
                     Log.d("OnResponce", String.valueOf(response.isSuccessful()));
                     UtilisateurSecurity utilisateurSecurity = response.body();
                     utilisateurSecurity.setEmail(emailText);
@@ -132,7 +132,9 @@ public class FragmentConnexion extends Fragment {
 
 
     public void loadUSer(){
-        RetrofitService retrofitService = new RetrofitService(new EncryptedPreferencesService(getContext()).getAuthToken());
+        RetrofitService retrofitService = new RetrofitService(
+                new EncryptedPreferencesService(getContext()).getAuthToken()
+        );
         utilisateurApi = retrofitService.getRetrofit().create(UserApi.class);
 
         Call<Utilisateur> call = utilisateurApi.loadUser();
@@ -144,6 +146,7 @@ public class FragmentConnexion extends Fragment {
                     appService.getUtilisateurSecurity().setUtilisateur(utilisateur);
                     Log.d("UserLoader","userLoaded");
                 } else {
+
                     Log.d("help",response.toString());
                 }
             }
