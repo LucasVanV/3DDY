@@ -1,5 +1,8 @@
 package fr.uphf.a3ddy.service.retrofit.api;
 
+import java.util.Set;
+
+import fr.uphf.a3ddy.model.Tag;
 import fr.uphf.a3ddy.model.Utilisateur;
 import fr.uphf.a3ddy.model.UtilisateurSecurity;
 import retrofit2.Call;

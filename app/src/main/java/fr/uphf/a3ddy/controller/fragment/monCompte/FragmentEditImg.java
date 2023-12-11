@@ -51,8 +51,8 @@ public class FragmentEditImg extends Fragment {
     private Button enregister;
     private Button selectImg;
     private AppService appService;
-    private LoadFragmentService loadFragmentService;
 
+    private LoadFragmentService loadFragmentService;
 
     public void iniUI() {
         buttonRetour = view.findViewById(R.id.retour);

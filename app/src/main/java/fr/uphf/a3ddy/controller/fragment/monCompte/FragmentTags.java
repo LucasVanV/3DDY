@@ -15,7 +15,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
-import com.google.android.material.textfield.TextInputLayout;
+
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -23,12 +23,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import fr.uphf.a3ddy.AppService;
+import fr.uphf.a3ddy.service.AppService;
 import fr.uphf.a3ddy.R;
 import fr.uphf.a3ddy.model.Tag;
 import fr.uphf.a3ddy.model.Utilisateur;
 import fr.uphf.a3ddy.model.UtilisateurSecurity;
 import fr.uphf.a3ddy.service.EncryptedPreferencesService;
+import fr.uphf.a3ddy.service.LoadFragmentService;
 import fr.uphf.a3ddy.service.retrofit.RetrofitService;
 import fr.uphf.a3ddy.service.retrofit.api.UserApi;
 import retrofit2.Call;
@@ -46,6 +47,7 @@ public class FragmentTags extends Fragment {
     private AppService appService;
 
     private Button buttonValider;
+    private LoadFragmentService loadFragmentService;
 
     public void iniUI() {
         buttonRetour = view.findViewById(R.id.retour);
@@ -107,6 +109,8 @@ public class FragmentTags extends Fragment {
         context = getContext();
         appService = (AppService) getActivity().getApplication();
         userS = appService.getUtilisateurSecurity();
+        loadFragmentService = new LoadFragmentService(this);
+        Log.d("USERS " , userS.toString() );
         iniUI();
 
         setListener();
@@ -126,7 +130,7 @@ public class FragmentTags extends Fragment {
         UserApi utilisateurApi = retrofitService.getRetrofit().create(UserApi.class);
         Log.d("Token : " , authToken );
         Call<Utilisateur> call = utilisateurApi.modificationTags("Bearer " + authToken,
-                userS.getId(),
+                userS.getUtilisateur().getId(),
                 userS.getUtilisateur().getPseudo(),
                 tags
         );
@@ -138,7 +142,7 @@ public class FragmentTags extends Fragment {
                     Utilisateur modifRequest = response.body();
                     Toast.makeText(getActivity(), "Modification réussie ", Toast.LENGTH_LONG).show();
                     // Modification réussie, redirigez l'utilisateur vers l'activité suivante
-                    loadFragment( new FragmentParamatres());
+                    loadFragmentService.loadFragment(new FragmentParamatres(),R.id.bloc_fragment_accueil);
                 } else {
                     // Gestion des erreurs en fonction du code de réponse HTTP
                     if (response.code() == 400) {
@@ -170,22 +174,5 @@ public class FragmentTags extends Fragment {
                 call.cancel();
             }
         });
-    }
-
-    public void loadFragment(Fragment fragment) {
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        // Masquer le fragment actuel s'il y en a un
-        Fragment currentFragment = getFragmentManager().findFragmentById(R.id.fragment_container);
-        if (currentFragment != null) {
-            transaction.hide(currentFragment);
-        }
-        // Remplacer le fragment ou l'ajouter s'il n'y en a pas
-        if (getChildFragmentManager().findFragmentByTag(fragment.getClass().getSimpleName()) == null) {
-            transaction.add(R.id.bloc_fragment_accueil, fragment, fragment.getClass().getSimpleName());
-        } else {
-            transaction.show(fragment);
-        }
-        transaction.addToBackStack(null);
-        transaction.commit();
     }
 }
