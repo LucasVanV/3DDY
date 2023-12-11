@@ -275,15 +275,18 @@ public class FragmentCreationProfil extends Fragment {
         }
     }
     public void writeInputStreamToFile(InputStream inputStream, File outputFile) throws IOException {
-        OutputStream outputStream = Files.newOutputStream(outputFile.toPath());
-        byte[] buffer = new byte[4 * 1024];
-        int bytesRead;
-        while ((bytesRead = inputStream.read(buffer)) != -1) {
-            outputStream.write(buffer, 0, bytesRead);
+        try (OutputStream outputStream = Files.newOutputStream(outputFile.toPath())) {
+            byte[] buffer = new byte[4 * 1024];
+            int bytesRead;
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, bytesRead);
+            }
+            outputStream.flush();
+        } finally {
+            if (inputStream != null) {
+                inputStream.close();
+            }
         }
-        outputStream.flush();
-        outputStream.close();
-        inputStream.close();
     }
 
 }
