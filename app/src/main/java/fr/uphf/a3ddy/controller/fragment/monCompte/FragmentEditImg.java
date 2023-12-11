@@ -24,12 +24,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import fr.uphf.a3ddy.AppService;
+import fr.uphf.a3ddy.service.AppService;
 import fr.uphf.a3ddy.R;
 import fr.uphf.a3ddy.controller.activity.Accueil_fypActivity;
 import fr.uphf.a3ddy.model.Utilisateur;
 import fr.uphf.a3ddy.model.UtilisateurSecurity;
 import fr.uphf.a3ddy.service.EncryptedPreferencesService;
+import fr.uphf.a3ddy.service.LoadFragmentService;
 import fr.uphf.a3ddy.service.retrofit.RetrofitService;
 import fr.uphf.a3ddy.service.retrofit.api.UserApi;
 import okhttp3.MediaType;
@@ -50,6 +51,7 @@ public class FragmentEditImg extends Fragment {
     private Button enregister;
     private Button selectImg;
     private AppService appService;
+    private LoadFragmentService loadFragmentService;
 
 
     public void iniUI() {
@@ -59,8 +61,8 @@ public class FragmentEditImg extends Fragment {
     }
 
     public void setListeners() {
-        buttonRetour.setOnClickListener(v -> loadFragment(new FragmentParamatres()));
-        selectImg.setOnClickListener(v -> choisirImage(v));
+        buttonRetour.setOnClickListener(v -> loadFragmentService.loadFragment(new FragmentParamatres(),getActivity(),R.id.bloc_fragment_accueil));
+        selectImg.setOnClickListener(this::choisirImage);
     }
 
     @Override
@@ -193,22 +195,4 @@ public class FragmentEditImg extends Fragment {
         outputStream.close();
         inputStream.close();
     }
-
-    public void loadFragment(Fragment fragment) {
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        // Masquer le fragment actuel s'il y en a un
-        Fragment currentFragment = getFragmentManager().findFragmentById(R.id.fragment_container);
-        if (currentFragment != null) {
-            transaction.hide(currentFragment);
-        }
-        // Remplacer le fragment ou l'ajouter s'il n'y en a pas
-        if (getChildFragmentManager().findFragmentByTag(fragment.getClass().getSimpleName()) == null) {
-            transaction.add(R.id.bloc_fragment_accueil, fragment, fragment.getClass().getSimpleName());
-        } else {
-            transaction.show(fragment);
-        }
-        transaction.addToBackStack(null);
-        transaction.commit();
-    }
-
 }

@@ -1,5 +1,6 @@
 plugins {
     id("com.android.application")
+    id("org.sonarqube") version "4.2.1.3168"
 }
 
 android {
@@ -53,4 +54,14 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.12.0")
     implementation("com.github.bumptech.glide:okhttp3-integration:4.11.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
+}
+
+
+sonar {
+    properties {
+        property ("sonar.projectKey", "3DDY_Android" )
+        property ("sonar.projectName", "3DDY_Android")
+        property ("sonar.host.url","http://localhost:9000")
+        property ("sonar.token","sqp_7ccb99f15581fd2396242738f80b454bbfa7e91d")
+    }
 }

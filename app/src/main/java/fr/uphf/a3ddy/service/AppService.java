@@ -1,4 +1,4 @@
-package fr.uphf.a3ddy;
+package fr.uphf.a3ddy.service;
 
 import android.app.Application;
 import fr.uphf.a3ddy.model.UtilisateurSecurity;

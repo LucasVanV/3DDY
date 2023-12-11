@@ -11,11 +11,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import fr.uphf.a3ddy.R;
+import fr.uphf.a3ddy.service.LoadFragmentService;
 
 public class FragmentProfil extends Fragment {
     View view;
     private Context context;
     private ImageButton parametre;
+    private LoadFragmentService loadFragmentService;
 
     private void iniUI(){
         parametre = view.findViewById(R.id.bouton_parametre);
@@ -23,7 +25,10 @@ public class FragmentProfil extends Fragment {
     }
 
     private void setListeners() {
-        parametre.setOnClickListener(v -> loadFragment(new FragmentParamatres()));
+        parametre.setOnClickListener(v -> loadFragmentService.loadFragment(
+                new FragmentParamatres(),
+                R.id.bloc_fragment_accueil
+                ));
         //TODO les autres action de bouton
     }
 
@@ -31,28 +36,11 @@ public class FragmentProfil extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_profil, container, false);
         context = getContext();
+        loadFragmentService = new LoadFragmentService(this);
         iniUI();
         setListeners();
         return view;
     }
 
 
-    public void loadFragment(Fragment fragment) {
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        // Masquer le fragment actuel s'il y en a un
-        Fragment currentFragment = getFragmentManager().findFragmentById(getId());
-
-        if (currentFragment != null) {
-            transaction.hide(currentFragment);
-        }
-        // Remplacer le fragment ou l'ajouter s'il n'y en a pas
-        if (getChildFragmentManager().findFragmentByTag(fragment.getClass().getSimpleName()) == null) {
-            transaction.add(R.id.bloc_fragment_accueil, fragment, fragment.getClass().getSimpleName());
-        }
-        else {
-            transaction.show(fragment);
-        }
-        transaction.addToBackStack(null);
-        transaction.commit();
-    }
 }

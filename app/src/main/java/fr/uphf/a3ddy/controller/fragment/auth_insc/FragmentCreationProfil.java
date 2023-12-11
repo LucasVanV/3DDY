@@ -29,12 +29,13 @@ import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.List;
 
-import fr.uphf.a3ddy.AppService;
+import fr.uphf.a3ddy.service.AppService;
 import fr.uphf.a3ddy.R;
 import fr.uphf.a3ddy.controller.activity.Accueil_fypActivity;
 import fr.uphf.a3ddy.model.Utilisateur;
 import fr.uphf.a3ddy.model.UtilisateurSecurity;
 import fr.uphf.a3ddy.service.EncryptedPreferencesService;
+import fr.uphf.a3ddy.service.LoadFragmentService;
 import fr.uphf.a3ddy.service.retrofit.RetrofitService;
 import fr.uphf.a3ddy.service.retrofit.api.UserApi;
 import okhttp3.MediaType;
@@ -89,12 +90,7 @@ public class FragmentCreationProfil extends Fragment {
         }
 
         Button button = view.findViewById(R.id.bouton_ajouter_photoProfil);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                choisirImage(v);
-            }
-        });
+        button.setOnClickListener(this::choisirImage);
         return view;
     }
 
