@@ -51,6 +51,8 @@ dependencies {
     implementation("androidx.fragment:fragment:1.6.2")
     implementation("androidx.fragment:fragment-ktx:1.6.2")
 
+    implementation("org.rajawali3d:rajawali:1.0.325@aar");
+
     implementation("com.github.bumptech.glide:glide:4.12.0")
     implementation("com.github.bumptech.glide:okhttp3-integration:4.11.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
