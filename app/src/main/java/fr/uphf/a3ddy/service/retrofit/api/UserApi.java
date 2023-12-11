@@ -75,9 +75,11 @@ public interface UserApi {
 
     @FormUrlEncoded
     @PUT("/api/v1/modif/modificationTags")
-    Call<UtilisateurSecurity> modificationTags(
+    Call<Utilisateur> modificationTags(
             @Header("Authorization") String authorization,
-            @Field("tags") String tags
+            @Field("id") long id,
+            @Field("pseudo") String pseudo,
+            @Field("tags") Set<Tag> tags
     );
     @GET("/api/v1/auth/loadUser")
     Call<Utilisateur> loadUser();

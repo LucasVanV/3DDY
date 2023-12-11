@@ -23,6 +23,8 @@ public class Utilisateur {
     private String bio;
     //private Set<Tag> tagsPrefere; // Assurez-vous que la classe 'Tag' soit également adaptée
 
+    @SerializedName("Tags")
+    private Set<Tag> tags;
 
     // Constructeur par défaut
     public Utilisateur() {
@@ -60,6 +62,23 @@ public class Utilisateur {
 
     public void setBio(String bio) {
         this.bio = bio;
+    }
+
+
+    public String getDossier_server() {
+        return dossier_server;
+    }
+
+    public void setDossier_server(String dossier_server) {
+        this.dossier_server = dossier_server;
+    }
+
+    public Set<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
     }
 
     @Override

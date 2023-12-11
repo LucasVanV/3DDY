@@ -23,6 +23,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import fr.uphf.a3ddy.AppService;
 import fr.uphf.a3ddy.R;
 import fr.uphf.a3ddy.model.Tag;
 import fr.uphf.a3ddy.model.Utilisateur;
@@ -40,6 +41,9 @@ public class FragmentTags extends Fragment {
     Context context;
     private ImageButton buttonRetour;
     private ChipGroup chipTag;
+
+    private UtilisateurSecurity userS;
+    private AppService appService;
 
     private Button buttonValider;
 
@@ -76,10 +80,12 @@ public class FragmentTags extends Fragment {
             @Override
             public void onClick(View view) {
                 StringBuilder selectedChipsText = new StringBuilder();
+                Set<Tag> tagSet = new HashSet<>();
 
                 for (int i = 0; i < chipTag.getChildCount(); i++) {
                     Chip chip = (Chip) chipTag.getChildAt(i);
                     if (chip.isChecked()) {
+                        tagSet.add(new Tag(chip.toString()));
                         String chipText = chip.getText().toString();
                         selectedChipsText.append(chipText).append("/");
                     }
@@ -89,7 +95,7 @@ public class FragmentTags extends Fragment {
                 if (selectedChipsText.length() > 0 && selectedChipsText.charAt(selectedChipsText.length() - 1) == '/') {
                     selectedChipsText.deleteCharAt(selectedChipsText.length() - 1);
                 }
-                modificationTags(selectedChipsText.toString());
+                modificationTags(tagSet);
             }
         });
     }
@@ -99,6 +105,8 @@ public class FragmentTags extends Fragment {
         super.onCreate(savedInstanceState);
         view = inflater.inflate(R.layout.fragment_tags, container, false);
         context = getContext();
+        appService = (AppService) getActivity().getApplication();
+        userS = appService.getUtilisateurSecurity();
         iniUI();
 
         setListener();
@@ -106,7 +114,7 @@ public class FragmentTags extends Fragment {
         return view;
     }
 
-    public void modificationTags(String tags) {
+    public void modificationTags(Set<Tag> tags) {
         // Obtenez le token de votre emplacement de stockage sécurisé
 
         EncryptedPreferencesService encryptedPreferencesService =
@@ -117,15 +125,17 @@ public class FragmentTags extends Fragment {
         RetrofitService retrofitService = new RetrofitService(authToken);
         UserApi utilisateurApi = retrofitService.getRetrofit().create(UserApi.class);
         Log.d("Token : " , authToken );
-        Call<UtilisateurSecurity> call = utilisateurApi.modificationTags("Bearer " + authToken,
+        Call<Utilisateur> call = utilisateurApi.modificationTags("Bearer " + authToken,
+                userS.getId(),
+                userS.getUtilisateur().getPseudo(),
                 tags
         );
 
-        call.enqueue(new Callback<UtilisateurSecurity>() {
+        call.enqueue(new Callback<Utilisateur>() {
             @Override
-            public void onResponse(Call<UtilisateurSecurity> call, Response<UtilisateurSecurity> response) {
+            public void onResponse(Call<Utilisateur> call, Response<Utilisateur> response) {
                 if (response.isSuccessful()) {
-                    UtilisateurSecurity modifRequest = response.body();
+                    Utilisateur modifRequest = response.body();
                     Toast.makeText(getActivity(), "Modification réussie ", Toast.LENGTH_LONG).show();
                     // Modification réussie, redirigez l'utilisateur vers l'activité suivante
                     loadFragment( new FragmentParamatres());
@@ -153,7 +163,7 @@ public class FragmentTags extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<UtilisateurSecurity> call, Throwable t) {
+            public void onFailure(Call<Utilisateur> call, Throwable t) {
                 // Gérez les erreurs de modification de compte, etc.
                 Log.d("Erreur : ", t.getLocalizedMessage());
                 Toast.makeText(getActivity(), "Erreur : " + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();

@@ -170,12 +170,7 @@ public class FragmentCreationProfil extends Fragment {
 
     public void creationProfil(String nomUtilisateurText, String bioText, String textTags, Uri imageUri) {
         // Logs pour déboguer
-        System.out.println("Pseudo : " + nomUtilisateurText);
-        System.out.println("Bio : " + bioText);
-        System.out.println("Tags : " + textTags);
-        System.out.println("Image : " + imageUri);
 
-        Log.d("TOKEN avant requet",new EncryptedPreferencesService(context).getAuthToken());
 
         // Appel Retrofit
         RetrofitService retrofitService = new RetrofitService(new EncryptedPreferencesService(context).getAuthToken());
@@ -220,6 +215,32 @@ public class FragmentCreationProfil extends Fragment {
         }
     }
 
+    public void loadUSer(){
+        RetrofitService retrofitService = new RetrofitService(new EncryptedPreferencesService(getContext()).getAuthToken());
+        UserApi utilisateurApi = retrofitService.getRetrofit().create(UserApi.class);
+
+        Call<Utilisateur> call = utilisateurApi.loadUser();
+        call.enqueue(new Callback<Utilisateur>() {
+            @Override
+            public void onResponse(Call<Utilisateur> call, Response<Utilisateur> response) {
+                if(response.isSuccessful()) {
+                    Utilisateur utilisateur = response.body();
+                    appService.getUtilisateurSecurity().setUtilisateur(utilisateur);
+                    Log.d("UserLoader","userLoaded");
+                } else {
+                    Log.d("help",response.toString());
+                }
+            }
+            @Override
+            public void onFailure(Call<Utilisateur> call, Throwable t) {
+                Log.d("Erreur : ", t.getLocalizedMessage());
+                Toast.makeText(context, "Erreur : " + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                call.cancel();
+            }
+        });
+    }
+
+
     public void requestCreateProfil(Call call){
         call.enqueue(new Callback<Utilisateur>() {
             @Override
@@ -232,7 +253,7 @@ public class FragmentCreationProfil extends Fragment {
                     Log.d("UserProfile",utilisateur.toString());
                     // Inscription réussie, redirigez l'utilisateur vers l'activité suivante
                     appService.setUtilisateurSecurity(utilisateurSecurity);
-
+                    loadUSer();
                     Intent intent = new Intent(context, Accueil_fypActivity.class);
                     startActivity(intent);
                     requireActivity().finish();

@@ -39,3 +39,9 @@ Oapp/src/main/java/fr/uphf/a3ddy/controller/fragment/monCompte/FragmentTags.java
 Vapp/src/main/java/fr/uphf/a3ddy/controller/fragment/monCompte/FragmentModifProfil.java,7\7\77c4a649bd0721c04cef570c174d795ee829057d
 ‰
 Yapp/src/main/java/fr/uphf/a3ddy/controller/fragment/monCompte/FragmentModifMonCompte.java,0\b\0b40486669149050f0bc48eb949fa0edee8caa3e
+x
+Happ/src/main/java/fr/uphf/a3ddy/service/interceptor/AuthInterceptor.java,c\b\cb12e59191fce406dc4e9a412499d0ec3a0041c5
+‚
+Rapp/src/main/java/fr/uphf/a3ddy/controller/fragment/monCompte/FragmentEditBio.java,a\d\ad58a97669dfedadcc92538adc5ff1f772f2e370
+‚
+Rapp/src/main/java/fr/uphf/a3ddy/controller/fragment/monCompte/FragmentEditImg.java,e\2\e24746ded5e90f3a70211bd26ea95b8b8e62f135

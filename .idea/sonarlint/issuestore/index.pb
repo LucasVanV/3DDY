@@ -31,3 +31,13 @@ Yapp/src/main/java/fr/uphf/a3ddy/controller/fragment/monCompte/FragmentModifMonC
 Tapp/src/main/java/fr/uphf/a3ddy/controller/fragment/auth_insc/FragmentConnexion.java,7\b\7b7df8f6a44a91f97ad46a145ee479deac278f44
 x
 Happ/src/main/java/fr/uphf/a3ddy/service/EncryptedPreferencesService.java,f\3\f30b4755f652e7f1dcad709af18bd86abfde28dd
+x
+Happ/src/main/java/fr/uphf/a3ddy/service/interceptor/AuthInterceptor.java,c\b\cb12e59191fce406dc4e9a412499d0ec3a0041c5
+†
+Vapp/src/main/java/fr/uphf/a3ddy/controller/fragment/auth_insc/FragmentInscription.java,0\4\04ff61af6ea002d08c54abd89f8dd66fae6aa89e
+‚
+Rapp/src/main/java/fr/uphf/a3ddy/controller/fragment/monCompte/FragmentEditBio.java,a\d\ad58a97669dfedadcc92538adc5ff1f772f2e370
+‚
+Rapp/src/main/java/fr/uphf/a3ddy/controller/fragment/monCompte/FragmentEditImg.java,e\2\e24746ded5e90f3a70211bd26ea95b8b8e62f135
+u
+Eapp/src/main/java/fr/uphf/a3ddy/service/retrofit/RetrofitService.java,5\2\52ad82a713f024eb547fb8c4b9a2a28b7739256c
