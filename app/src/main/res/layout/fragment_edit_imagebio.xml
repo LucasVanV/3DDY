@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:padding="16dp"
+    >
+
+    <ImageButton
+        android:id="@+id/retour"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="39dp"
+        android:background="@drawable/baseline_arrow_back_24"
+        app:layout_constraintEnd_toStartOf="@+id/titre"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"/>
+
+    <TextView
+        android:id="@+id/titre"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="Edit photo profile"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/retour"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+    <LinearLayout
+        android:layout_marginTop="120dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+        >
+
+        <ImageView
+            android:id="@+id/imageViewProfilePhoto"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/photo_profil"
+            />
+
+        <Button
+            android:id="@+id/buttonChangeProfilePhoto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bouton"
+            android:text="Changer Photo"
+            android:layout_marginTop="12dp"
+            />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/enregistrer"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/bouton"
+        android:text="Enregistre"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="45dp"
+
+        app:layout_constraintVertical_bias="0.468"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color"
-    tools:context=".controller.activity.ParamatresActivity">
+    tools:context=".controller.activity.Accueil_fypActivity">
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -71,7 +71,7 @@
                     app:srcCompat="@drawable/icone_mon_compte" />
 
                 <Button
-                    android:id="@+id/button"
+                    android:id="@+id/monComptebutton"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bouton"
@@ -86,16 +86,47 @@
                     android:layout_height="wrap_content"
                     android:text="Mes informations, sécurité, ..."
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/button"
-                    app:layout_constraintStart_toStartOf="@+id/button"
-                    app:layout_constraintTop_toBottomOf="@+id/button" />
+                    app:layout_constraintEnd_toEndOf="@+id/monComptebutton"
+                    app:layout_constraintStart_toStartOf="@+id/monComptebutton"
+                    app:layout_constraintTop_toBottomOf="@+id/monComptebutton" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintlayout_profil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/titre_parametres">
+
+                <ImageView
+                    android:id="@+id/imageView2profil"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/icone_mon_compte" />
+
+                <Button
+                    android:id="@+id/monProfil"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bouton"
+                    android:text="Mon Profil"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imageView2profil"
+                    app:layout_constraintTop_toTopOf="parent" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintlayout_notifications"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/constraintlayout_compte">
@@ -126,7 +157,7 @@
                 android:id="@+id/constraintlayout_relations"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 
@@ -160,12 +191,11 @@
                     app:layout_constraintTop_toBottomOf="@+id/button_relation" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintlayout_tags"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="24dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/constraintlayout_compte">
@@ -195,7 +225,7 @@
                 android:id="@+id/constraintlayout_langue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 
@@ -224,7 +254,7 @@
                 android:id="@+id/constraintlayout_deconnexion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="24dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 
@@ -253,7 +283,7 @@
                 android:id="@+id/constraintlayout_supprimer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="24dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 
@@ -280,9 +310,8 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
-    </ScrollView>
 
-    <include layout="@layout/menu" />
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

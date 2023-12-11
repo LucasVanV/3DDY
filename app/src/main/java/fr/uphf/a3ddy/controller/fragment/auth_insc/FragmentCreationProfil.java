@@ -22,16 +22,18 @@ import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.List;
 
+import fr.uphf.a3ddy.service.AppService;
 import fr.uphf.a3ddy.R;
 import fr.uphf.a3ddy.controller.activity.Accueil_fypActivity;
 import fr.uphf.a3ddy.model.Utilisateur;
+import fr.uphf.a3ddy.model.UtilisateurSecurity;
 import fr.uphf.a3ddy.service.EncryptedPreferencesService;
 import fr.uphf.a3ddy.service.retrofit.RetrofitService;
 import fr.uphf.a3ddy.service.retrofit.api.UserApi;
@@ -49,18 +51,20 @@ public class FragmentCreationProfil extends Fragment {
     private TextInputLayout nomUtilisateur;
     private TextInputLayout bio;
     private ChipGroup chipGroup;
+    private AppService appService;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        context=getContext();
+        context = getContext();
         view = inflater.inflate(R.layout.creation_profil, container, false);
         nomUtilisateur = view.findViewById(R.id.TextInputLayout_nomUtilisateur);
         bio = view.findViewById(R.id.TextInputLayout_bio);
         chipGroup = view.findViewById(R.id.chipGroup);
 
-        // Liste de tags
+        appService = (AppService) requireActivity().getApplication();
+
         // TODO : Mettre directement les données de la table "tags" dans la list au lieu de rentrer à la main
         List<String> tagList = Arrays.asList("Automobile", "Sport", "Objet");
 
@@ -84,12 +88,7 @@ public class FragmentCreationProfil extends Fragment {
         }
 
         Button button = view.findViewById(R.id.bouton_ajouter_photoProfil);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                choisirImage(v);
-            }
-        });
+        button.setOnClickListener(this::choisirImage);
         return view;
     }
 
@@ -137,22 +136,22 @@ public class FragmentCreationProfil extends Fragment {
                     //PP null
                     if (imageUri == null) {
                         Toast.makeText(context, "Vous devez choisir une photo de profil",
-                                Toast.LENGTH_SHORT).show();
+                                Toast.LENGTH_LONG).show();
                     }
                     //Nom d'utilisateur null
                     if (nomUtilisateurText.isEmpty()) {
                         Toast.makeText(context, "Veuillez saisir un nom d'utilisateur",
-                                Toast.LENGTH_SHORT).show();
+                                Toast.LENGTH_LONG).show();
                     }
                     //Bio null
                     if (bioText.isEmpty()) {
                         Toast.makeText(context, "Veuillez saisir une bio",
-                                Toast.LENGTH_SHORT).show();
+                                Toast.LENGTH_LONG).show();
                     }
                     //Tags null
                     if (selectedChipsText.toString().isEmpty()) {
                         Toast.makeText(context, "Vous devez choisir au moins un tag",
-                                Toast.LENGTH_SHORT).show();
+                                Toast.LENGTH_LONG).show();
                     }
 
                     creationProfil(nomUtilisateurText, bioText, selectedChipsText.toString(), imageUri);
@@ -164,17 +163,10 @@ public class FragmentCreationProfil extends Fragment {
     }
 
     public void creationProfil(String nomUtilisateurText, String bioText, String textTags, Uri imageUri) {
-        // Logs pour déboguer
-        System.out.println("Pseudo : " + nomUtilisateurText);
-        System.out.println("Bio : " + bioText);
-        System.out.println("Tags : " + textTags);
-        System.out.println("Image : " + imageUri);
-
-        Log.d("TOKEN avant requet",new EncryptedPreferencesService(context).getAuthToken());
 
         // Appel Retrofit
-        RetrofitService retrofitService = new RetrofitService(new EncryptedPreferencesService(context).getAuthToken());//TODO
-        //RetrofitService retrofitService = new RetrofitService("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJxdWVudGluQHRlc3QudGVzdCIsImlhdCI6MTcwMDUwNTk2NSwiZXhwIjoxNzAwNTkyMzY1fQ.BXLlNNNAoPiV5BViBF34PpCzqIuQkjvcAeiDEFj2Q8w");
+        RetrofitService retrofitService = new RetrofitService(new EncryptedPreferencesService(context).getAuthToken());
+
         UserApi utilisateurApi = retrofitService.getRetrofit().create(UserApi.class);
 
         try {
@@ -211,19 +203,52 @@ public class FragmentCreationProfil extends Fragment {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(context, "Erreur : " + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
         }
     }
+
+    public void loadUSer(){
+        RetrofitService retrofitService = new RetrofitService(new EncryptedPreferencesService(getContext()).getAuthToken());
+        UserApi utilisateurApi = retrofitService.getRetrofit().create(UserApi.class);
+
+        Call<Utilisateur> call = utilisateurApi.loadUser();
+        call.enqueue(new Callback<Utilisateur>() {
+            @Override
+            public void onResponse(Call<Utilisateur> call, Response<Utilisateur> response) {
+                if(response.isSuccessful()) {
+                    Utilisateur utilisateur = response.body();
+                    appService.getUtilisateurSecurity().setUtilisateur(utilisateur);
+                    Log.d("UserLoader","userLoaded");
+                } else {
+                    Log.d("help",response.toString());
+                }
+            }
+            @Override
+            public void onFailure(Call<Utilisateur> call, Throwable t) {
+                Log.d("Erreur : ", t.getLocalizedMessage());
+                Toast.makeText(context, "Erreur : " + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                call.cancel();
+            }
+        });
+    }
+
 
     public void requestCreateProfil(Call call){
         call.enqueue(new Callback<Utilisateur>() {
             @Override
-            public void onResponse(Call<Utilisateur> call, Response<Utilisateur> response) { // TODO a verifier
+            public void onResponse(Call<Utilisateur> call, Response<Utilisateur> response) {
                 if (response.isSuccessful()) {
                     Utilisateur utilisateur = response.body();
+                    UtilisateurSecurity utilisateurSecurity = appService.getUtilisateurSecurity();
+                    utilisateurSecurity.setUtilisateur(utilisateur);
+                    Log.d("show me UserS", utilisateurSecurity.toString());
+                    Log.d("UserProfile",utilisateur.toString());
                     // Inscription réussie, redirigez l'utilisateur vers l'activité suivante
+                    appService.setUtilisateurSecurity(utilisateurSecurity);
+                    loadUSer();
                     Intent intent = new Intent(context, Accueil_fypActivity.class);
                     startActivity(intent);
+                    requireActivity().finish();
                 }
             }
             @Override
@@ -250,7 +275,7 @@ public class FragmentCreationProfil extends Fragment {
         }
     }
     public void writeInputStreamToFile(InputStream inputStream, File outputFile) throws IOException {
-        OutputStream outputStream = new FileOutputStream(outputFile);
+        OutputStream outputStream = Files.newOutputStream(outputFile.toPath());
         byte[] buffer = new byte[4 * 1024];
         int bytesRead;
         while ((bytesRead = inputStream.read(buffer)) != -1) {

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:padding="16dp"
+    tools:context=".controller.fragment.monCompte.FragmentTags">
+
+    <LinearLayout
+        android:id="@+id/linearlayout_titre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageButton
+            android:id="@+id/retour"
+            android:layout_width="68dp"
+            android:layout_height="39dp"
+            android:layout_marginTop="4dp"
+            android:backgroundTint="@color/background_color"
+            android:contentDescription="Bouton de retour"
+            android:src="@drawable/arrow" />
+        <TextView
+            android:id="@+id/titre"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="@dimen/taille_police_titre"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="Mes tags">
+        </TextView>
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/ScrollView_tags"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearlayout_titre">
+
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/ScrollView_tags"
+            app:singleSelection="false"
+            android:clickable="true"
+            android:focusable="true">
+
+        </com.google.android.material.chip.ChipGroup>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/button_valider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bouton"
+        android:layout_marginTop="50dp"
+        android:text="Valider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ScrollView_tags"
+        app:layout_constraintVertical_bias="0.385" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,15 +14,17 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import fr.uphf.a3ddy.R;
 import fr.uphf.a3ddy.controller.fragment.monCompte.FragmentProfil;
 import fr.uphf.a3ddy.controller.fragment.posts.FragmentPoster;
+import fr.uphf.a3ddy.model.Utilisateur;
+import fr.uphf.a3ddy.model.UtilisateurSecurity;
 
 public class Accueil_fypActivity extends AppCompatActivity {
+
+    private UtilisateurSecurity currentUserSecurity;
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.accueil);
-
-
-
 
         //On inclus le menu sur l'activité principale
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomAppBar);
@@ -58,6 +60,12 @@ public class Accueil_fypActivity extends AppCompatActivity {
             }
         });
     }
+/*
+    public void ExtractionUserS(){
+        Intent intent = getIntent();
+        currentUserSecurity= intent.get(UtilisateurSecurity);
+    }
+    */
 
     private void loadFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

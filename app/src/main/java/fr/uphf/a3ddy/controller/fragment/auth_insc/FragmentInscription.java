@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+
 import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
@@ -19,9 +20,11 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.io.IOException;
 import java.util.Objects;
 
+import fr.uphf.a3ddy.service.AppService;
 import fr.uphf.a3ddy.R;
 import fr.uphf.a3ddy.model.UtilisateurSecurity;
 import fr.uphf.a3ddy.service.EncryptedPreferencesService;
+import fr.uphf.a3ddy.service.LoadFragmentService;
 import fr.uphf.a3ddy.service.retrofit.RetrofitService;
 import fr.uphf.a3ddy.service.retrofit.api.UserApi;
 import retrofit2.Call;
@@ -37,6 +40,8 @@ public class FragmentInscription extends Fragment {
     private TextInputLayout confirmerMDP;
     private Button boutonInscription;
     Context context;
+    private AppService appService;
+    private LoadFragmentService loadFragmentService;
 
 
     public void iniUI(){
@@ -48,36 +53,22 @@ public class FragmentInscription extends Fragment {
     }
 
     public void setListeners() {
-        imageButton.setOnClickListener(v -> loadFragment(new FragmentChoixAuthentification()));
+        imageButton.setOnClickListener(v -> loadFragmentService.loadFragment(
+                new FragmentChoixAuthentification()
+                ,R.id.main)
+        );
         boutonInscription.setOnClickListener(v -> inscription());
-    }
-
-
-    public void loadFragment(Fragment fragment) {
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        // Masquer le fragment actuel s'il y en a un
-        Fragment currentFragment = getFragmentManager().findFragmentById(R.id.fragment_container);
-
-        if (currentFragment != null) {
-            transaction.hide(currentFragment);
-        }
-        // Remplacer le fragment ou l'ajouter s'il n'y en a pas
-        if (getChildFragmentManager().findFragmentByTag(fragment.getClass().getSimpleName()) == null) {
-            transaction.add(R.id.main, fragment, fragment.getClass().getSimpleName());
-        } else {
-            transaction.show(fragment);
-        }
-        transaction.addToBackStack(null);
-        transaction.commit();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         context = getContext();
-        view = inflater.inflate(R.layout.activity_inscription, container, false);
+        loadFragmentService = new LoadFragmentService(this);
+        view = inflater.inflate(R.layout.fragment_inscription, container, false);
         iniUI();
         setListeners();
-         return view;
+        appService = (AppService) getActivity().getApplication();
+        return view;
     }
 
     //Fonction permettant de vérifier le regex pour le mot de passe
@@ -103,22 +94,31 @@ public class FragmentInscription extends Fragment {
         RetrofitService retrofitService = new RetrofitService("");
         UserApi utilisateurApi = retrofitService.getRetrofit().create(UserApi.class);
 
+
         Call<UtilisateurSecurity> call = utilisateurApi.inscription(
                 emailText, mdpText
         );
 
         call.enqueue(new Callback<UtilisateurSecurity>() {
             @Override
-            public void onResponse(Call<UtilisateurSecurity> call, Response<UtilisateurSecurity> response) {
+            public void onResponse(
+                    Call<UtilisateurSecurity> call,
+                    Response<UtilisateurSecurity> response
+            ) {
                 if (response.isSuccessful()) {
-                    UtilisateurSecurity utilisateurSecurity1 = response.body();
-                    String token = utilisateurSecurity1.getToken();
+                    UtilisateurSecurity utilisateurSecurity = response.body();
+                    utilisateurSecurity.setEmail(emailText);
+                    Log.d("Utilisateur.tostring", utilisateurSecurity.toString());
+                    String token = utilisateurSecurity.getToken();
                 
                     EncryptedPreferencesService encryptedPreferencesService =
                             new EncryptedPreferencesService(getContext());
                     encryptedPreferencesService.saveAuthToken(token);
-
-                    loadFragment(new FragmentCreationProfil());
+                    appService.setUtilisateurSecurity(utilisateurSecurity);
+                    loadFragmentService.loadFragment(
+                            new FragmentCreationProfil(),
+                            R.id.main
+                    );
 
 
                 } else {
