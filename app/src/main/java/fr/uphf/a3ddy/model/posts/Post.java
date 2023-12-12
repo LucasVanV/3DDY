@@ -120,4 +120,19 @@ public class Post {
     public void setTagsReferences(Set<Tag> tagsReferences) {
         this.tagsReferences = tagsReferences;
     }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id=" + id +
+                ", datePost='" + datePost + '\'' +
+                ", image='" + image + '\'' +
+                ", titre='" + titre + '\'' +
+                ", description='" + description + '\'' +
+                ", commentaires='" + commentaires + '\'' +
+                ", nbTelechargement='" + nbTelechargement + '\'' +
+                ", utilisateurPost=" + utilisateurPost +
+                ", tagsReferences=" + tagsReferences +
+                '}';
+    }
 }
