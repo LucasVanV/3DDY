@@ -2,6 +2,7 @@ package fr.uphf.a3ddy.service.retrofit.api;
 
 import java.util.List;
 
+import fr.uphf.a3ddy.model.posts.Page;
 import fr.uphf.a3ddy.model.posts.Post;
 import fr.uphf.a3ddy.model.posts.PostRequest;
 import okhttp3.MultipartBody;
@@ -51,7 +52,7 @@ public interface PostApi {
             @Query("idPost") Long idPost
     );
 
-    @GET("getForYouPage")
-    Call<List<Post>> getForYouPage(
+    @GET("/api/v1/posts/getForYouPage")
+    Call<Page> getForYouPage(
             @Query("page") int page);
 }

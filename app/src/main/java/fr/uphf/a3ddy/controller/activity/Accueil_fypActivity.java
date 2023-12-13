@@ -20,13 +20,16 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Objects;
 
 import fr.uphf.a3ddy.R;
 import fr.uphf.a3ddy.controller.fragment.monCompte.FragmentProfil;
 import fr.uphf.a3ddy.controller.fragment.posts.FragmentPoster;
 import fr.uphf.a3ddy.model.Utilisateur;
+import fr.uphf.a3ddy.model.posts.Page;
 import fr.uphf.a3ddy.model.posts.Post;
 import fr.uphf.a3ddy.model.posts.PostRequest;
+import fr.uphf.a3ddy.service.EncryptedPreferencesService;
 import fr.uphf.a3ddy.service.posts.PostAdapter;
 import fr.uphf.a3ddy.service.retrofit.RetrofitService;
 import fr.uphf.a3ddy.service.retrofit.api.PostApi;
@@ -42,16 +45,22 @@ public class Accueil_fypActivity extends AppCompatActivity {
     private int currentPage = 0;
     private boolean isLoading = false;
     private RecyclerView recyclerView;
+    private Context context;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.accueil);
+        context = getApplicationContext();
 
         // Initialiser votre adapter
         postAdapter = new PostAdapter();
         getFyp(currentPage);
+        // Après l'initialisation de votre RecyclerView
         recyclerView = findViewById(R.id.recyclerViewPosts);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(postAdapter);
+
 
         // Ajoutez un écouteur de défilement pour détecter le bas de la liste
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -111,23 +120,27 @@ public class Accueil_fypActivity extends AppCompatActivity {
         });
     }
 
-    private void displayPosts(List<Post> newPosts) {
+    private void displayPosts(Page newPosts) {
         // Ajoutez les nouveaux posts à l'adaptateur
         postAdapter.addPosts(newPosts);
     }
 
     public void getFyp(int page) {
         isLoading = true;
-        RetrofitService retrofitService = new RetrofitService("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGVvMTIzNDVAZ21haWwuY29tIiwiaWF0IjoxNzAyMzg3MjE3LCJleHAiOjE3MDI0NzM2MTd9.XEws5QQWSt2ymLnJcFm11fKz_VSFb3oYRNagI9Q8aMU");
+        Log.d("Start to request: ", "GOOOOG");
+        //RetrofitService retrofitService = new RetrofitService(new EncryptedPreferencesService(context).getAuthToken());
+        RetrofitService retrofitService = new RetrofitService("eyJhbGciOiJIUzI1NiJ9" +
+                ".eyJzdWIiOiJ0aGVvMTIzNDVAZ21haWwuY29tIiwiaWF0IjoxNzAyMzg5NTU3LCJleHAiOjE3MDI0NzU5NTd9.X7kCoCa3GugMTLqedCkncyS-X5g6-zvbfliCg446Zks");
         PostApi postApi = retrofitService.getRetrofit().create(PostApi.class);
 
-        Call<List<Post>> call = postApi.getForYouPage(page);
-        call.enqueue(new Callback<List<Post>>() {
+        Call<Page> call = postApi.getForYouPage(page);
+        call.enqueue(new Callback<Page>() {
             @Override
-            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
+            public void onResponse(Call<Page> call, Response<Page> response) {
                 Log.d("erreur", "1");
                 if (response.isSuccessful()) {
-                    List<Post> newPosts = response.body();
+                    Page newPosts = response.body();
+                    Log.d("post", newPosts.getPostList().toString());
                     if (newPosts != null ) {
                         displayPosts(newPosts);
                     } else {
@@ -143,7 +156,7 @@ public class Accueil_fypActivity extends AppCompatActivity {
 
 
             @Override
-            public void onFailure(Call<List<Post>> call, Throwable t) {
+            public void onFailure(Call<Page> call, Throwable t) {
                 Log.e("Erreur", "Failed to get posts: " + t.getMessage(), t);
                 Toast.makeText(Accueil_fypActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
 

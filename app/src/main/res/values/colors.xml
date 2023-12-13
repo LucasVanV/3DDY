@@ -10,12 +10,11 @@
     <color name="button_color">#474040</color>
     <color name="input_color">#817B7B</color>
     <color name="text_color_blanc">#FFFFFF</color>
-
     <color name="couleur_menu">#282323</color>
     <color name="blanc">#FFFFFF</color>
     <color name="alerte_rouge">#E23636</color>
     <color name="alerte_vert">#7CB862</color>
-    <color name="light_blue_600">#FF039BE5</color>
+    <color name="light_blue_600">#3B81E9</color>
     <color name="light_blue_900">#FF01579B</color>
     <color name="light_blue_A200">#FF40C4FF</color>
     <color name="light_blue_A400">#FF00B0FF</color>

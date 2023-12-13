@@ -6,30 +6,28 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import fr.uphf.a3ddy.R;
+import fr.uphf.a3ddy.model.posts.Page;
 import fr.uphf.a3ddy.model.posts.Post;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
-    private List<Post> posts = new ArrayList<>();
+    private Page posts = new Page();
 
     public PostAdapter() {
         // Constructeur vide
     }
 
-    public void addPosts(List<Post> newPosts) {
+    public void addPosts(Page newPosts) {
         this.posts = newPosts;
         notifyDataSetChanged();
     }
 
-    public void setPosts(List<Post> newPosts) {
+    public void setPosts(Page newPosts) {
         this.posts = newPosts;
         notifyDataSetChanged();
     }
@@ -43,7 +41,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
-        Post post = posts.get(position);
+        Post post = posts.getPostList().get(position);
 
         Glide.with(holder.itemView.getContext())
                 .load(post.getUtilisateurPost().getPhotoProfil())
@@ -56,14 +54,19 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                 .into(holder.postImage);
 
         holder.userName.setText(post.getUtilisateurPost().getPseudo());
-        holder.date.setText(post.getDatePost());
+        holder.date.setText(Post.formatLocalDateTime(LocalDateTime.parse(post.getDatePost())));
         holder.title.setText(post.getTitre());
     }
 
     @Override
     public int getItemCount() {
-        return posts.size();
+        if (posts != null && posts.getPostList() != null) {
+            return posts.getPostList().size();
+        } else {
+            return 0;
+        }
     }
+
 
     public static class PostViewHolder extends RecyclerView.ViewHolder {
         ImageView userImage, postImage;
@@ -74,7 +77,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             userImage = itemView.findViewById(R.id.user_image2);
             postImage = itemView.findViewById(R.id.post_image2);
             userName = itemView.findViewById(R.id.user2);
-            date = itemView.findViewById(R.id.textView);
+            date = itemView.findViewById(R.id.textView_date);
             title = itemView.findViewById(R.id.textView2);
         }
     }
