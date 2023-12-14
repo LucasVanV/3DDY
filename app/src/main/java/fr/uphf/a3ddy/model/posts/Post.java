@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Set;
 
 import fr.uphf.a3ddy.model.Tag;
@@ -119,5 +120,31 @@ public class Post {
 
     public void setTagsReferences(Set<Tag> tagsReferences) {
         this.tagsReferences = tagsReferences;
+    }
+
+    public static String formatLocalDateTime(LocalDateTime localDateTime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        return localDateTime.format(formatter);
+    }
+
+    // Ajoutez une méthode pour convertir une String en LocalDateTime
+    public static LocalDateTime parseLocalDateTime(String datePost) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return LocalDateTime.parse(datePost, formatter);
+    }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id=" + id +
+                ", datePost='" + datePost + '\'' +
+                ", image='" + image + '\'' +
+                ", titre='" + titre + '\'' +
+                ", description='" + description + '\'' +
+                ", commentaires='" + commentaires + '\'' +
+                ", nbTelechargement='" + nbTelechargement + '\'' +
+                ", utilisateurPost=" + utilisateurPost +
+                ", tagsReferences=" + tagsReferences +
+                '}';
     }
 }

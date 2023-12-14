@@ -1,10 +1,15 @@
 package fr.uphf.a3ddy.service.retrofit.api;
 
+import java.util.List;
+
+import fr.uphf.a3ddy.model.posts.Page;
+import fr.uphf.a3ddy.model.posts.Post;
 import fr.uphf.a3ddy.model.posts.PostRequest;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.DELETE;
+import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -25,7 +30,7 @@ public interface PostApi {
             @Part("tagsPrefere") RequestBody tagsPrefere,
             @Part MultipartBody.Part imagePost,
             @Part MultipartBody.Part modele3d
-            );
+    );
 
 
     @Multipart
@@ -46,4 +51,8 @@ public interface PostApi {
     Call<Long> deletePost(
             @Query("idPost") Long idPost
     );
+
+    @GET("/api/v1/posts/getForYouPage")
+    Call<Page> getForYouPage(
+            @Query("page") int page);
 }
