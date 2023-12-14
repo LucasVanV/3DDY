@@ -1,5 +1,6 @@
 package fr.uphf.a3ddy.service.posts;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,9 +24,16 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     }
 
     public void addPosts(Page newPosts) {
-        this.posts = newPosts;
-        notifyDataSetChanged();
+        if (this.posts == null) {
+            this.posts = new Page();
+        }
+
+        if (newPosts != null && newPosts.getPostList() != null) {
+            this.posts.getPostList().addAll(newPosts.getPostList());
+            notifyDataSetChanged();
+        }
     }
+
 
     public void setPosts(Page newPosts) {
         this.posts = newPosts;
@@ -43,13 +51,18 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
         Post post = posts.getPostList().get(position);
 
+        String baseUrl = "http://192.168.56.1:8080/"; // Remplacez cela par la base de l'URL de votre serveur
+        String imageUrl = baseUrl + post.getImage();
+
+        Log.d("url image", imageUrl);
+
         Glide.with(holder.itemView.getContext())
                 .load(post.getUtilisateurPost().getPhotoProfil())
                 .placeholder(R.drawable.default_user)
                 .into(holder.userImage);
 
         Glide.with(holder.itemView.getContext())
-                .load(post.getImage())
+                .load(imageUrl)
                 .placeholder(R.drawable.default_post)
                 .into(holder.postImage);
 

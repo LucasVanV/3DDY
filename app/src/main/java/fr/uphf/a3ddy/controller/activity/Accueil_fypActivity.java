@@ -55,12 +55,10 @@ public class Accueil_fypActivity extends AppCompatActivity {
 
         // Initialiser votre adapter
         postAdapter = new PostAdapter();
-        getFyp(currentPage);
         // Après l'initialisation de votre RecyclerView
         recyclerView = findViewById(R.id.recyclerViewPosts);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(postAdapter);
-
 
         // Ajoutez un écouteur de défilement pour détecter le bas de la liste
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -84,8 +82,7 @@ public class Accueil_fypActivity extends AppCompatActivity {
             }
         });
 
-
-        //On inclus le menu sur l'activité principale
+        // On inclus le menu sur l'activité principale
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomAppBar);
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
@@ -111,13 +108,16 @@ public class Accueil_fypActivity extends AppCompatActivity {
                 // startActivity(intentMessage);
                 return true;
             } else if (itemId == R.id.compte) {
-                //Redirection vers la page de compte
+                // Redirection vers la page de compte
                 loadFragment(new FragmentProfil());
                 return true;
             } else {
                 return false;
             }
         });
+
+        // Initialiser le premier chargement
+        getFyp(currentPage);
     }
 
     private void displayPosts(Page newPosts) {
@@ -129,8 +129,7 @@ public class Accueil_fypActivity extends AppCompatActivity {
         isLoading = true;
         Log.d("Start to request: ", "GOOOOG");
         //RetrofitService retrofitService = new RetrofitService(new EncryptedPreferencesService(context).getAuthToken());
-        RetrofitService retrofitService = new RetrofitService("eyJhbGciOiJIUzI1NiJ9" +
-                ".eyJzdWIiOiJ0aGVvMTIzNDVAZ21haWwuY29tIiwiaWF0IjoxNzAyMzg5NTU3LCJleHAiOjE3MDI0NzU5NTd9.X7kCoCa3GugMTLqedCkncyS-X5g6-zvbfliCg446Zks");
+        RetrofitService retrofitService = new RetrofitService("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGVvMTIzNDU2QGdtYWlsLmNvbSIsImlhdCI6MTcwMjQ1Nzg3OCwiZXhwIjoxNzAyNTQ0Mjc4fQ.aAXRwmf_JIShAzoaKnIhh3PvxnLJ-DTskyKJ-ROgdeg");
         PostApi postApi = retrofitService.getRetrofit().create(PostApi.class);
 
         Call<Page> call = postApi.getForYouPage(page);
@@ -141,19 +140,22 @@ public class Accueil_fypActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Page newPosts = response.body();
                     Log.d("post", newPosts.getPostList().toString());
-                    if (newPosts != null ) {
-                        displayPosts(newPosts);
+                    if (newPosts != null && newPosts.getPostList() != null) {
+                        // Vérifier si la liste actuelle est vide avant d'ajouter de nouveaux posts
+                        if (postAdapter.getItemCount() == 0) {
+                            postAdapter.setPosts(newPosts);
+                        } else {
+                            postAdapter.addPosts(newPosts);
+                        }
                     } else {
                         Log.e("API Call", "Empty list of posts");
                     }
                 } else {
                     Log.e("API Call", "Failed to get posts. HTTP status code: " + response.code());
-                    Log.e("API Call",
-                            "Error body: " + response.errorBody().toString());
+                    Log.e("API Call", "Error body: " + response.errorBody().toString());
                 }
                 isLoading = false;
             }
-
 
             @Override
             public void onFailure(Call<Page> call, Throwable t) {
@@ -164,6 +166,9 @@ public class Accueil_fypActivity extends AppCompatActivity {
             }
         });
     }
+
+
+
 
     private void loadFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
