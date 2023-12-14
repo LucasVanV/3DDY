@@ -57,7 +57,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         Log.d("url image", imageUrl);
 
         Glide.with(holder.itemView.getContext())
-                .load(post.getUtilisateurPost().getPhotoProfil())
+                .load(post.getUtilisateurPost().getDossierServer())
                 .placeholder(R.drawable.default_user)
                 .into(holder.userImage);
 

@@ -140,9 +140,8 @@ public class Accueil_fypActivity extends AppCompatActivity {
 
     public void getFyp(int page) {
         isLoading = true;
-        Log.d("Start to request: ", "GOOOOG");
         //RetrofitService retrofitService = new RetrofitService(new EncryptedPreferencesService(context).getAuthToken());
-        RetrofitService retrofitService = new RetrofitService("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGVvMTIzNDU2QGdtYWlsLmNvbSIsImlhdCI6MTcwMjQ1Nzg3OCwiZXhwIjoxNzAyNTQ0Mjc4fQ.aAXRwmf_JIShAzoaKnIhh3PvxnLJ-DTskyKJ-ROgdeg");
+        RetrofitService retrofitService = new RetrofitService("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGVvMTIzNDU2N0BnbWFpbC5jb20iLCJpYXQiOjE3MDI1NDQ4MzgsImV4cCI6MTcwMjYzMTIzOH0.KVmhXa-gmC4EbkJqUfyySxxmo1oPM6gIXNL-SMoo9qI");
         PostApi postApi = retrofitService.getRetrofit().create(PostApi.class);
 
         Call<Page> call = postApi.getForYouPage(page);

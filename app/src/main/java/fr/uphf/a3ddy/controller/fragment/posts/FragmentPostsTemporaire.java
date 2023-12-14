@@ -72,7 +72,7 @@ public class FragmentPostsTemporaire extends Fragment {
 
 
     public void deletePost(Long id) {
-        RetrofitService retrofitService = new RetrofitService("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGVvdmVzcXVlMTJmZXpmNTQ4MTRAZ21haWwuY29tIiwiaWF0IjoxNzAxNjczODczLCJleHAiOjE3MDE3NjAyNzN9.E4eZ2yhVbkOcLwx5-__10HpKldFttIUa5Ye6yFQw5xo");
+        RetrofitService retrofitService = new RetrofitService("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGVvMTIzNDU2N0BnbWFpbC5jb20iLCJpYXQiOjE3MDI1NDQ4MzgsImV4cCI6MTcwMjYzMTIzOH0.KVmhXa-gmC4EbkJqUfyySxxmo1oPM6gIXNL-SMoo9qI");
         PostApi postApi = retrofitService.getRetrofit().create(PostApi.class);
 
 

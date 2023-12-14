@@ -240,8 +240,7 @@ public class FragmentPoster extends Fragment {
         // Appel Retrofit
         //RetrofitService retrofitService = new RetrofitService(new EncryptedPreferencesService(context).getAuthToken
         // ());
-        RetrofitService retrofitService = new RetrofitService("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGVvMTIzNDU2QGdtYWlsLmNvbSIsImlhdCI6MTcwMjQ1Nzg3OCwiZXhwIjoxNzAyNTQ0Mjc4fQ.aAXRwmf_JIShAzoaKnIhh3PvxnLJ-DTskyKJ-ROgdeg");
-
+        RetrofitService retrofitService = new RetrofitService("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGVvMTIzNDU2N0BnbWFpbC5jb20iLCJpYXQiOjE3MDI1NDQ4MzgsImV4cCI6MTcwMjYzMTIzOH0.KVmhXa-gmC4EbkJqUfyySxxmo1oPM6gIXNL-SMoo9qI");
         PostApi postApi = retrofitService.getRetrofit().create(PostApi.class);
 
         try {
@@ -307,7 +306,7 @@ public class FragmentPoster extends Fragment {
         // Appel Retrofit
         //RetrofitService retrofitService = new RetrofitService(new EncryptedPreferencesService(context).getAuthToken
         // ());
-        RetrofitService retrofitService = new RetrofitService("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGVvdmVzcXVlMTJmZXpmNTQ4MTRAZ21haWwuY29tIiwiaWF0IjoxNzAxNjczODczLCJleHAiOjE3MDE3NjAyNzN9.E4eZ2yhVbkOcLwx5-__10HpKldFttIUa5Ye6yFQw5xo");
+        RetrofitService retrofitService = new RetrofitService("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGVvMTIzNDU2N0BnbWFpbC5jb20iLCJpYXQiOjE3MDI1NDQ4MzgsImV4cCI6MTcwMjYzMTIzOH0.KVmhXa-gmC4EbkJqUfyySxxmo1oPM6gIXNL-SMoo9qI");
 
         PostApi postApi = retrofitService.getRetrofit().create(PostApi.class);
 
