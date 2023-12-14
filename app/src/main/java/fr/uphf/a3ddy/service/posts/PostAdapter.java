@@ -51,7 +51,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
         Post post = posts.getPostList().get(position);
 
-        String baseUrl = "http://192.168.56.1:8080/"; // Remplacez cela par la base de l'URL de votre serveur
+        String baseUrl = "http://192.168.56.1:8080/"; // Remplacez cela par la base de l'URL du serveur
         String imageUrl = baseUrl + post.getImage();
 
         Log.d("url image", imageUrl);
@@ -68,7 +68,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
         holder.userName.setText(post.getUtilisateurPost().getPseudo());
         holder.date.setText(Post.formatLocalDateTime(LocalDateTime.parse(post.getDatePost())));
-        holder.title.setText(post.getTitre());
+        holder.title.setText(post.getDescription());
     }
 
     @Override
