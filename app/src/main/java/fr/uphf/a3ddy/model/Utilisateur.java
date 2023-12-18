@@ -19,6 +19,7 @@ public class Utilisateur {
     private String pseudo;
     @SerializedName("dossier_server")
     private String dossier_server;
+
     @SerializedName("bio")
     private String bio;
     //private Set<Tag> tagsPrefere; // Assurez-vous que la classe 'Tag' soit également adaptée
@@ -33,6 +34,7 @@ public class Utilisateur {
     public Utilisateur(String pseudo, String dossier_server , String bio) {
         this.pseudo = pseudo;
         this.dossier_server = dossier_server;
+
         this.bio = bio;
     }
 
@@ -54,7 +56,7 @@ public class Utilisateur {
 
     public void setDossierServer(String dossier_server) {
         this.dossier_server = dossier_server;
-    }
+
 
     public String getBio() {
         return bio;

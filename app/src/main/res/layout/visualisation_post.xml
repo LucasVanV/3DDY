@@ -22,7 +22,8 @@
         android:id="@+id/user_image2"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:background="@drawable/default_user"
+        android:background="@drawable/rounded_image_background_with_default"
+        android:scaleType="centerCrop"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="16dp" />
 
