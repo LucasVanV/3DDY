@@ -1,0 +1,15 @@
+<!-- rounded_image_background_with_default.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Arrière-plan par défaut -->
+    <item android:drawable="@drawable/default_user" />
+
+    <!-- Cercle -->
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="@android:color/transparent" />
+            <stroke
+                android:width="2dp"
+                android:color="#FFFFFF" />
+        </shape>
+    </item>
+</layer-list>

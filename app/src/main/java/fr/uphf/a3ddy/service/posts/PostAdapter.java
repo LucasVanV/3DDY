@@ -12,6 +12,8 @@ import java.time.format.DateTimeFormatter;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 import fr.uphf.a3ddy.R;
 import fr.uphf.a3ddy.model.posts.Page;
 import fr.uphf.a3ddy.model.posts.Post;
@@ -52,13 +54,17 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         Post post = posts.getPostList().get(position);
 
         String baseUrl = "http://192.168.56.1:8080/"; // Remplacez cela par la base de l'URL de votre serveur
+
         String imageUrl = baseUrl + post.getImage();
+        String imageProfilUrl = baseUrl + "images/uploads/" + post.getUtilisateurPost().getDossierServer() +
+                "/profilPicture/PhotoProfil.jpg";
 
         Log.d("url image", imageUrl);
 
         Glide.with(holder.itemView.getContext())
-                .load(post.getUtilisateurPost().getPhotoProfil())
+                .load(imageProfilUrl)
                 .placeholder(R.drawable.default_user)
+                .apply(RequestOptions.circleCropTransform())
                 .into(holder.userImage);
 
         Glide.with(holder.itemView.getContext())
@@ -68,7 +74,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
         holder.userName.setText(post.getUtilisateurPost().getPseudo());
         holder.date.setText(Post.formatLocalDateTime(LocalDateTime.parse(post.getDatePost())));
-        holder.title.setText(post.getTitre());
+        holder.title.setText(post.getDescription());
     }
 
     @Override

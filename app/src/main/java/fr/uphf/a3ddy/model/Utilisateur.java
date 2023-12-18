@@ -17,8 +17,8 @@ public class Utilisateur {
     private Long id;
     @SerializedName("pseudo")
     private String pseudo;
-    @SerializedName("photoProfil")
-    private File photoProfil;
+    @SerializedName("dossierServer")
+    private String dossierServer;
     @SerializedName("bio")
     private String bio;
     //private Set<Tag> tagsPrefere; // Assurez-vous que la classe 'Tag' soit également adaptée
@@ -28,9 +28,9 @@ public class Utilisateur {
     public Utilisateur() {
     }
 
-    public Utilisateur(String pseudo, File photoProfil, String bio) {
+    public Utilisateur(String pseudo, String dossierServer, String bio) {
         this.pseudo = pseudo;
-        this.photoProfil = photoProfil;
+        this.dossierServer = dossierServer;
         this.bio = bio;
     }
 
@@ -46,12 +46,12 @@ public class Utilisateur {
         this.pseudo = pseudo;
     }
 
-    public File getPhotoProfil() {
-        return photoProfil;
+    public String getDossierServer() {
+        return dossierServer;
     }
 
-    public void setPhotoProfil(File photoProfil) {
-        this.photoProfil = photoProfil;
+    public void setDossierServer(String dossierServer) {
+        this.dossierServer = dossierServer;
     }
 
     public String getBio() {
