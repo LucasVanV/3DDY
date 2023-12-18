@@ -33,13 +33,11 @@ public class PostAdapterProfilUser extends RecyclerView.Adapter<PostAdapterProfi
         }
     }
 
-
     public void setPosts(Page newPosts) {
         this.posts = newPosts;
         Log.d("setPosts", "Posts set: " + newPosts.getPostList().size() + " posts");
         notifyDataSetChanged();
     }
-
 
     @NonNull
     @Override
@@ -48,41 +46,57 @@ public class PostAdapterProfilUser extends RecyclerView.Adapter<PostAdapterProfi
         return new PostViewHolder(view);
     }
 
-
     @Override
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
         Log.d("onBindViewHolder", "Position: " + position);
-        Post post = posts.getPostList().get(position);
-        Log.d("aaaaaaaaaaaaaaaaa", post.toString());
-        String baseUrl = "http://192.168.56.1:8080/"; // Remplacez cela par la base de l'URL du serveur
-        String imageUrl = baseUrl + post.getImage();
 
-        int firstImagePosition = position * 2;
-        int secondImagePosition = position * 2 + 1;
+        // Vérifier si la position est valide
+        if (position < posts.getPostList().size()) {
+            Post post = posts.getPostList().get(position);
+            Log.d("aaaaaaaaaaaaaaaaa", post.toString());
 
-        // Assurez-vous que la position est valide pour le premier élément
-        if (firstImagePosition < posts.getPostList().size()) {
-            Post firstPost = posts.getPostList().get(firstImagePosition);
-            String firstImageUrl = baseUrl + firstPost.getImage();
-            Glide.with(holder.itemView.getContext())
-                    .load(firstImageUrl)
-                    .placeholder(R.drawable.default_post)
-                    .into(holder.postImage2);
+            // Vérifier si l'objet Post et sa propriété image ne sont pas null
+            if (post != null && post.getImage() != null) {
+                String baseUrl = "http://192.168.56.1:8080/"; // Remplacez cela par la base de l'URL du serveur
+                String imageUrl = baseUrl + post.getImage();
+
+                int firstImagePosition = position * 2;
+                int secondImagePosition = position * 2 + 1;
+
+                // Assurez-vous que la position est valide pour le premier élément
+                if (firstImagePosition < posts.getPostList().size()) {
+                    Post firstPost = posts.getPostList().get(firstImagePosition);
+                    String firstImageUrl = baseUrl + firstPost.getImage();
+                    Glide.with(holder.itemView.getContext())
+                            .load(firstImageUrl)
+                            .placeholder(R.drawable.default_post)
+                            .into(holder.postImage2);
+                } else {
+                    // Si la position est invalide, cachez l'ImageView correspondant
+                    holder.postImage2.setVisibility(View.GONE);
+                    holder.postImage3.setVisibility(View.GONE);
+                }
+
+                // Assurez-vous que la position est valide pour le deuxième élément
+                if (secondImagePosition < posts.getPostList().size()) {
+                    Post secondPost = posts.getPostList().get(secondImagePosition);
+                    String secondImageUrl = baseUrl + secondPost.getImage();
+                    Glide.with(holder.itemView.getContext())
+                            .load(secondImageUrl)
+                            .placeholder(R.drawable.default_post)
+                            .into(holder.postImage3);
+                } else {
+                    // Si la position est invalide, cachez l'ImageView correspondant
+                    holder.postImage3.setVisibility(View.GONE);
+                }
+            } else {
+                // Si l'objet Post ou sa propriété image est null, cachez les ImageView correspondants
+                holder.postImage2.setVisibility(View.GONE);
+                holder.postImage3.setVisibility(View.GONE);
+            }
         } else {
-            // Si la position est invalide, cachez l'ImageView correspondant
+            // Si la position est invalide, cachez les ImageView correspondants
             holder.postImage2.setVisibility(View.GONE);
-        }
-
-        // Assurez-vous que la position est valide pour le deuxième élément
-        if (secondImagePosition < posts.getPostList().size()) {
-            Post secondPost = posts.getPostList().get(secondImagePosition);
-            String secondImageUrl = baseUrl + secondPost.getImage();
-            Glide.with(holder.itemView.getContext())
-                    .load(secondImageUrl)
-                    .placeholder(R.drawable.default_post)
-                    .into(holder.postImage3);
-        } else {
-            // Si la position est invalide, cachez l'ImageView correspondant
             holder.postImage3.setVisibility(View.GONE);
         }
     }
@@ -98,9 +112,6 @@ public class PostAdapterProfilUser extends RecyclerView.Adapter<PostAdapterProfi
         }
     }
 
-
-
-
     public static class PostViewHolder extends RecyclerView.ViewHolder {
         ImageView postImage2, postImage3;
 
@@ -110,5 +121,4 @@ public class PostAdapterProfilUser extends RecyclerView.Adapter<PostAdapterProfi
             postImage3 = itemView.findViewById(R.id.post_image3);
         }
     }
-
 }

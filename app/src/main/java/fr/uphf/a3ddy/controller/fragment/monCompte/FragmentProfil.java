@@ -180,8 +180,9 @@ public class FragmentProfil extends Fragment {
         });
 
         // Appel initial pour récupérer les premiers posts
-        getListPost(currentPage, Long.valueOf(getUserBundle().get(0)));
-
+        if (getUserBundle().size() > 0) {
+            getListPost(currentPage, Long.valueOf(getUserBundle().get(0)));
+        }
         return view;
     }
 
