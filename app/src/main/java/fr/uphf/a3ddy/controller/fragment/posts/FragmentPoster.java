@@ -240,7 +240,7 @@ public class FragmentPoster extends Fragment {
         // Appel Retrofit
         //RetrofitService retrofitService = new RetrofitService(new EncryptedPreferencesService(context).getAuthToken
         // ());
-        RetrofitService retrofitService = new RetrofitService("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGVvb29vb3YxMjNAZ21haWwuY29tIiwiaWF0IjoxNzAyODkxMzE5LCJleHAiOjE3MDI5Nzc3MTl9.R0Gtjo_hp4q2kyEr3Gfdx3wy7c9XPevTWcezIL937CY");
+        RetrofitService retrofitService = new RetrofitService("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGVvb29vb3YxMjNAZ21haWwuY29tIiwiaWF0IjoxNzAyODk3MDU3LCJleHAiOjE3MDI5ODM0NTd9.SUOxE3GDVwZZBvtDpmlB-woOqQ79CeV8hkfPYXmCmvs");
         PostApi postApi = retrofitService.getRetrofit().create(PostApi.class);
 
         try {
@@ -250,8 +250,8 @@ public class FragmentPoster extends Fragment {
 
             if (imageInputStream != null && modele3dInputStream != null) {
                 // Créez des fichiers temporaires distincts pour l'image et le modèle 3D
-                File imageFile = createTempImageFile();
-                File modele3dFile = createTempImageFile();
+                File imageFile = createTempImageFile(".jpg");
+                File modele3dFile = createTempImageFile(".obj");
 
                 if (imageFile != null && modele3dFile != null) {
                     // Copiez les données de l'InputStream vers les fichiers temporaires
@@ -307,7 +307,7 @@ public class FragmentPoster extends Fragment {
         //RetrofitService retrofitService = new RetrofitService(new EncryptedPreferencesService(context).getAuthToken
         // ());
         RetrofitService retrofitService = new RetrofitService("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGVvMTIzNDU2N0BnbWFpbC5jb20iLCJpYXQiOjE3MDI1NDQ4MzgsImV4cCI6MTcwMjYzMTIzOH0.KVmhXa-gmC4EbkJqUfyySxxmo1oPM6gIXNL-SMoo9qI");
-        
+
 
         PostApi postApi = retrofitService.getRetrofit().create(PostApi.class);
 
@@ -318,8 +318,9 @@ public class FragmentPoster extends Fragment {
 
             if (imageInputStream != null && modele3dInputStream != null) {
                 // Créez des fichiers temporaires distincts pour l'image et le modèle 3D
-                File imageFile = createTempImageFile();
-                File modele3dFile = createTempImageFile();
+                File imageFile = createTempImageFile(".jpg");
+                File modele3dFile = createTempImageFile(".obj");
+
 
                 if (imageFile != null && modele3dFile != null) {
                     // Copiez les données de l'InputStream vers les fichiers temporaires
@@ -393,12 +394,13 @@ public class FragmentPoster extends Fragment {
         });
     }
 
-    public File createTempImageFile() {
+    public File createTempImageFile(String fileExtension) {
         try {
             // Créez un fichier temporaire dans le répertoire de cache de l'application
             File cacheDir = context.getCacheDir();
             if (cacheDir != null) {
-                return File.createTempFile("temp_image", ".jpg", cacheDir);
+                // Utilisez l'extension spécifiée pour le fichier temporaire
+                return File.createTempFile("temp_file", fileExtension, cacheDir);
             } else {
                 return null;
             }

@@ -4,11 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,6 +26,7 @@ import java.util.List;
 import java.util.Objects;
 
 import fr.uphf.a3ddy.R;
+import fr.uphf.a3ddy.controller.fragment.monCompte.FragmentParamatres;
 import fr.uphf.a3ddy.controller.fragment.monCompte.FragmentProfil;
 import fr.uphf.a3ddy.controller.fragment.posts.FragmentPoster;
 import fr.uphf.a3ddy.model.Utilisateur;
@@ -50,8 +54,9 @@ public class Accueil_fypActivity extends AppCompatActivity {
     private int currentPage = 0;
     private boolean isLoading = false;
     private RecyclerView recyclerView;
+    private ImageButton user_image;
+    private ConstraintLayout visualisationRoot;
     private Context context;
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,9 +65,8 @@ public class Accueil_fypActivity extends AppCompatActivity {
         context = getApplicationContext();
 
         //On inclus le menu sur l'activité principale
-        // Initialiser votre adapter
-        postAdapter = new PostAdapter();
-        // Après l'initialisation de votre RecyclerView
+        postAdapter = new PostAdapter(this);
+
         recyclerView = findViewById(R.id.recyclerViewPosts);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(postAdapter);
@@ -141,7 +145,7 @@ public class Accueil_fypActivity extends AppCompatActivity {
     public void getFyp(int page) {
         isLoading = true;
         //RetrofitService retrofitService = new RetrofitService(new EncryptedPreferencesService(context).getAuthToken());
-        RetrofitService retrofitService = new RetrofitService("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGVvb29vb3YxMjNAZ21haWwuY29tIiwiaWF0IjoxNzAyODkxMzE5LCJleHAiOjE3MDI5Nzc3MTl9.R0Gtjo_hp4q2kyEr3Gfdx3wy7c9XPevTWcezIL937CY");
+        RetrofitService retrofitService = new RetrofitService("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGVvb29vb3YxMjNAZ21haWwuY29tIiwiaWF0IjoxNzAyODk3MDU3LCJleHAiOjE3MDI5ODM0NTd9.SUOxE3GDVwZZBvtDpmlB-woOqQ79CeV8hkfPYXmCmvs");
         PostApi postApi = retrofitService.getRetrofit().create(PostApi.class);
 
         Call<Page> call = postApi.getForYouPage(page);
@@ -182,10 +186,28 @@ public class Accueil_fypActivity extends AppCompatActivity {
 
 
 
-    private void loadFragment(Fragment fragment) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.bloc_fragment_accueil, fragment)
-                .addToBackStack(null)
-                .commit();
+    public void loadFragment(Fragment fragment) {
+        if (fragment != null) {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.bloc_fragment_accueil, fragment)
+                    .addToBackStack(null)
+                    .commit();
+        } else {
+            Log.e("loadFragment", "Attempted to load a null fragment");
+        }
     }
+
+    public void loadFragmentWithBundle(Fragment fragment, Bundle arguments) {
+        if (fragment != null) {
+            fragment.setArguments(arguments);  // Ajoutez les arguments au fragment
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.bloc_fragment_accueil, fragment)
+                    .addToBackStack(null)
+                    .commit();
+        } else {
+            Log.e("loadFragment", "Attempted to load a null fragment");
+        }
+    }
+
+
 }

@@ -3,6 +3,7 @@ package fr.uphf.a3ddy.model;
 
 import android.net.Uri;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.File;
@@ -17,9 +18,8 @@ public class Utilisateur {
     private Long id;
     @SerializedName("pseudo")
     private String pseudo;
-    @SerializedName("dossier_server")
-    private String dossier_server;
-
+    @SerializedName("dossierServer")
+    private String dossierServer;
     @SerializedName("bio")
     private String bio;
     //private Set<Tag> tagsPrefere; // Assurez-vous que la classe 'Tag' soit également adaptée
@@ -27,14 +27,23 @@ public class Utilisateur {
     @SerializedName("Tags")
     private Set<Tag> tags;
 
+    //@Expose permet d'exclure les attributs transitoires lors de la sérialisation
+    @Expose(serialize = false, deserialize = false)
+    private int nbPublication;
+
+    @Expose(serialize = false, deserialize = false)
+    private int nbAbonne;
+
+    @Expose(serialize = false, deserialize = false)
+    private int nbSuivis;
+
     // Constructeur par défaut
     public Utilisateur() {
     }
 
-    public Utilisateur(String pseudo, String dossier_server , String bio) {
+    public Utilisateur(String pseudo, String dossierServer , String bio) {
         this.pseudo = pseudo;
-        this.dossier_server = dossier_server;
-
+        this.dossierServer = dossierServer;
         this.bio = bio;
     }
 
@@ -51,12 +60,12 @@ public class Utilisateur {
     }
 
     public String getDossierServer() {
-        return dossier_server;
+        return dossierServer;
     }
 
     public void setDossierServer(String dossier_server) {
-        this.dossier_server = dossier_server;
-
+        this.dossierServer = dossierServer;
+    }
 
     public String getBio() {
         return bio;
@@ -64,15 +73,6 @@ public class Utilisateur {
 
     public void setBio(String bio) {
         this.bio = bio;
-    }
-
-
-    public String getDossier_server() {
-        return dossier_server;
-    }
-
-    public void setDossier_server(String dossier_server) {
-        this.dossier_server = dossier_server;
     }
 
     public Set<Tag> getTags() {
@@ -83,13 +83,37 @@ public class Utilisateur {
         this.tags = tags;
     }
 
+    public int getNbPublication() {
+        return nbPublication;
+    }
+
+    public void setNbPublication(int nbPublication) {
+        this.nbPublication = nbPublication;
+    }
+
+    public int getNbAbonne() {
+        return nbAbonne;
+    }
+
+    public void setNbAbonne(int nbAbonne) {
+        this.nbAbonne = nbAbonne;
+    }
+
+    public int getNbSuivis() {
+        return nbSuivis;
+    }
+
+    public void setNbSuivis(int nbSuivis) {
+        this.nbSuivis = nbSuivis;
+    }
+
     @Override
     public String toString() {
         return "Utilisateur{" +
                 "id=" + id +
                 ", pseudo='" + pseudo + "'" +
                 ", bio='" + bio + "'" +
-                ", dossier_server='" + dossier_server + "'" +
+                ", dossier_server='" + dossierServer + "'" +
                 '}';
     }
 }
