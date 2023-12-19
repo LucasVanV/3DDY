@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -15,8 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import fr.uphf.a3ddy.R;
-import fr.uphf.a3ddy.controller.activity.Accueil_fypActivity;
-import fr.uphf.a3ddy.controller.fragment.model3d.Model3dFragment;
+import fr.uphf.a3ddy.controller.activity.Model3dFragment;
 import fr.uphf.a3ddy.service.retrofit.RetrofitService;
 import fr.uphf.a3ddy.service.retrofit.api.PostApi;
 import retrofit2.Call;
@@ -72,7 +70,7 @@ public class FragmentPostsTemporaire extends Fragment {
 
 
     public void deletePost(Long id) {
-        RetrofitService retrofitService = new RetrofitService("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGVvMTIzNDU2N0BnbWFpbC5jb20iLCJpYXQiOjE3MDI1NDQ4MzgsImV4cCI6MTcwMjYzMTIzOH0.KVmhXa-gmC4EbkJqUfyySxxmo1oPM6gIXNL-SMoo9qI");
+        RetrofitService retrofitService = new RetrofitService("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGVvb29vb3YxMjNAZ21haWwuY29tIiwiaWF0IjoxNzAyODk3MDU3LCJleHAiOjE3MDI5ODM0NTd9.SUOxE3GDVwZZBvtDpmlB-woOqQ79CeV8hkfPYXmCmvs");
         PostApi postApi = retrofitService.getRetrofit().create(PostApi.class);
 
 

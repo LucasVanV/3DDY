@@ -28,7 +28,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     private Accueil_fypActivity mActivity;  // Ajoutez cette ligne
 
     public PostAdapter(Accueil_fypActivity activity) {
-        mActivity = activity;  // Modifiez cette ligne
+        mActivity = activity;
     }
 
     public void addPosts(Page newPosts) {
@@ -66,18 +66,21 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                 "/profilPicture/PhotoProfil.jpg";
 
         Log.d("utilisateur", post.getUtilisateurPost().toString());
-        //Log.d("url image", imageUrl);
+        Log.d("url image", imageUrl);
+        try {
+            Glide.with(holder.itemView.getContext())
+                    .load(imageProfilUrl)
+                    .placeholder(R.drawable.default_user)
+                    .apply(RequestOptions.circleCropTransform())
+                    .into(holder.userImage);
 
-        Glide.with(holder.itemView.getContext())
-                .load(imageProfilUrl)
-                .placeholder(R.drawable.default_user)
-                .apply(RequestOptions.circleCropTransform())
-                .into(holder.userImage);
-
-        Glide.with(holder.itemView.getContext())
-                .load(imageUrl)
-                .placeholder(R.drawable.default_post)
-                .into(holder.postImage);
+            Glide.with(holder.itemView.getContext())
+                    .load(imageUrl)
+                    .placeholder(R.drawable.default_post)
+                    .into(holder.postImage);
+        } catch (Exception e) {
+            Log.d("error", e.getMessage());
+        }
 
         holder.userName.setText(post.getUtilisateurPost().getPseudo());
         holder.date.setText(Post.formatLocalDateTime(LocalDateTime.parse(post.getDatePost())));

@@ -23,6 +23,9 @@
         <activity
             android:name=".controller.activity.ChoixAuthentificationActivity"
             android:exported="false" />
+        <activity
+            android:name=".controller.activity.Model3dFragment"
+            android:exported="false" />
 
         <activity
             android:name=".controller.activity.Accueil_fypActivity"
@@ -33,6 +36,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

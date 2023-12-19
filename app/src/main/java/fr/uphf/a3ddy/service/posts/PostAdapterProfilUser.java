@@ -1,6 +1,7 @@
 package fr.uphf.a3ddy.service.posts;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,16 +9,32 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
 import fr.uphf.a3ddy.R;
+import fr.uphf.a3ddy.controller.activity.Accueil_fypActivity;
+import fr.uphf.a3ddy.controller.fragment.monCompte.FragmentProfil;
+import fr.uphf.a3ddy.controller.fragment.posts.FragmentPostDetail;
 import fr.uphf.a3ddy.model.posts.Page;
 import fr.uphf.a3ddy.model.posts.Post;
 
 public class PostAdapterProfilUser extends RecyclerView.Adapter<PostAdapterProfilUser.PostViewHolder> {
     private Page posts = new Page();
+    private Accueil_fypActivity mActivity;  // Ajoutez cette ligne
+
+    public PostAdapterProfilUser(Fragment fragment) {
+        if (fragment.getActivity() instanceof Accueil_fypActivity) {
+            mActivity = (Accueil_fypActivity) fragment.getActivity();
+        } else {
+            throw new IllegalArgumentException("Fragment must be attached to an instance of Accueil_fypActivity");
+        }
+    }
+
+
+
 
     public PostAdapterProfilUser() {
     }
@@ -71,6 +88,16 @@ public class PostAdapterProfilUser extends RecyclerView.Adapter<PostAdapterProfi
                             .load(firstImageUrl)
                             .placeholder(R.drawable.default_post)
                             .into(holder.postImage2);
+
+                    //Permet d'ouvrir un post pour le consulter en détail
+                    holder.postImage2.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Log.d("post", firstPost.getId().toString());
+                            //on envoie les données dans le loadFragment()
+                            setBundleArgs(firstPost);
+                        }
+                    });
                 } else {
                     // Si la position est invalide, cachez l'ImageView correspondant
                     holder.postImage2.setVisibility(View.GONE);
@@ -85,6 +112,16 @@ public class PostAdapterProfilUser extends RecyclerView.Adapter<PostAdapterProfi
                             .load(secondImageUrl)
                             .placeholder(R.drawable.default_post)
                             .into(holder.postImage3);
+
+                    //Permet d'ouvrir un post pour le consulter en détail
+                    holder.postImage3.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Log.d("post", secondPost.getId().toString());
+                            //on envoie les données dans le loadFragment()
+                            setBundleArgs(secondPost);
+                        }
+                    });
                 } else {
                     // Si la position est invalide, cachez l'ImageView correspondant
                     holder.postImage3.setVisibility(View.GONE);
@@ -100,6 +137,23 @@ public class PostAdapterProfilUser extends RecyclerView.Adapter<PostAdapterProfi
             holder.postImage3.setVisibility(View.GONE);
         }
     }
+
+
+    private void setBundleArgs(Post post) {
+        Bundle arguments = new Bundle();
+        //envoyer les infos de l'utilisateur du post sur le fragment profil
+        arguments.putString("postId", String.valueOf(post.getId()));
+        arguments.putString("datePost", post.getDatePost());
+        arguments.putString("descriptionPost", post.getDescription());
+        arguments.putString("imagePost", post.getImage());
+        arguments.putString("nbTelechargementPost", post.getNbTelechargement());
+        arguments.putString("titrePost", post.getTitre());
+        arguments.putString("pseudoUtilisateurPost", post.getUtilisateurPost().getPseudo());
+        arguments.putString("ppUtilisateurPost", post.getUtilisateurPost().getDossierServer());
+
+        mActivity.loadFragmentWithBundle(new FragmentPostDetail(), arguments);
+    }
+
 
     @Override
     public int getItemCount() {
