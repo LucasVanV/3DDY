@@ -29,3 +29,5 @@ Aapp/src/main/java/fr/uphf/a3ddy/service/retrofit/api/PostApi.java,c\f\cf617a82
 Lapp/src/main/java/fr/uphf/a3ddy/controller/activity/Accueil_fypActivity.java,9\2\928483e64c06cf571c7520854c7c8fe6e25030d1
 s
 Capp/src/main/java/fr/uphf/a3ddy/service/retrofit/api/SearchApi.java,5\2\5250bb57be0d6c4b946633b801b688603ac0dcd1
+e
+5app/src/main/java/fr/uphf/a3ddy/model/posts/Page.java,c\9\c9dbc0230962f6931288dc26b2c108620b5fd04d
