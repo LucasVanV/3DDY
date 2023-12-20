@@ -27,6 +27,8 @@ import java.util.List;
 import fr.uphf.a3ddy.R;
 import fr.uphf.a3ddy.controller.fragment.monCompte.FragmentParamatres;
 import fr.uphf.a3ddy.model.posts.Page;
+import fr.uphf.a3ddy.service.AppService;
+import fr.uphf.a3ddy.service.EncryptedPreferencesService;
 import fr.uphf.a3ddy.service.LoadFragmentService;
 import fr.uphf.a3ddy.service.posts.PostAdapterProfilUser;
 import fr.uphf.a3ddy.service.retrofit.RetrofitService;
@@ -39,8 +41,10 @@ public class FragmentProfil extends Fragment {
     View view;
     private Context context;
     private PostAdapterProfilUser postAdapter;
+    private AppService appService;
     private int currentPage = 0;
     private boolean isLoading = false;
+
     private RecyclerView recyclerView;
     private ImageButton parametre;
     private TextView nom_utilisateur;
@@ -54,6 +58,7 @@ public class FragmentProfil extends Fragment {
     private Button button_modifierProfil_ou_suivre;
     private Button button_partagerProfil_ou_message;
     private LoadFragmentService loadFragmentService;
+
 
     private void iniUI() {
         parametre = view.findViewById(R.id.bouton_parametre);
@@ -95,6 +100,9 @@ public class FragmentProfil extends Fragment {
 
     private void setArguments() {
         List<String> userBundle = getUserBundle();
+
+        //Si il y a des infos dans le bundle on rempli la page avec un utilisateur spécifique (pas l'utilisateur
+        // connecté)
         if (userBundle.size() > 0) {
             bouton_parametre.setVisibility(View.GONE);
             bouton_favoris.setVisibility(View.GONE);
@@ -129,6 +137,29 @@ public class FragmentProfil extends Fragment {
                 }
             }
         }
+
+        //Si il y a rien dans le bundle on rempli les infos de l'utilisateur connecté
+        if (userBundle.size() == 0) {
+            button_modifierProfil_ou_suivre.setText("Modifier mon profil");
+            button_partagerProfil_ou_message.setText("Partager mon profil");
+
+            nom_utilisateur.setText(appService.getUtilisateurSecurity().getUtilisateur().getPseudo());
+            bio.setText(appService.getUtilisateurSecurity().getUtilisateur().getBio());
+            nb_publications.setText(String.valueOf(appService.getUtilisateurSecurity().getUtilisateur().getNbPublication()));
+            nb_abonnes.setText(String.valueOf(appService.getUtilisateurSecurity().getUtilisateur().getNbAbonne()));
+            nb_abonnement.setText(String.valueOf(appService.getUtilisateurSecurity().getUtilisateur().getNbSuivis()));
+
+            String baseUrl = "http://192.168.56.1:8080/";
+            String imageProfilUrl =
+                    baseUrl + "images/uploads/" + appService.getUtilisateurSecurity().getUtilisateur().getDossierServer() +
+                            "/profilPicture/PhotoProfil.jpg";
+
+            Glide.with(context)
+                    .load(imageProfilUrl)
+                    .placeholder(R.drawable.default_user)
+                    .apply(RequestOptions.circleCropTransform())
+                    .into(photo_profil);
+        }
     }
 
 
@@ -144,6 +175,8 @@ public class FragmentProfil extends Fragment {
         view = inflater.inflate(R.layout.fragment_profil, container, false);
         context = getContext();
         loadFragmentService = new LoadFragmentService(this);
+        appService = (AppService) this.getActivity().getApplication();
+
         iniUI();
         setListeners();
         getUserBundle();
@@ -166,29 +199,35 @@ public class FragmentProfil extends Fragment {
                 int totalItemCount = layoutManager.getItemCount();
                 int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
 
-                Log.d("user id ", getUserBundle().get(0));
                 if (!isLoading) {
                     if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
                             && firstVisibleItemPosition >= 0
                             && totalItemCount >= 10) {  // Vérifiez si au moins 10 éléments pour déclencher le chargement suivant
                         currentPage++;
-                        getListPost(currentPage, Long.valueOf(getUserBundle().get(0)));
+                        if (!getUserBundle().isEmpty()) {
+                            getListPost(currentPage, Long.valueOf(getUserBundle().get(0)));
+                        } else {
+                            getListPost(currentPage, appService.getUtilisateurSecurity().getUtilisateur().getId());
+                        }
                     }
                 }
             }
         });
 
-        // Appel initial pour récupérer les premiers posts
-        if (getUserBundle().size() > 0) {
+        // Appel pour récupérer les posts d'un utilisateur en particulier (pas celui connecté)
+        if (!getUserBundle().isEmpty()) {
             getListPost(currentPage, Long.valueOf(getUserBundle().get(0)));
+        } else {
+            getListPost(currentPage, appService.getUtilisateurSecurity().getUtilisateur().getId());
         }
+
         return view;
     }
 
 
     public void getListPost(int page, Long idUser) {
         isLoading = true;
-        RetrofitService retrofitService = new RetrofitService("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGVvdjEyMzQ1NjdAZ21haWwuY29tIiwiaWF0IjoxNzAyOTkxODIwLCJleHAiOjE3MDMwNzgyMjB9.36_bQb64tncEgLJImEYt2LykyaFFcMc3KAKDpsz-nrM");
+        RetrofitService retrofitService = new RetrofitService(new EncryptedPreferencesService(context).getAuthToken());
         PostApi postApi = retrofitService.getRetrofit().create(PostApi.class);
 
         Call<Page> call = postApi.getUserPost(page, idUser);
