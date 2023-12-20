@@ -105,8 +105,6 @@ public class FragmentConnexion extends Fragment {
                             new EncryptedPreferencesService(getContext());
                     encryptedPreferencesService.saveAuthToken(token);
 
-                    Log.d("TOKEN USER",token);
-
                     loadUSer();
 
                     Intent intent = new Intent(context, Accueil_fypActivity.class);

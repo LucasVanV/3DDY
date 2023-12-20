@@ -57,6 +57,7 @@ public class Utilisateur {
     public void setDossierServer(String dossier_server) {
         this.dossier_server = dossier_server;
 
+    }
 
     public String getBio() {
         return bio;
