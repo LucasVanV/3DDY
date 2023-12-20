@@ -25,3 +25,9 @@ f
 6app/src/main/java/fr/uphf/a3ddy/FragmentRecherche.java,0\7\076aab3222f2f13215f3c3a3054241bc1561cf85
 z
 Japp/src/main/java/fr/uphf/a3ddy/controller/fragment/FragmentRecherche.java,8\d\8d973485f51470b85e8211823c2a8876451d22e2
+q
+Aapp/src/main/java/fr/uphf/a3ddy/service/retrofit/api/PostApi.java,c\f\cf617a82d8b77f029d6c2d7897ce9aba231122d5
+|
+Lapp/src/main/java/fr/uphf/a3ddy/controller/activity/Accueil_fypActivity.java,9\2\928483e64c06cf571c7520854c7c8fe6e25030d1
+s
+Capp/src/main/java/fr/uphf/a3ddy/service/retrofit/api/SearchApi.java,5\2\5250bb57be0d6c4b946633b801b688603ac0dcd1
