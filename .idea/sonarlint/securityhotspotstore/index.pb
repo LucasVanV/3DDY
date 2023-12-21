@@ -19,8 +19,6 @@ Oapp/src/main/java/fr/uphf/a3ddy/controller/fragment/monCompte/FragmentTags.java
 Yapp/src/main/java/fr/uphf/a3ddy/controller/fragment/auth_insc/FragmentCreationProfil.java,a\c\acd6de4f52161e61fedb2da3b7e71360e7d05680
 Å
 Qapp/src/main/java/fr/uphf/a3ddy/controller/fragment/monCompte/FragmentProfil.java,5\1\51a84a8ae0ec8c9550a6fb58f9e74cadfa3b7b20
-f
-6app/src/main/java/fr/uphf/a3ddy/FragmentRecherche.java,0\7\076aab3222f2f13215f3c3a3054241bc1561cf85
 z
 Japp/src/main/java/fr/uphf/a3ddy/controller/fragment/FragmentRecherche.java,8\d\8d973485f51470b85e8211823c2a8876451d22e2
 q

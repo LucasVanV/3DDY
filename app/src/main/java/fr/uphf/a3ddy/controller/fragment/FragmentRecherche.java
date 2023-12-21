@@ -5,6 +5,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -27,10 +29,12 @@ public class FragmentRecherche extends Fragment {
     View view;
     Context context;
     private AppService appService;
+    private int currentPage = 0;
+    private boolean isLoading = false;
     private UtilisateurSecurity userS;
     AutoCompleteTextView autoCompleteTextView;
     private LoadFragmentService loadFragmentService;
-    ListView resultatsRecherche;
+    RecyclerView resultatsRecherche;
 
     public void iniUI() {
         autoCompleteTextView = view.findViewById(R.id.autoComplete);
@@ -52,6 +56,6 @@ public class FragmentRecherche extends Fragment {
         appService = (AppService) getActivity().getApplication();
         userS = appService.getUtilisateurSecurity();
         loadFragmentService = new LoadFragmentService(this);
-
-        return view;    }
+        return view;
+    }
 }

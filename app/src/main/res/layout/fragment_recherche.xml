@@ -26,7 +26,7 @@
         app:layout_constraintTop_toBottomOf="@+id/titre_recherche"
         tools:ignore="MissingConstraints" />
 
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
         app:layout_constraintTop_toBottomOf="@+id/autoComplete"
         android:id="@+id/resultats_recherche"
         android:layout_width="match_parent"

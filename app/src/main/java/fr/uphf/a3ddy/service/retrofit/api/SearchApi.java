@@ -20,7 +20,7 @@ import okhttp3.RequestBody;
 import retrofit2.http.Query;
 
 public interface SearchApi {
-    @GET("/api/v1/tag/getUser")
+    @GET("/api/search/getUser")
     Call<Page> findUserByName(
             @Query("page") int page
     );
