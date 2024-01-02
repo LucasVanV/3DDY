@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.sonarqube") version "4.2.1.3168"
+    id("com.google.ar.sceneform.plugin")
 }
 
 android {
@@ -48,10 +49,6 @@ dependencies {
 
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
-    implementation("org.rajawali3d:rajawali:1.0.325@aar")
-    
-    implementation("com.github.bumptech.glide:glide:4.16.0")
-    annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
@@ -61,12 +58,30 @@ dependencies {
     implementation("androidx.fragment:fragment:1.6.2")
     implementation("androidx.fragment:fragment-ktx:1.6.2")
 
-    implementation("org.rajawali3d:rajawali:1.0.325@aar");
+    implementation("org.rajawali3d:rajawali:1.0.325@aar")
 
-    implementation("com.github.bumptech.glide:glide:4.12.0")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+
+    implementation("com.google.ar:core:1.41.0")
+    //implementation("com.google.ar.sceneform:core:1.17.1")
+
+    implementation("com.google.ar.sceneform.ux:sceneform-ux:1.17.1")
+    implementation("com.google.ar.sceneform:core:1.17.1")
+
+
+    annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
+
     implementation("com.github.bumptech.glide:okhttp3-integration:4.11.0")
-    annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
+
 }
+
+sceneform.asset(
+    "sampledata/bugatti.obj",
+    "default",
+    "sampledata/bugatti.sfa",
+    "src/main/assets/bugatti"
+)
 
 
 sonar {
