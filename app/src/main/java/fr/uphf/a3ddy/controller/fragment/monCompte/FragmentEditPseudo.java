@@ -48,8 +48,9 @@ public class FragmentEditPseudo extends Fragment {
     }
 
     public void setListeners() {
+        loadFragmentService = new LoadFragmentService(this);
         buttonRetour.setOnClickListener(v -> loadFragmentService.loadFragment(
-                new FragmentParamatres(),
+                new FragmentProfil(),
                 R.id.bloc_fragment_accueil)
         );
         enregistrer.setOnClickListener(v-> modificationPseudo());
@@ -87,7 +88,7 @@ public class FragmentEditPseudo extends Fragment {
                     if (response.isSuccessful()) {
                         userS.setUtilisateur(response.body());
                         loadFragmentService.loadFragment(
-                                new FragmentModifProfil(),
+                                new FragmentProfil(),
                                 R.id.bloc_fragment_accueil
                         );
                     }

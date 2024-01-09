@@ -14,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,15 +34,10 @@ import java.util.List;
 
 import fr.uphf.a3ddy.R;
 import fr.uphf.a3ddy.controller.activity.Accueil_fypActivity;
-import fr.uphf.a3ddy.controller.fragment.FragmentAccueilFyp;
-import fr.uphf.a3ddy.controller.fragment.monCompte.FragmentProfil;
-import fr.uphf.a3ddy.model.Utilisateur;
-import fr.uphf.a3ddy.model.posts.Post;
 import fr.uphf.a3ddy.model.posts.PostRequest;
 import fr.uphf.a3ddy.service.EncryptedPreferencesService;
 import fr.uphf.a3ddy.service.retrofit.RetrofitService;
 import fr.uphf.a3ddy.service.retrofit.api.PostApi;
-import fr.uphf.a3ddy.service.retrofit.api.UserApi;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -61,7 +55,6 @@ public class FragmentPoster extends Fragment {
     private ChipGroup chipGroup;
     private TextInputLayout titre;
     private TextInputLayout description;
-    private Button modifier_post;
     private TextView textViewTitre;
     Bundle bundle;
     Long postIdUpdated;
@@ -71,7 +64,6 @@ public class FragmentPoster extends Fragment {
     private void iniUI() {
         Button bouton_ajouter_model = view.findViewById(R.id.bouton_ajouter_model_3d);
         Button bouton_photo_model = view.findViewById(R.id.bouton_ajouter_photo);
-        modifier_post = view.findViewById(R.id.modifierPost);
         titre = view.findViewById(R.id.TextInputLayout_titre);
         description = view.findViewById(R.id.TextInputLayout_description);
         chipGroup = view.findViewById(R.id.chipGroup);
@@ -103,7 +95,6 @@ public class FragmentPoster extends Fragment {
             textViewTitre.setText("Modification post");
         }
 
-        modifier_post.setOnClickListener(view1 -> loadFragment(new FragmentPostsTemporaire()));
 
         chipGroup = view.findViewById(R.id.chipGroup);
         ajouterTags(); // ajoute une liste de tags au chipGroup
@@ -303,12 +294,9 @@ public class FragmentPoster extends Fragment {
     public void updatePost(String titre, String description, String commentaires, String textTags,
                            Uri imagePost,
                            Uri modele3d) {
+
         // Appel Retrofit
-        //RetrofitService retrofitService = new RetrofitService(new EncryptedPreferencesService(context).getAuthToken
-        // ());
-        RetrofitService retrofitService = new RetrofitService("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGVvMTIzNDU2N0BnbWFpbC5jb20iLCJpYXQiOjE3MDI1NDQ4MzgsImV4cCI6MTcwMjYzMTIzOH0.KVmhXa-gmC4EbkJqUfyySxxmo1oPM6gIXNL-SMoo9qI");
-
-
+        RetrofitService retrofitService = new RetrofitService(new EncryptedPreferencesService(context).getAuthToken());
         PostApi postApi = retrofitService.getRetrofit().create(PostApi.class);
 
         try {

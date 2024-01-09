@@ -4,10 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
-
+import android.widget.PopupMenu;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -58,13 +60,37 @@ public class Accueil_fypActivity extends AppCompatActivity {
     private ConstraintLayout visualisationRoot;
     private Context context;
 
+    public void onSeeMoreClick(View view, int position) {
+        // Handle the PopupMenu logic here
+        PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
+        MenuInflater inflater = popupMenu.getMenuInflater();
+        inflater.inflate(R.menu.menu_see_more_post, popupMenu.getMenu());
+
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                int itemId = item.getItemId();
+                if (itemId == R.id.supprimer) {
+                    Log.d("menuuuu", "delete");
+                    return true;
+                } else if (itemId == R.id.modifier) {
+                    Log.d("menuuuu", "update");
+                    return true;
+                }
+                return true;
+            }
+        });
+
+        popupMenu.show();
+    }
+
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.accueil);
         context = getApplicationContext();
 
-        //On inclus le menu sur l'activité principale
         postAdapter = new PostAdapter(this);
 
         recyclerView = findViewById(R.id.recyclerViewPosts);

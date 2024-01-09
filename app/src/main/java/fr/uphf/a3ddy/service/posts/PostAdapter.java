@@ -3,9 +3,13 @@ package fr.uphf.a3ddy.service.posts;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import java.time.LocalDateTime;
@@ -25,7 +29,7 @@ import fr.uphf.a3ddy.model.posts.Post;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
     private Page posts = new Page();
-    private Accueil_fypActivity mActivity;  // Ajoutez cette ligne
+    private Accueil_fypActivity mActivity;
 
     public PostAdapter(Accueil_fypActivity activity) {
         mActivity = activity;
@@ -59,7 +63,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
         Post post = posts.getPostList().get(position);
 
-        String baseUrl = "http://192.168.56.1:8080/"; // Remplacez cela par la base de l'URL du serveur
+        String baseUrl = "http://192.168.56.1:8080/";
 
         String imageUrl = baseUrl + post.getImage();
         String imageProfilUrl = baseUrl + "images/uploads/" + post.getUtilisateurPost().getDossierServer() +
@@ -86,7 +90,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         holder.date.setText(Post.formatLocalDateTime(LocalDateTime.parse(post.getDatePost())));
         holder.title.setText(post.getDescription());
 
-
         holder.userName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -100,7 +103,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             @Override
             public void onClick(View view) {
                 if (mActivity != null) {
-                   setBundleArgs(post);
+                    setBundleArgs(post);
                 }
             }
         });
@@ -142,5 +145,4 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             title = itemView.findViewById(R.id.textView2);
         }
     }
-
 }

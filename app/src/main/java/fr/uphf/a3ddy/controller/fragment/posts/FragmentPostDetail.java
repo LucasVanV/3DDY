@@ -11,12 +11,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -68,6 +71,7 @@ public class FragmentPostDetail extends Fragment {
     private TextView textView4;
     private ImageView post_image2;
     private ImageView user_image2;
+    private ImageButton buttonSeeMore;
 
 
     private List<String> getPostBundle() {
@@ -95,9 +99,8 @@ public class FragmentPostDetail extends Fragment {
     }
 
     private void setArguments() {
+        //On récupère les infos du post
         List<String> postBundle = getPostBundle();
-        if (postBundle.size() > 0) {
-        }
 
         //Date
         if (postBundle.size() >= 1) {
@@ -150,6 +153,55 @@ public class FragmentPostDetail extends Fragment {
         post_image2 = view.findViewById(R.id.post_image2);
         textView4 = view.findViewById(R.id.textView4);
         user_image2 = view.findViewById(R.id.user_image2);
+        buttonSeeMore = view.findViewById(R.id.button_see_more);
+        if (buttonSeeMore != null) {
+            buttonSeeMore.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // Ajoutez la logique de votre menu ici
+                    onSeeMoreClick(view);
+                }
+            });
+        }
+    }
+
+    private void onSeeMoreClick(View view) {
+        // Ajoutez la logique de votre menu ici
+        PopupMenu popupMenu = new PopupMenu(requireContext(), view);
+        MenuInflater inflater = popupMenu.getMenuInflater();
+        inflater.inflate(R.menu.menu_see_more_post, popupMenu.getMenu());
+
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                List<String> postBundle = getPostBundle();
+                int itemId = item.getItemId();
+                if (itemId == R.id.supprimer) {
+                    Log.d("menu", "delete");
+                    //Delete post
+                    if (postBundle.size() > 0) {
+                        Bundle bundle = new Bundle();
+                        bundle.putLong("postId", Long.parseLong(postBundle.get(0)));
+                        deletePost(Long.valueOf(postBundle.get(0)));
+                    }
+                    return true;
+                } else if (itemId == R.id.modifier) {
+                    //On récupère l'id du post à modifier
+                    Log.d("menu", "update");
+
+                    //Update post
+                    if (postBundle.size() > 0) {
+                        Bundle bundle = new Bundle();
+                        bundle.putLong("postId", Long.parseLong(postBundle.get(0)));
+                        loadFragment(new FragmentPoster(), bundle);
+                    }
+                    return true;
+                }
+                return true;
+            }
+        });
+
+        popupMenu.show();
     }
 
     @Override
@@ -160,5 +212,76 @@ public class FragmentPostDetail extends Fragment {
         setArguments();
 
         return view;
+    }
+
+
+    //Fonction pour delete un post
+    public void deletePost(Long id) {
+        // Appel Retrofit
+        RetrofitService retrofitService = new RetrofitService(new EncryptedPreferencesService(context).getAuthToken());
+        PostApi postApi = retrofitService.getRetrofit().create(PostApi.class);
+
+        Call<Long> call = postApi.deletePost(id);
+        requestDeletePost(call);
+    }
+
+    public void requestDeletePost(Call call){
+        call.enqueue(new Callback<Long>() {
+            @Override
+            public void onResponse(Call<Long> call, Response<Long> response) {
+                if (response.isSuccessful()) {
+                    // Le post a été supprimé avec succès
+                    loadFragmentWithoutBundle(new FragmentProfil());
+                } else {
+                    // Gérer les erreurs de la requête
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Long> call, Throwable t) {
+                // Gérer les erreurs de connexion
+            }
+        });
+    }
+
+
+    public void loadFragment(Fragment fragment, Bundle bundle) {
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        // Masquer le fragment actuel s'il y en a un
+        Fragment currentFragment = getFragmentManager().findFragmentById(R.id.fragment_container);
+        if (currentFragment != null) {
+            transaction.hide(currentFragment);
+        }
+
+        // Remplacer le fragment ou l'ajouter s'il n'y en a pas
+        if (getChildFragmentManager().findFragmentByTag(fragment.getClass().getSimpleName()) == null) {
+            fragment.setArguments(bundle); // Passer le bundle au fragment
+            transaction.add(R.id.accueil, fragment, fragment.getClass().getSimpleName());
+        } else {
+            transaction.show(fragment);
+        }
+
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    //Méthode pour changer de fragment
+    public void loadFragmentWithoutBundle(Fragment fragment) {
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        // Masquer le fragment actuel s'il y en a un
+        Fragment currentFragment = getFragmentManager().findFragmentById(R.id.bloc_fragment_accueil);
+        if (currentFragment != null) {
+            transaction.hide(currentFragment);
+        }
+
+        // Remplacer le fragment ou l'ajouter s'il n'y en a pas
+        if (getChildFragmentManager().findFragmentByTag(fragment.getClass().getSimpleName()) == null) {
+            transaction.add(R.id.bloc_fragment_accueil, fragment, fragment.getClass().getSimpleName());
+        } else {
+            transaction.show(fragment);
+        }
+
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }

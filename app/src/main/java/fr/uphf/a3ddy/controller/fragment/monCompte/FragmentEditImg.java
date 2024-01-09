@@ -61,7 +61,8 @@ public class FragmentEditImg extends Fragment {
     }
 
     public void setListeners() {
-        buttonRetour.setOnClickListener(v -> loadFragmentService.loadFragment(new FragmentParamatres(),R.id.bloc_fragment_accueil));
+        loadFragmentService = new LoadFragmentService(this);
+        buttonRetour.setOnClickListener(v -> loadFragmentService.loadFragment(new FragmentProfil(),R.id.bloc_fragment_accueil));
         selectImg.setOnClickListener(this::choisirImage);
     }
 

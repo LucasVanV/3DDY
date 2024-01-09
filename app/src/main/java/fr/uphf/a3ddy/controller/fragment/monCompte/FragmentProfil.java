@@ -4,11 +4,14 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -72,6 +75,30 @@ public class FragmentProfil extends Fragment {
         bouton_favoris = view.findViewById(R.id.bouton_favoris);
         button_modifierProfil_ou_suivre = view.findViewById(R.id.button_modifierProfil_ou_suivre);
         button_partagerProfil_ou_message = view.findViewById(R.id.button_partagerProfil_ou_message);
+    }
+
+    public void onSeeMoreClick(View view, int position) {
+        // Handle the PopupMenu logic here
+        PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
+        MenuInflater inflater = popupMenu.getMenuInflater();
+        inflater.inflate(R.menu.menu_see_more_post, popupMenu.getMenu());
+
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                int itemId = item.getItemId();
+                if (itemId == R.id.supprimer) {
+                    Log.d("menuuuu", "delete");
+                    return true;
+                } else if (itemId == R.id.modifier) {
+                    Log.d("menuuuu", "update");
+                    return true;
+                }
+                return true;
+            }
+        });
+
+        popupMenu.show();
     }
 
     private List<String> getUserBundle() {
@@ -159,6 +186,11 @@ public class FragmentProfil extends Fragment {
                     .placeholder(R.drawable.default_user)
                     .apply(RequestOptions.circleCropTransform())
                     .into(photo_profil);
+
+            button_modifierProfil_ou_suivre.setOnClickListener(v -> loadFragmentService.loadFragment(
+                    new FragmentModifProfil(),
+                    R.id.bloc_fragment_accueil)
+            );
         }
     }
 
@@ -204,11 +236,7 @@ public class FragmentProfil extends Fragment {
                             && firstVisibleItemPosition >= 0
                             && totalItemCount >= 10) {  // Vérifiez si au moins 10 éléments pour déclencher le chargement suivant
                         currentPage++;
-                        if (!getUserBundle().isEmpty()) {
-                            getListPost(currentPage, Long.valueOf(getUserBundle().get(0)));
-                        } else {
-                            getListPost(currentPage, appService.getUtilisateurSecurity().getUtilisateur().getId());
-                        }
+
                     }
                 }
             }
@@ -218,6 +246,7 @@ public class FragmentProfil extends Fragment {
         if (!getUserBundle().isEmpty()) {
             getListPost(currentPage, Long.valueOf(getUserBundle().get(0)));
         } else {
+            // Appel pour récupérer les posts de l'utilisateur connecté
             getListPost(currentPage, appService.getUtilisateurSecurity().getUtilisateur().getId());
         }
 
@@ -243,7 +272,9 @@ public class FragmentProfil extends Fragment {
                         if (postAdapter.getItemCount() == 0) {
                             postAdapter.setPosts(newPosts);
                         } else {
-                            postAdapter.addPosts(newPosts);
+                            if (postAdapter != null) {
+                                postAdapter.addPosts(newPosts);
+                            }
                         }
                     } else {
                         Log.e("API Call", "Empty list of posts");
