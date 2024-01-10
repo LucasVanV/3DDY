@@ -45,7 +45,7 @@ public class SceneView3D extends AppCompatActivity {
             arFragment.setOnTapArPlaneListener(
                     (HitResult hitResult, Plane plane, MotionEvent motionEvent) -> {
                         Anchor anchor = hitResult.createAnchor();
-                        loadModel(anchor, Uri.parse("bugatti.sfb"));//to load model 3D
+                        loadModel(anchor, Uri.parse("robot.sfb"));//to load model 3D
                     });
 
     }

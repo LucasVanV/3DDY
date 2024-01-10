@@ -77,10 +77,10 @@ dependencies {
 }
 
 sceneform.asset(
-    "sampledata/bugatti.obj",
+    "sampledata/robot.obj",
     "default",
-    "sampledata/bugatti.sfa",
-    "src/main/assets/bugatti"
+    "sampledata/robot.sfa",
+    "src/main/assets/robot"
 )
 
 
