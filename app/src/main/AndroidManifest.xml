@@ -23,9 +23,6 @@
         <activity
             android:name=".controller.activity.Accueil_fypActivity"
             android:exported="false" />
-        <activity
-            android:name=".controller.activity.Model3dFragment"
-            android:exported="false" />
 
         <activity
             android:name=".controller.activity.ChoixAuthentificationActivity"
