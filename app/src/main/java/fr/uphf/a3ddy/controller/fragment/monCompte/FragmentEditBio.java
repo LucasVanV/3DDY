@@ -49,9 +49,10 @@ public class FragmentEditBio extends Fragment {
     }
 
     public void setListeners() {
+        loadFragmentService = new LoadFragmentService(this);
         buttonRetour.setOnClickListener(v -> loadFragmentService.loadFragment(
-                new FragmentParamatres(),
-                R.id.fragment_container)
+                new FragmentProfil(),
+                R.id.bloc_fragment_accueil)
         );
         enregistrer.setOnClickListener(v -> modificationBio());
 

@@ -1,28 +1,38 @@
 package fr.uphf.a3ddy.service.posts;
 
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import fr.uphf.a3ddy.R;
+import fr.uphf.a3ddy.controller.activity.Accueil_fypActivity;
+import fr.uphf.a3ddy.controller.fragment.monCompte.FragmentProfil;
 import fr.uphf.a3ddy.model.posts.Page;
 import fr.uphf.a3ddy.model.posts.Post;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
     private Page posts = new Page();
+    private Accueil_fypActivity mActivity;
 
-    public PostAdapter() {
-        // Constructeur vide
+    public PostAdapter(Accueil_fypActivity activity) {
+        mActivity = activity;
     }
 
     public void addPosts(Page newPosts) {
@@ -53,28 +63,50 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
         Post post = posts.getPostList().get(position);
 
-        String baseUrl = "http://192.168.56.1:8080/"; // Remplacez cela par la base de l'URL du serveur
+        String baseUrl = "http://192.168.56.1:8080/";
 
         String imageUrl = baseUrl + post.getImage();
         String imageProfilUrl = baseUrl + "images/uploads/" + post.getUtilisateurPost().getDossierServer() +
                 "/profilPicture/PhotoProfil.jpg";
 
+        Log.d("utilisateur", post.getUtilisateurPost().toString());
         Log.d("url image", imageUrl);
+        try {
+            Glide.with(holder.itemView.getContext())
+                    .load(imageProfilUrl)
+                    .placeholder(R.drawable.default_user)
+                    .apply(RequestOptions.circleCropTransform())
+                    .into(holder.userImage);
 
-        Glide.with(holder.itemView.getContext())
-                .load(imageProfilUrl)
-                .placeholder(R.drawable.default_user)
-                .apply(RequestOptions.circleCropTransform())
-                .into(holder.userImage);
-
-        Glide.with(holder.itemView.getContext())
-                .load(imageUrl)
-                .placeholder(R.drawable.default_post)
-                .into(holder.postImage);
+            Glide.with(holder.itemView.getContext())
+                    .load(imageUrl)
+                    .placeholder(R.drawable.default_post)
+                    .into(holder.postImage);
+        } catch (Exception e) {
+            Log.d("error", e.getMessage());
+        }
 
         holder.userName.setText(post.getUtilisateurPost().getPseudo());
         holder.date.setText(Post.formatLocalDateTime(LocalDateTime.parse(post.getDatePost())));
         holder.title.setText(post.getDescription());
+
+        holder.userName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mActivity != null) {
+                    setBundleArgs(post);
+                }
+            }
+        });
+
+        holder.userImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mActivity != null) {
+                    setBundleArgs(post);
+                }
+            }
+        });
     }
 
     @Override
@@ -86,6 +118,19 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         }
     }
 
+    private void setBundleArgs(Post post) {
+        Bundle arguments = new Bundle();
+        //envoyer les infos de l'utilisateur du post sur le fragment profil
+        arguments.putString("userId", String.valueOf(post.getUtilisateurPost().getId()));
+        arguments.putString("userPseudo", post.getUtilisateurPost().getPseudo());
+        arguments.putString("userBio", post.getUtilisateurPost().getBio());
+        arguments.putString("userPP", post.getUtilisateurPost().getDossierServer());
+        arguments.putString("userNbPublication", String.valueOf(post.getUtilisateurPost().getNbPublication()));
+        arguments.putString("userNbAbonnes", String.valueOf(post.getUtilisateurPost().getNbAbonne()));
+        arguments.putString("userNbAbonnement",
+                String.valueOf(post.getUtilisateurPost().getNbSuivis()));
+        mActivity.loadFragmentWithBundle(new FragmentProfil(), arguments);
+    }
 
     public static class PostViewHolder extends RecyclerView.ViewHolder {
         ImageView userImage, postImage;

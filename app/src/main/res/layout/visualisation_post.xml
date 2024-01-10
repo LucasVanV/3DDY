@@ -5,8 +5,8 @@
     android:id="@+id/visualisation"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="#2D2828">
+    android:background="#2D2828"
+    android:padding="16dp">
 
     <ImageView
         android:id="@+id/post_image2"
@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/user_image2" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/user_image2"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -31,11 +31,20 @@
         android:id="@+id/user2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
         android:layout_marginStart="12dp"
+        android:gravity="center_vertical"
         android:text="John Doe"
         app:layout_constraintBottom_toTopOf="@+id/post_image2"
         app:layout_constraintStart_toEndOf="@+id/user_image2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/button_see_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/icone_see_more"
+        app:layout_constraintBottom_toTopOf="@+id/post_image2"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
@@ -136,13 +145,13 @@
         android:id="@+id/Linearlayout_note_chiffre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:orientation="horizontal"
-        android:layout_marginTop="16dp"
-        app:layout_goneMarginBottom="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/Linearlayout_note">
+        app:layout_constraintTop_toBottomOf="@id/Linearlayout_note"
+        app:layout_goneMarginBottom="16dp">
 
         <LinearLayout
             android:id="@+id/Linearlayout_nb_downloads_chiffre"
@@ -229,9 +238,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:background="@drawable/edittext"
         android:paddingTop="6dp"
         android:paddingBottom="6dp"
-        android:background="@drawable/edittext"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView_date">

@@ -38,7 +38,7 @@ public class FragmentModifProfil extends Fragment {
     }
     public void setListeners() {
         butonRetour.setOnClickListener(v-> loadFragmentService.loadFragment(
-                new FragmentParamatres(),
+                new FragmentProfil(),
                 R.id.bloc_fragment_accueil)
         );
         editImgProfile.setOnClickListener(v-> loadFragmentService.loadFragment(

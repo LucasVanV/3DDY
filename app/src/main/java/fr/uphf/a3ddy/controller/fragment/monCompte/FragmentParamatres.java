@@ -34,7 +34,6 @@ public class FragmentParamatres extends Fragment {
     private ImageButton boutonRetour;
     private Button buttonDeconnexion;
     private Button buttonTags;
-    private Button buttonMonProfil;
     private Button supresionCompte;
     private AppService appService;
     private UtilisateurSecurity utilisateurSecurity;
@@ -46,7 +45,6 @@ public class FragmentParamatres extends Fragment {
         boutonRetour = view.findViewById(R.id.retour);
         buttonDeconnexion = view.findViewById(R.id.button_deconnexion);
         buttonTags = view.findViewById(R.id.button_tags);
-        buttonMonProfil = view.findViewById(R.id.monProfil);
         supresionCompte = view.findViewById(R.id.button_supprimer);
     }
 
@@ -61,10 +59,6 @@ public class FragmentParamatres extends Fragment {
         );
         buttonTags.setOnClickListener(v -> loadFragmentService.loadFragment(
                 new FragmentTags(),
-                R.id.bloc_fragment_accueil)
-        );
-        buttonMonProfil.setOnClickListener(v->loadFragmentService.loadFragment(
-                new FragmentModifProfil(),
                 R.id.bloc_fragment_accueil)
         );
 

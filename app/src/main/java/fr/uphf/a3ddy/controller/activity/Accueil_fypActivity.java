@@ -4,11 +4,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
-
+import android.widget.PopupMenu;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,6 +28,7 @@ import java.util.List;
 import java.util.Objects;
 
 import fr.uphf.a3ddy.R;
+import fr.uphf.a3ddy.controller.fragment.monCompte.FragmentParamatres;
 import fr.uphf.a3ddy.controller.fragment.monCompte.FragmentProfil;
 import fr.uphf.a3ddy.controller.fragment.posts.FragmentPoster;
 import fr.uphf.a3ddy.model.Utilisateur;
@@ -50,7 +56,33 @@ public class Accueil_fypActivity extends AppCompatActivity {
     private int currentPage = 0;
     private boolean isLoading = false;
     private RecyclerView recyclerView;
+    private ImageButton user_image;
+    private ConstraintLayout visualisationRoot;
     private Context context;
+
+    public void onSeeMoreClick(View view, int position) {
+        // Handle the PopupMenu logic here
+        PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
+        MenuInflater inflater = popupMenu.getMenuInflater();
+        inflater.inflate(R.menu.menu_see_more_post, popupMenu.getMenu());
+
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                int itemId = item.getItemId();
+                if (itemId == R.id.supprimer) {
+                    Log.d("menuuuu", "delete");
+                    return true;
+                } else if (itemId == R.id.modifier) {
+                    Log.d("menuuuu", "update");
+                    return true;
+                }
+                return true;
+            }
+        });
+
+        popupMenu.show();
+    }
 
 
     @Override
@@ -59,10 +91,8 @@ public class Accueil_fypActivity extends AppCompatActivity {
         setContentView(R.layout.accueil);
         context = getApplicationContext();
 
-        //On inclus le menu sur l'activité principale
-        // Initialiser votre adapter
-        postAdapter = new PostAdapter();
-        // Après l'initialisation de votre RecyclerView
+        postAdapter = new PostAdapter(this);
+
         recyclerView = findViewById(R.id.recyclerViewPosts);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(postAdapter);
@@ -181,10 +211,28 @@ public class Accueil_fypActivity extends AppCompatActivity {
 
 
 
-    private void loadFragment(Fragment fragment) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.bloc_fragment_accueil, fragment)
-                .addToBackStack(null)
-                .commit();
+    public void loadFragment(Fragment fragment) {
+        if (fragment != null) {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.bloc_fragment_accueil, fragment)
+                    .addToBackStack(null)
+                    .commit();
+        } else {
+            Log.e("loadFragment", "Attempted to load a null fragment");
+        }
     }
+
+    public void loadFragmentWithBundle(Fragment fragment, Bundle arguments) {
+        if (fragment != null) {
+            fragment.setArguments(arguments);  // Ajoutez les arguments au fragment
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.bloc_fragment_accueil, fragment)
+                    .addToBackStack(null)
+                    .commit();
+        } else {
+            Log.e("loadFragment", "Attempted to load a null fragment");
+        }
+    }
+
+
 }

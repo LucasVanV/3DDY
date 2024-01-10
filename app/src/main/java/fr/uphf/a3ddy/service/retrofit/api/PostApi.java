@@ -55,4 +55,10 @@ public interface PostApi {
     @GET("/api/v1/posts/getForYouPage")
     Call<Page> getForYouPage(
             @Query("page") int page);
+
+    @GET("/api/v1/posts/getUserPost")
+    Call<Page> getUserPost(
+            @Query("page") int page,
+            @Query("userId") Long userId
+    );
 }

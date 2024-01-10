@@ -42,8 +42,8 @@
 
                 <ImageView
                     android:id="@+id/photo_profil"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
                     android:background="@drawable/image_ronde"
                     android:src="@drawable/photo_profil"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -56,7 +56,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     app:layout_constraintBottom_toTopOf="@+id/textview_publications"
-                    app:layout_constraintStart_toEndOf="@+id/photo_profil" />
+                    app:layout_constraintEnd_toEndOf="@+id/textview_publications"
+                    app:layout_constraintStart_toEndOf="@+id/photo_profil"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/textview_publications"
@@ -65,6 +67,7 @@
                     android:layout_marginStart="20dp"
                     android:text="Publication"
                     android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/photo_profil"
                     app:layout_constraintTop_toBottomOf="@+id/nb_publications" />
 
@@ -74,7 +77,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
                     app:layout_constraintBottom_toTopOf="@+id/textview_publications"
-                    app:layout_constraintStart_toEndOf="@+id/textview_publications" />
+                    app:layout_constraintEnd_toEndOf="@+id/textview_abonnes"
+                    app:layout_constraintStart_toEndOf="@+id/textview_publications"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/textview_abonnes"
@@ -83,6 +88,7 @@
                     android:layout_marginStart="30dp"
                     android:text="Abonnés"
                     android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/textview_publications"
                     app:layout_constraintTop_toBottomOf="@+id/nb_abonnes" />
 
@@ -93,7 +99,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
                     app:layout_constraintBottom_toTopOf="@+id/textview_abonnes"
-                    app:layout_constraintStart_toEndOf="@+id/textview_abonnes" />
+                    app:layout_constraintEnd_toEndOf="@+id/textview_abonnement"
+                    app:layout_constraintStart_toEndOf="@+id/textview_abonnes"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/textview_abonnement"
@@ -102,6 +110,7 @@
                     android:layout_marginStart="30dp"
                     android:text="Abonnements"
                     android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/textview_abonnes"
                     app:layout_constraintTop_toBottomOf="@+id/nb_abonnement" />
 
@@ -112,6 +121,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/constraintlayout_photoprofil_followers" />
 
 
@@ -120,6 +133,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/nom_utilisateur" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -179,6 +194,21 @@
                     tools:ignore="MissingConstraints" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bloc_fragment_accueil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearlayout_photoprofil_followers">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewPosts"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#2D2828" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

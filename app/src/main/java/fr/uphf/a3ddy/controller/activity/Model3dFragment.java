@@ -1,5 +1,5 @@
 // Model3dFragment.java
-package fr.uphf.a3ddy.controller.fragment.model3d;
+package fr.uphf.a3ddy.controller.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
