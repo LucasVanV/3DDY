@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/supprimer"
-        android:title="Supprimer"/>
-    <item android:id="@+id/modifier"
+    <item
+        android:id="@+id/supprimer"
+        android:icon="@drawable/icone_delete"
+        android:iconTint="#CF4242"
+        android:title="Supprimer" />
+    <item
+        android:id="@+id/modifier"
+        android:icon="@drawable/icone_edit"
+        android:iconTint="#FFFFFF"
         android:title="Modifier" />
 </menu>

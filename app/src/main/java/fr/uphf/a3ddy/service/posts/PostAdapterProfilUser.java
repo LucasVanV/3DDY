@@ -18,8 +18,10 @@ import com.bumptech.glide.Glide;
 import fr.uphf.a3ddy.R;
 import fr.uphf.a3ddy.controller.activity.Accueil_fypActivity;
 import fr.uphf.a3ddy.controller.fragment.posts.FragmentPostDetail;
+import fr.uphf.a3ddy.model.UtilisateurSecurity;
 import fr.uphf.a3ddy.model.posts.Page;
 import fr.uphf.a3ddy.model.posts.Post;
+import fr.uphf.a3ddy.service.AppService;
 
 public class PostAdapterProfilUser extends RecyclerView.Adapter<PostAdapterProfilUser.PostViewHolder> {
     private Page posts = new Page();
@@ -101,6 +103,7 @@ public class PostAdapterProfilUser extends RecyclerView.Adapter<PostAdapterProfi
         if (holder.button_see_more != null) {
             setUpSeeMoreButton(holder.itemView);
             holder.itemView.setTag(position);  // Set the position as a tag
+
 
             holder.button_see_more.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -188,8 +191,23 @@ public class PostAdapterProfilUser extends RecyclerView.Adapter<PostAdapterProfi
         arguments.putString("titrePost", post.getTitre());
         arguments.putString("pseudoUtilisateurPost", post.getUtilisateurPost().getPseudo());
         arguments.putString("ppUtilisateurPost", post.getUtilisateurPost().getDossierServer());
-        arguments.putString("postButtonSeeMore", "true");
 
+        //AppService allow to get the connected user
+        AppService appService = (AppService) mActivity.getApplication();
+        UtilisateurSecurity utilisateurSecurity = appService.getUtilisateurSecurity();
+        //If user is connected :
+        if (utilisateurSecurity.getUtilisateur() != null) {
+            //If connected user == user post :
+            if (post.getUtilisateurPost().getDossierServer().equals(utilisateurSecurity.getUtilisateur().getDossierServer())) {
+                //We set the bundle == true
+                arguments.putString("postButtonSeeMore", "true");
+            }  else { //We set the bundle == false
+                arguments.putString("postButtonSeeMore", "false");
+
+            }
+        } else {
+            Log.d("erreur dans l'affichage du post", "utilisateur pas connecté");
+        }
         mActivity.loadFragmentWithBundle(new FragmentPostDetail(), arguments);
     }
 

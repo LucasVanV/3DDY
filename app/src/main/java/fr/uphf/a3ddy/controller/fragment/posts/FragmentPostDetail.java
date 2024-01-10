@@ -81,7 +81,7 @@ public class FragmentPostDetail extends Fragment {
             if (arguments != null) {
                 //key == nom des arguments du loadFragment()
                 List<String> keys = Arrays.asList("postId", "datePost", "descriptionPost", "imagePost",
-                        "nbTelechargementPost", "titrePost", "pseudoUtilisateurPost", "ppUtilisateurPost");
+                        "nbTelechargementPost", "titrePost", "pseudoUtilisateurPost", "ppUtilisateurPost", "postButtonSeeMore");
 
                 //on ajoute pour chaque clé la valeur correspondante dans une liste
                 for (String key : keys) {
@@ -136,6 +136,15 @@ public class FragmentPostDetail extends Fragment {
                                         .apply(RequestOptions.circleCropTransform())
                                         .placeholder(R.drawable.default_user)
                                         .into(user_image2);
+
+                                //Popupmenu
+                                if (postBundle.size() >= 8) {
+                                    if (postBundle.get(8) == "true") { //Show
+                                        buttonSeeMore.setVisibility(View.VISIBLE);
+                                    } else { //Hide
+                                        buttonSeeMore.setVisibility(View.GONE);
+                                    }
+                                }
                             }
                         }
                     }
@@ -225,7 +234,7 @@ public class FragmentPostDetail extends Fragment {
         requestDeletePost(call);
     }
 
-    public void requestDeletePost(Call call){
+    public void requestDeletePost(Call call) {
         call.enqueue(new Callback<Long>() {
             @Override
             public void onResponse(Call<Long> call, Response<Long> response) {

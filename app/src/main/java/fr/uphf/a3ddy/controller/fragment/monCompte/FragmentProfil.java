@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -79,7 +80,8 @@ public class FragmentProfil extends Fragment {
 
     public void onSeeMoreClick(View view, int position) {
         // Handle the PopupMenu logic here
-        PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
+        Context wrapper = new ContextThemeWrapper(context, R.style.Base_Theme__3DDY);
+        PopupMenu popupMenu = new PopupMenu(wrapper, view);
         MenuInflater inflater = popupMenu.getMenuInflater();
         inflater.inflate(R.menu.menu_see_more_post, popupMenu.getMenu());
 
