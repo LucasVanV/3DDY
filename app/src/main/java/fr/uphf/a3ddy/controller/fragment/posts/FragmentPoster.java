@@ -14,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,15 +34,10 @@ import java.util.List;
 
 import fr.uphf.a3ddy.R;
 import fr.uphf.a3ddy.controller.activity.Accueil_fypActivity;
-import fr.uphf.a3ddy.controller.fragment.FragmentAccueilFyp;
-import fr.uphf.a3ddy.controller.fragment.monCompte.FragmentProfil;
-import fr.uphf.a3ddy.model.Utilisateur;
-import fr.uphf.a3ddy.model.posts.Post;
 import fr.uphf.a3ddy.model.posts.PostRequest;
 import fr.uphf.a3ddy.service.EncryptedPreferencesService;
 import fr.uphf.a3ddy.service.retrofit.RetrofitService;
 import fr.uphf.a3ddy.service.retrofit.api.PostApi;
-import fr.uphf.a3ddy.service.retrofit.api.UserApi;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -240,7 +234,7 @@ public class FragmentPoster extends Fragment {
         // Appel Retrofit
         //RetrofitService retrofitService = new RetrofitService(new EncryptedPreferencesService(context).getAuthToken
         // ());
-        RetrofitService retrofitService = new RetrofitService("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGVvb29vb3YxMjNAZ21haWwuY29tIiwiaWF0IjoxNzAyODkxMzE5LCJleHAiOjE3MDI5Nzc3MTl9.R0Gtjo_hp4q2kyEr3Gfdx3wy7c9XPevTWcezIL937CY");
+        RetrofitService retrofitService = new RetrofitService(new EncryptedPreferencesService(context).getAuthToken());
         PostApi postApi = retrofitService.getRetrofit().create(PostApi.class);
 
         try {

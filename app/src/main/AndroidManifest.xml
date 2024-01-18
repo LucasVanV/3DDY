@@ -40,8 +40,13 @@
             android:name=".controller.activity.ChoixAuthentificationActivity"
             android:exported="false" />
 
+
         <activity
             android:name=".controller.fragment.model3d.SceneView3D"
+            android:exported="false" />
+
+        <activity
+            android:name=".controller.fragment.model3d.ViewModel3D"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
