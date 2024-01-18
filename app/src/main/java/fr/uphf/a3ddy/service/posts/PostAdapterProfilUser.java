@@ -119,6 +119,14 @@ public class PostAdapterProfilUser extends RecyclerView.Adapter<PostAdapterProfi
         if (position < posts.getPostList().size()) {
             Post post = posts.getPostList().get(position);
 
+            //Si l'utilisateur a 1 seul post :
+            if (posts.getPostList().get(0).getUtilisateurPost().getNbPublication() < 2) {
+                if (holder.postImage3 != null) {
+                    //On cache dans le xml l'emplacement du 2eme post
+                    holder.postImage3.setVisibility(View.GONE);
+                }
+            }
+
             if (post != null && post.getImage() != null) {
                 String baseUrl = "http://192.168.56.1:8080/";
                 String imageUrl = baseUrl + post.getImage();
@@ -141,8 +149,12 @@ public class PostAdapterProfilUser extends RecyclerView.Adapter<PostAdapterProfi
                         }
                     });
                 } else {
-                    holder.postImage2.setVisibility(View.GONE);
-                    holder.postImage3.setVisibility(View.GONE);
+                    if (holder.postImage2 != null) {
+                        holder.postImage2.setVisibility(View.GONE);
+                    }
+                    if (holder.postImage3 != null) {
+                        holder.postImage3.setVisibility(View.GONE);
+                    }
                 }
 
                 // Set up the click listener for postImage3 if present
@@ -201,7 +213,7 @@ public class PostAdapterProfilUser extends RecyclerView.Adapter<PostAdapterProfi
             if (post.getUtilisateurPost().getDossierServer().equals(utilisateurSecurity.getUtilisateur().getDossierServer())) {
                 //We set the bundle == true
                 arguments.putString("postButtonSeeMore", "true");
-            }  else { //We set the bundle == false
+            } else { //We set the bundle == false
                 arguments.putString("postButtonSeeMore", "false");
 
             }

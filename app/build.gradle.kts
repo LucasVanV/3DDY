@@ -50,6 +50,9 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
     implementation("org.rajawali3d:rajawali:1.0.325@aar")
 
+    runtimeOnly("androidx.annotation:annotation:1.7.1")
+    implementation("javax.annotation:javax.annotation-api:1.3.2")
+
     implementation ("com.github.bumptech.glide:glide:4.12.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
 

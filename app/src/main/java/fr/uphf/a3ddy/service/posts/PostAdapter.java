@@ -1,5 +1,6 @@
 package fr.uphf.a3ddy.service.posts;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,20 +13,35 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.signature.ObjectKey;
+
+import org.jetbrains.annotations.NotNull;
 
 import fr.uphf.a3ddy.R;
 import fr.uphf.a3ddy.controller.activity.Accueil_fypActivity;
 import fr.uphf.a3ddy.controller.fragment.monCompte.FragmentProfil;
 import fr.uphf.a3ddy.model.posts.Page;
 import fr.uphf.a3ddy.model.posts.Post;
+import fr.uphf.a3ddy.service.EncryptedPreferencesService;
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
     private Page posts = new Page();
@@ -71,16 +87,64 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
         Log.d("utilisateur", post.getUtilisateurPost().toString());
         Log.d("url image", imageUrl);
+
+        OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
+        clientBuilder.addInterceptor(new Interceptor() {
+            @NotNull
+            @Override
+            public Response intercept(@NotNull Chain chain) throws IOException {
+                Request originalRequest = chain.request();
+                String authToken = new EncryptedPreferencesService(mActivity).getAuthToken();
+                Log.d("AuthToken", authToken);
+
+                Request newRequest = originalRequest.newBuilder()
+                        .header("Authorization", "Bearer " + authToken)
+                        .build();
+                return chain.proceed(newRequest);
+            }
+        });
+
+        OkHttpClient okHttpClient = clientBuilder.build();
+
         try {
+            Log.d("token", new EncryptedPreferencesService(mActivity).getAuthToken());
             Glide.with(holder.itemView.getContext())
                     .load(imageProfilUrl)
-                    .placeholder(R.drawable.default_user)
-                    .apply(RequestOptions.circleCropTransform())
+                    .apply(RequestOptions.circleCropTransform().placeholder(R.drawable.default_user))
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)
+                    .listener(new RequestListener<Drawable>() {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                            Log.e("Glide", "Error loading imageProfilUrl", e);
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                            return false;
+                        }
+                    })
                     .into(holder.userImage);
+
 
             Glide.with(holder.itemView.getContext())
                     .load(imageUrl)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)
                     .placeholder(R.drawable.default_post)
+                    .listener(new RequestListener<Drawable>() {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                            Log.e("Glide", "Error loading imageUrl", e);
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                            return false;
+                        }
+                    })
                     .into(holder.postImage);
         } catch (Exception e) {
             Log.d("error", e.getMessage());
@@ -108,6 +172,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             }
         });
     }
+
 
     @Override
     public int getItemCount() {
